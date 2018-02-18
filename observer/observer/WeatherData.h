@@ -3,13 +3,15 @@
 #include <vector>
 #include <algorithm>
 #include <climits>
-#include "Observer.h"
 #include <string>
+#include <map>
+#include "Observer.h"
 
 using namespace std;
 
 struct SWeatherInfo
 {
+	std::string location;
 	double temperature = 0;
 	double humidity = 0;
 	double pressure = 0;
@@ -24,10 +26,11 @@ private:
 	*/
 	void Update(SWeatherInfo const& data) override
 	{
+		std::cout << "Location: " << data.location << std::endl;
 		std::cout << "Current Temp " << data.temperature << std::endl;
 		std::cout << "Current Hum " << data.humidity << std::endl;
 		std::cout << "Current Pressure " << data.pressure << std::endl;
-		std::cout << "----------------" << std::endl;
+		std::cout << std::endl << std::endl << std::endl;
 	}
 };
 
@@ -68,6 +71,13 @@ private:
 	unsigned m_countAcc = 0;
 };
 
+struct AccumulatedWeatherStats
+{
+	CParameterStatsAccumulator temperatureAccumulator;
+	CParameterStatsAccumulator humidityAccumulator;
+	CParameterStatsAccumulator pressureAccumulator;
+};
+
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 private:
@@ -77,31 +87,63 @@ private:
 	*/
 	void Update(SWeatherInfo const& data) override
 	{
-		m_temperatureAccumulator.Add(data.temperature);
-		m_humidityAccumulator.Add(data.humidity);
-		m_pressureAccumulator.Add(data.pressure);
-
-		PrintStats("Temp", m_temperatureAccumulator);
-		PrintStats("Hum", m_humidityAccumulator);
-		PrintStats("Pressure", m_pressureAccumulator);
+		auto stats = GetOrCreateStats(data.location);
+		UpdateStats(stats, data);
+		PrintStats(stats, data.location);
 	}
 
-	void PrintStats(std::string const& parameterName, CParameterStatsAccumulator const& statsAccumulator)
+	AccumulatedWeatherStats* GetOrCreateStats(std::string locationName)
 	{
+		auto pos = m_weatherStats.find(locationName);
+		if (pos == m_weatherStats.end()) {
+			auto result = m_weatherStats.emplace(locationName, AccumulatedWeatherStats());
+			if (result.second == false)
+			{
+				throw runtime_error("Can't create weather stats!");
+			}
+			else
+			{
+				pos = result.first;
+			}
+		}
+		return &pos->second;
+	}
+
+	void UpdateStats(AccumulatedWeatherStats * stats, SWeatherInfo const& data)
+	{
+		stats->temperatureAccumulator.Add(data.temperature);
+		stats->humidityAccumulator.Add(data.humidity);
+		stats->pressureAccumulator.Add(data.pressure);
+	}
+
+	void PrintStats(AccumulatedWeatherStats const* stats, std::string const& location) const
+	{
+		std::cout << "Location: " << location << std::endl;
+		PrintParameterStats("Temp", stats->temperatureAccumulator);
+		PrintParameterStats("Hum", stats->humidityAccumulator);
+		PrintParameterStats("Pressure", stats->pressureAccumulator);
+		std::cout << std::endl << std::endl << std::endl;
+	}
+
+	void PrintParameterStats(std::string const& parameterName, CParameterStatsAccumulator const& statsAccumulator) const
+	{
+		std::cout << "-" << std::endl;
 		std::cout << "Max " << parameterName << " " << statsAccumulator.GetMaxValue() << std::endl;
 		std::cout << "Min " << parameterName << " " << statsAccumulator.GetMinValue() << std::endl;
 		std::cout << "Average " << parameterName << " " << statsAccumulator.GetAverageValue() << std::endl;
-		std::cout << "----------------" << std::endl;
 	}
 
-	CParameterStatsAccumulator m_temperatureAccumulator;
-	CParameterStatsAccumulator m_humidityAccumulator;
-	CParameterStatsAccumulator m_pressureAccumulator;
+	std::map<std::string, AccumulatedWeatherStats> m_weatherStats;
 };
 
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
+
+	CWeatherData(std::string const& name)
+		: m_name(name)
+	{}
+
 	// Температура в градусах Цельсия
 	double GetTemperature()const
 	{
@@ -135,6 +177,7 @@ protected:
 	SWeatherInfo GetChangedData()const override
 	{
 		SWeatherInfo info;
+		info.location = m_name;
 		info.temperature = GetTemperature();
 		info.humidity = GetHumidity();
 		info.pressure = GetPressure();
@@ -144,4 +187,6 @@ private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;	
 	double m_pressure = 760.0;
+
+	std::string m_name;
 };

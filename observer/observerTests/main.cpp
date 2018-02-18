@@ -15,102 +15,137 @@
 #include <boost/test/output/compiler_log_formatter.hpp>
 #include <boost/algorithm/string/replace.hpp>
 
-#include "../observer/Observer.h"
+#include "../observer/WeatherData.h"
 
 using namespace std;
 
-class CTestObservable : public CObservable<int>
-{
-	int GetChangedData() const
-	{
-		return 0;
-	}
-};
-
-struct ObserverFixture
-{
-	CTestObservable observable;
-};
-
-class CSelfDeleteObserver : public IObserver<int>
+class CTestObserver : public IObserver<SWeatherInfo>
 {
 public:
-	CSelfDeleteObserver(CTestObservable& observable)
-		: m_observable(observable)
+	CTestObserver(std::function<void(SWeatherInfo const&)>&& callback)
+		: m_callback(callback)
 	{
-		m_observable.RegisterObserver(this);
 	}
 
-	void Update(int const& data)
+	void Update(SWeatherInfo const& data) override
 	{
-		m_observable.RemoveObserver(this);
+		m_callback(data);
 	}
+
 private:
-	CTestObservable& m_observable;
+	std::function<void(SWeatherInfo const&)> m_callback;
 };
 
-class CSelfAddObserver : public IObserver<int>
+struct WeatherDataFixture
 {
-public:
-	CSelfAddObserver(CTestObservable& observable)
-		: m_observable(observable)
-	{
-		m_observable.RegisterObserver(this);
-	}
+	const std::string weatherDataName = "test";
 
-	void Update(int const& data)
+	shared_ptr<CWeatherData> weatherData;
+	WeatherDataFixture()
 	{
-		m_observable.RegisterObserver(this);
+		weatherData = make_shared<CWeatherData>(weatherDataName);
 	}
-private:
-	CTestObservable& m_observable;
 };
 
-class CTestUpdatePriorityObserver : public IObserver<int>
-{
-public:
-	CTestUpdatePriorityObserver(CTestObservable& observable, size_t priority, size_t expectedPriority, size_t& updateCounter)
-		: m_expectedPriority(expectedPriority)
-		, m_updateCounter(updateCounter)
+BOOST_FIXTURE_TEST_SUITE(WeatherData, WeatherDataFixture)
+
+	BOOST_AUTO_TEST_CASE(shows_correct_weather_info)
 	{
-		observable.RegisterObserver(this, priority);
+		BOOST_CHECK_EQUAL(weatherData->GetTemperature(), 0.0);
+		BOOST_CHECK_EQUAL(weatherData->GetHumidity(), 0.0);
+		BOOST_CHECK_EQUAL(weatherData->GetPressure(), 760.0);
+
+		weatherData->SetMeasurements(3, 0.7, 761);
+		BOOST_CHECK_EQUAL(weatherData->GetTemperature(), 3.0);
+		BOOST_CHECK_EQUAL(weatherData->GetHumidity(), 0.7);
+		BOOST_CHECK_EQUAL(weatherData->GetPressure(), 761.0);
 	}
 
-	void Update(int const& data)
+	BOOST_AUTO_TEST_CASE(shows_correct_weather_info_from_notification)
 	{
-		BOOST_CHECK_EQUAL(++m_updateCounter, m_expectedPriority);
+		auto testObserver = make_shared<CTestObserver>([&](SWeatherInfo const&) {
+			BOOST_CHECK_EQUAL(weatherData->GetTemperature(), 3.0);
+			BOOST_CHECK_EQUAL(weatherData->GetHumidity(), 0.7);
+			BOOST_CHECK_EQUAL(weatherData->GetPressure(), 761.0);
+		});
+		weatherData->RegisterObserver(testObserver.get());
+		weatherData->SetMeasurements(3, 0.7, 761);
 	}
-private:
-	size_t m_expectedPriority;
-	size_t& m_updateCounter;
-};
 
-BOOST_FIXTURE_TEST_SUITE(Observer, ObserverFixture)
+	BOOST_AUTO_TEST_CASE(can_send_its_name_to_observer_in_notification)
+	{
+		auto testObserver = make_shared<CTestObserver>([&](SWeatherInfo const& data) {
+			BOOST_CHECK_EQUAL(data.location, weatherDataName);
+		});
+		weatherData->RegisterObserver(testObserver.get());
+		weatherData->MeasurementsChanged();
+	}
+
+	BOOST_AUTO_TEST_CASE(can_register_observer)
+	{
+		bool isUpdated = false;
+		auto testObserver = make_shared<CTestObserver>([&](SWeatherInfo const&) {
+			isUpdated = true;
+		});
+		weatherData->RegisterObserver(testObserver.get());
+		weatherData->MeasurementsChanged();
+		BOOST_CHECK(isUpdated);
+	}
+
+	BOOST_AUTO_TEST_CASE(can_remove_observer)
+	{
+		bool isUpdated = false;
+		auto testObserver = make_shared<CTestObserver>([&](SWeatherInfo const&) {
+			isUpdated = true;
+		});
+		weatherData->RegisterObserver(testObserver.get());
+		weatherData->RemoveObserver(testObserver.get());
+		weatherData->MeasurementsChanged();
+		BOOST_CHECK(!isUpdated);
+	}
 
 	BOOST_AUTO_TEST_CASE(can_delete_observer_from_observer_notification)
 	{
-		auto selfDeleteObserver = make_shared<CSelfDeleteObserver>(observable);
-		BOOST_CHECK_NO_THROW(observable.NotifyObservers());
-	}
-
-	BOOST_AUTO_TEST_CASE(can_register_observer_from_observer_notification)
-	{
-		auto selfAddObserver = make_shared<CSelfDeleteObserver>(observable);
-		BOOST_CHECK_NO_THROW(observable.NotifyObservers());
+		int updateCount = 0;
+		shared_ptr<CTestObserver> testObserver = make_shared<CTestObserver>([&](SWeatherInfo const&) {
+			weatherData->RemoveObserver(testObserver.get());
+			++updateCount;
+		});
+		weatherData->RegisterObserver(testObserver.get());
+		weatherData->MeasurementsChanged();
+		weatherData->MeasurementsChanged();
+		BOOST_CHECK_EQUAL(updateCount, 1);
 	}
 
 	BOOST_AUTO_TEST_CASE(can_update_observers_by_its_priority_order)
 	{
-		size_t updateCounter = 0;
-		auto observer1 = make_shared<CTestUpdatePriorityObserver>(observable, 2, 2, updateCounter);
-		auto observer2 = make_shared<CTestUpdatePriorityObserver>(observable, 3, 1, updateCounter);
-		auto observer3 = make_shared<CTestUpdatePriorityObserver>(observable, 1, 3, updateCounter);
-		observable.NotifyObservers();
+		int updateCount = 0;
+		shared_ptr<CTestObserver> testObserver1 = make_shared<CTestObserver>([&](SWeatherInfo const&) {
+			BOOST_CHECK_EQUAL(++updateCount, 2);
+		});
+		shared_ptr<CTestObserver> testObserver2 = make_shared<CTestObserver>([&](SWeatherInfo const&) {
+			BOOST_CHECK_EQUAL(++updateCount, 1);
+		});
+		shared_ptr<CTestObserver> testObserver3 = make_shared<CTestObserver>([&](SWeatherInfo const&) {
+			BOOST_CHECK_EQUAL(++updateCount, 3);
+		});
+
+		weatherData->RegisterObserver(testObserver1.get(), 2);
+		weatherData->RegisterObserver(testObserver2.get(), 3);
+		weatherData->RegisterObserver(testObserver3.get(), 1);
+		
+		weatherData->MeasurementsChanged();
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
 
+BOOST_FIXTURE_TEST_SUITE(Display, WeatherDataFixture)
+// TODO?
+BOOST_AUTO_TEST_SUITE_END()
 
+BOOST_FIXTURE_TEST_SUITE(StatsDisplay, WeatherDataFixture)
+// TODO?
+BOOST_AUTO_TEST_SUITE_END()
 
 /*
 Данный класс управляет форматированием журнала запуска тестов

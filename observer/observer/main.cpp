@@ -3,20 +3,23 @@
 
 int main()
 {
-	CWeatherData wd;
+	CWeatherData weatherDataOutdoor("outdoor");
+	CWeatherData weatherDataIndoor("indoor");
 
 	auto display = make_shared<CDisplay>();
-	wd.RegisterObserver(display.get());
+	weatherDataOutdoor.RegisterObserver(display.get());
+	weatherDataIndoor.RegisterObserver(display.get());
 
 	auto statsDisplay = make_shared<CStatsDisplay>();
-	wd.RegisterObserver(statsDisplay.get());
+	weatherDataOutdoor.RegisterObserver(statsDisplay.get());
+	weatherDataIndoor.RegisterObserver(statsDisplay.get());
 
-	wd.SetMeasurements(3, 0.7, 760);
-	wd.SetMeasurements(4, 0.8, 761);
+	weatherDataOutdoor.SetMeasurements(3, 0.7, 760);
+	weatherDataOutdoor.SetMeasurements(4, 0.8, 761);
+	weatherDataOutdoor.SetMeasurements(3, 0.7, 760);
+	
+	weatherDataIndoor.SetMeasurements(26, 0.7, 761);
+	weatherDataIndoor.SetMeasurements(27, 0.8, 761);
 
-	wd.RemoveObserver(statsDisplay.get());
-
-	wd.SetMeasurements(10, 0.8, 761);
-	wd.SetMeasurements(-10, 0.8, 761);
 	return 0;
 }
