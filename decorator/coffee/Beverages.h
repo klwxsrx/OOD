@@ -17,6 +17,9 @@ private:
 	std::string m_description;
 };
 
+// Размер порции кофе
+enum class CoffeeSize { Standard, Double };
+
 // Кофе
 class CCoffee : public CBeverage
 {
@@ -35,47 +38,44 @@ public:
 class CCapuccino : public CCoffee
 {
 public:
-	enum Size { Standard, Double };
-
-	CCapuccino(Size size = Size::Standard)
-		: CCoffee((size == Size::Standard) ? "Capuccino" : "Double capuccino")
+	CCapuccino(CoffeeSize size = CoffeeSize::Standard)
+		: CCoffee((size == CoffeeSize::Standard) ? "Capuccino" : "Double capuccino")
 		, m_size(size)
 	{}
 
 	double GetCost() const override 
 	{
-		return (m_size == Size::Standard) ? 80 : 120;
+		return (m_size == CoffeeSize::Standard) ? 80 : 120;
 	}
 private:
-	Size m_size;
+	CoffeeSize m_size;
 };
 
 // Латте
 class CLatte : public CCoffee
 {
 public:
-	enum Size { Standard, Double };
-
-	CLatte(Size size = Size::Standard) 
-		: CCoffee((size == Size::Standard) ? "Latte" : "Double latte")
+	CLatte(CoffeeSize size = CoffeeSize::Standard)
+		: CCoffee((size == CoffeeSize::Standard) ? "Latte" : "Double latte")
 		, m_size(size)
 	{}
 
 	double GetCost() const override 
 	{
-		return (m_size == Size::Standard) ? 90 : 130;
+		return (m_size == CoffeeSize::Standard) ? 90 : 130;
 	}
 private:
-	Size m_size;
+	CoffeeSize m_size;
 };
+
+// Сорт чая
+enum TeaGrade { BlackTea, GreenTea, HerbalTea, OolongTea };
 
 // Чай
 class CTea : public CBeverage
 {
 public:
-	enum Grade { BlackTea, GreenTea, HerbalTea, OolongTea };
-
-	CTea(Grade grade = BlackTea)
+	CTea(TeaGrade grade = BlackTea)
 		: CBeverage(GetDescriptionByGrade(grade))
 	{}
 
@@ -84,21 +84,21 @@ public:
 		return 30; 
 	}
 private:
-	static std::string GetDescriptionByGrade(Grade grade)
+	static std::string GetDescriptionByGrade(TeaGrade grade)
 	{
 		std::string gradeName;
 		switch (grade)
 		{
-		case Grade::GreenTea:
+		case TeaGrade::GreenTea:
 			gradeName = "Green";
 			break;
-		case Grade::HerbalTea:
+		case TeaGrade::HerbalTea:
 			gradeName = "Herbal";
 			break;
-		case Grade::OolongTea:
+		case TeaGrade::OolongTea:
 			gradeName = "Oolong";
 			break;
-		case Grade::BlackTea:
+		case TeaGrade::BlackTea:
 		default:
 			gradeName = "Black";
 		}
@@ -106,13 +106,14 @@ private:
 	}
 };
 
+// Размер порции молочного коктейля
+enum class MilkshakeSize { Small, Standard, Big };
+
 // Молочный коктейль
 class CMilkshake : public CBeverage
 {
 public:
-	enum Size { Small, Standard, Big };
-
-	CMilkshake(Size size = CMilkshake::Standard) 
+	CMilkshake(MilkshakeSize size = MilkshakeSize::Standard)
 		: CBeverage(GetDescriptionBySize(size))
 		, m_size(size)
 	{}
@@ -122,31 +123,31 @@ public:
 		return GetCostBySize(m_size);
 	}
 private:
-	Size m_size;
+	MilkshakeSize m_size;
 
-	static std::string GetDescriptionBySize(Size size)
+	static std::string GetDescriptionBySize(MilkshakeSize size)
 	{
 		switch (size)
 		{
-		case CMilkshake::Small:
+		case MilkshakeSize::Small:
 			return "Small milkshake";
-		case CMilkshake::Big:
+		case MilkshakeSize::Big:
 			return "Big milkshake";
-		case CMilkshake::Standard:
+		case MilkshakeSize::Standard:
 		default:
 			return "Milkshake";
 		}
 	}
 
-	static double GetCostBySize(Size size)
+	static double GetCostBySize(MilkshakeSize size)
 	{
 		switch (size)
 		{
-		case CMilkshake::Small:
+		case MilkshakeSize::Small:
 			return 50;
-		case CMilkshake::Big:
+		case MilkshakeSize::Big:
 			return 80;
-		case CMilkshake::Standard:
+		case MilkshakeSize::Standard:
 		default:
 			return 60;
 		}
