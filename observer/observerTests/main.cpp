@@ -139,14 +139,6 @@ BOOST_FIXTURE_TEST_SUITE(WeatherData, WeatherDataFixture)
 
 BOOST_AUTO_TEST_SUITE_END()
 
-BOOST_FIXTURE_TEST_SUITE(Display, WeatherDataFixture)
-// TODO?
-BOOST_AUTO_TEST_SUITE_END()
-
-BOOST_FIXTURE_TEST_SUITE(StatsDisplay, WeatherDataFixture)
-// TODO?
-BOOST_AUTO_TEST_SUITE_END()
-
 /*
 Данный класс управляет форматированием журнала запуска тестов
 Для того, чтобы увидеть результат, приложение должно быть запущено с ключём --log_level=test_suite (см. Post-build event в настройках проекта)

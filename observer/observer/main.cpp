@@ -1,5 +1,9 @@
 #include "WeatherData.h"
+#include "Display.h"
+#include "StatsDisplay.h"
 #include <memory>
+
+using namespace std;
 
 int main()
 {

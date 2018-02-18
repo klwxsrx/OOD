@@ -142,6 +142,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Display.h" />
+    <ClInclude Include="StatsDisplay.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="WeatherData.h" />
   </ItemGroup>
