@@ -43,8 +43,8 @@ struct Triangle_ : TestCanvas_
 		: vertex1(200, 100)
 		, vertex2(300, 200)
 		, vertex3(100, 200)
-		, color(Color::Red)
-		, triangle(CPoint(200, 100), CPoint(300, 200), CPoint(100, 200), Color::Red)
+		, color(Color::Green)
+		, triangle(CPoint(200, 100), CPoint(300, 200), CPoint(100, 200), Color::Green)
 	{
 	}
 };
@@ -57,11 +57,11 @@ struct Ellipse_ : TestCanvas_
 	Color color;
 
 	Ellipse_()
-		: ellipse(CPoint(200, 200), 150, 100, Color::Red)
+		: ellipse(CPoint(200, 200), 150, 100, Color::Blue)
 		, center(200, 200)
 		, horizontalRadius(150)
 		, verticalRadius(100)
-		, color(Color::Red)
+		, color(Color::Blue)
 	{
 	}
 };
@@ -77,8 +77,8 @@ struct RegularPolygon_ : TestCanvas_
 		: center(200, 200)
 		, vertexCount(3)
 		, radius(100)
-		, polygon(CPoint(200, 200), 100, 3, Color::Red)
-		, color(Color::Red)
+		, polygon(CPoint(200, 200), 100, 3, Color::Yellow)
+		, color(Color::Yellow)
 	{
 	}
 };
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_SUITE(Triangle)
 
 	BOOST_AUTO_TEST_CASE(can_be_created_with_correct_parameters)
 	{
-		BOOST_CHECK_NO_THROW(CTriangle(CPoint(200, 100), CPoint(300, 200), CPoint(100, 200), Color::Red));
+		BOOST_CHECK_NO_THROW(CTriangle(CPoint(200, 100), CPoint(300, 200), CPoint(100, 200), Color::Pink));
 
 		BOOST_CHECK_THROW(CTriangle(CPoint(200, 100), CPoint(200, 100), CPoint(200, 100), Color::Red), std::logic_error);
 		BOOST_CHECK_THROW(CTriangle(CPoint(200, 100), CPoint(200, 100), CPoint(100, 200), Color::Red), std::logic_error);
@@ -162,7 +162,7 @@ BOOST_AUTO_TEST_SUITE(Ellipse)
 
 	BOOST_AUTO_TEST_CASE(can_be_created_with_correct_parameters)
 	{
-		BOOST_CHECK_NO_THROW(CEllipse(CPoint(200, 200), 100, 100, Color::Red));
+		BOOST_CHECK_NO_THROW(CEllipse(CPoint(200, 200), 100, 100, Color::Black));
 
 		BOOST_CHECK_THROW(CEllipse(CPoint(200, 200), 0, 100, Color::Red), std::logic_error);
 		BOOST_CHECK_THROW(CEllipse(CPoint(200, 200), 100, 0, Color::Red), std::logic_error);
@@ -220,9 +220,9 @@ BOOST_AUTO_TEST_SUITE(Regular_polygon)
 		BOOST_CHECK_EQUAL(canvas.GetEllipsesCount(), 0);
 		BOOST_CHECK_EQUAL(canvas.GetLinesCount(), vertexCount);
 		
-		BOOST_CHECK(canvas.HasLine(CPoint(200, 100), CPoint(282, 141)));
-		BOOST_CHECK(canvas.HasLine(CPoint(282, 141), CPoint(233, 105)));
-		BOOST_CHECK(canvas.HasLine(CPoint(233, 105), CPoint(200, 100)));
+		BOOST_CHECK(canvas.HasLine(CPoint(200, 100), CPoint(114, 249)));
+		BOOST_CHECK(canvas.HasLine(CPoint(114, 249), CPoint(287, 250)));
+		BOOST_CHECK(canvas.HasLine(CPoint(287, 250), CPoint(200, 100)));
 	}
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -2,6 +2,7 @@
 #include "RegularPolygon.h"
 
 const unsigned FULL_ANGLE = 360;
+const double PI = 3.141592653589793238463;
 
 CRegularPolygon::CRegularPolygon(CPoint const& center, unsigned radius, unsigned vertexCount, Color color)
 	: m_center(center)
@@ -32,8 +33,8 @@ unsigned CRegularPolygon::GetRadius()const
 
 void CRegularPolygon::DrawImpl(ICanvas & canvas)
 {
-	const unsigned stepAngle = FULL_ANGLE / m_vertexCount;
-	unsigned currentAngle = stepAngle;
+	const double stepAngle = PI / m_vertexCount * 2;
+	double currentAngle = (PI / 2) + stepAngle;
 
 	CPoint topPoint(m_center.x, m_center.y - m_radius);
 	CPoint previousPoint(topPoint);
