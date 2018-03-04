@@ -1,7 +1,6 @@
 #pragma once
 #include "Color.h"
-
-struct CPoint;
+#include "Point.h"
 
 struct ICanvas
 {

@@ -7,13 +7,10 @@ CShape::CShape(Color color)
 {
 }
 
-CShape::~CShape()
-{
-}
-
 void CShape::Draw(ICanvas & canvas)
 {
 	canvas.SetColor(m_color);
+	DrawImpl(canvas);
 }
 
 Color CShape::GetColor()const

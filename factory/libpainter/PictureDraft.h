@@ -4,8 +4,6 @@
 #include <boost/iterator/indirect_iterator.hpp>
 #include "Shape.h"
 
-
-
 class CPictureDraft
 {
 
