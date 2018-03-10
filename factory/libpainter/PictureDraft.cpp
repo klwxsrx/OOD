@@ -17,7 +17,7 @@ CPictureDraft::ConstIterator CPictureDraft::end() const
 	return m_shapes.end();
 }
 
-void CPictureDraft::AddShape(std::unique_ptr<CShape>&& shape)
+void CPictureDraft::AddShape(std::unique_ptr<IShape>&& shape)
 {
 	m_shapes.push_back(move(shape));
 }

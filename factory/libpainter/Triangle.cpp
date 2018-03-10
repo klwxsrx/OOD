@@ -28,7 +28,7 @@ CPoint CTriangle::GetVertex3()const
 	return m_vertex3;
 }
 
-void CTriangle::DrawImpl(ICanvas & canvas)
+void CTriangle::DrawImpl(ICanvas & canvas)const
 {
 	canvas.DrawLine(m_vertex1, m_vertex2);
 	canvas.DrawLine(m_vertex2, m_vertex3);

@@ -1,27 +1,18 @@
 #pragma once
-#include <memory>
-#include <vector>
-#include <boost/iterator/indirect_iterator.hpp>
-#include "Shape.h"
+#include "IPictureDraft.h"
 
-class CPictureDraft
+class CPictureDraft : public IPictureDraft
 {
 
 public:
-	typedef std::vector<std::unique_ptr<CShape>> Storage;
-
 
 	CPictureDraft();
 
-	bool IsEmpty()const;
+	void AddShape(std::unique_ptr<IShape> && shape) override;
+	bool IsEmpty()const override;
 
-	typedef boost::indirect_iterator<Storage::const_iterator, const CShape&> ConstIterator;
-
-	ConstIterator begin()const;
-
-	ConstIterator end()const;
-
-	void AddShape(std::unique_ptr<CShape> && shape);
+	ConstIterator begin()const override;
+	ConstIterator end()const override;
 
 	CPictureDraft(CPictureDraft &&) = default;
 	CPictureDraft& operator=(CPictureDraft &&) = default;

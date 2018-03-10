@@ -11,7 +11,7 @@ public:
 	CPoint GetVertex3()const;
 
 protected:
-	void DrawImpl(ICanvas & canvas)override;
+	void DrawImpl(ICanvas & canvas)const override;
 
 private:
 	CPoint m_vertex1, m_vertex2, m_vertex3;

@@ -7,7 +7,7 @@ CShape::CShape(Color color)
 {
 }
 
-void CShape::Draw(ICanvas & canvas)
+void CShape::Draw(ICanvas & canvas)const
 {
 	canvas.SetColor(m_color);
 	DrawImpl(canvas);

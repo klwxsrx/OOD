@@ -8,14 +8,17 @@ public:
 	void SetColor(Color color)override
 	{
 		m_canvasColor = color;
+		m_isUntouched = false;
 	}
 	void DrawLine(CPoint const& from, CPoint const& to)override
 	{
 		m_lines.push_back(Line(from, to));
+		m_isUntouched = false;
 	}
 	void DrawEclipse(CPoint const& center, unsigned horizontalRadius, unsigned verticalRadius)override
 	{
 		m_ellipses.push_back(Ellipse(center, horizontalRadius, verticalRadius));
+		m_isUntouched = false;
 	}
 	Color GetColor()const
 	{
@@ -40,6 +43,10 @@ public:
 		return std::any_of(m_ellipses.begin(), m_ellipses.end(), [&](Ellipse const& ellipse) {
 			return ellipse.center == center && ellipse.horizontalRadius == horizontalRadius && ellipse.verticalRadius == verticalRadius;
 		});
+	}
+	bool IsUntouched()const
+	{
+		return m_isUntouched;
 	}
 
 private:
@@ -69,4 +76,5 @@ private:
 	Color m_canvasColor;
 	std::vector<Line> m_lines;
 	std::vector<Ellipse> m_ellipses;
+	bool m_isUntouched = true;
 };

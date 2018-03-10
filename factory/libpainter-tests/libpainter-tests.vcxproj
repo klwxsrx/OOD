@@ -168,11 +168,13 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestCanvas.h" />
+    <ClInclude Include="TestShape.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColorTests.cpp" />
     <ClCompile Include="DesignerTests.cpp" />
     <ClCompile Include="libpainter-tests.cpp" />
+    <ClCompile Include="PainterTests.cpp" />
     <ClCompile Include="PictureDraftTests.cpp" />
     <ClCompile Include="PointTests.cpp" />
     <ClCompile Include="ShapeFactoryTests.cpp" />

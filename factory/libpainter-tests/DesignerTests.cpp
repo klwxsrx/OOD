@@ -2,17 +2,20 @@
 #include "../libpainter/Designer.h"
 #include "../libpainter/PictureDraft.h"
 #include "../libpainter/IShapeFactory.h"
+#include "../libpainter/IShape.h"
 
 using namespace std;
 using boost::algorithm::all_of;
 using boost::copy;
 
-class CMockShape : public CShape
+class CMockShape : public IShape
 {
 public:
 	CMockShape(const string& descr)
-		: CShape(Color::Red)
-		, descr(descr)
+		: descr(descr)
+	{
+	}
+	void Draw(ICanvas &)const override
 	{
 	}
 	string descr;
@@ -21,10 +24,8 @@ public:
 struct MockShapeFactory : IShapeFactory
 {
 	vector<string> shapeDescriptions;
-	// Inherited via IShapeFactory
-	unique_ptr<CShape> CreateShape(const std::string & description) override
+	unique_ptr<IShape> CreateShape(const std::string & description) override
 	{
-		// Запротоколировали описание созданной фигуры
 		shapeDescriptions.push_back(description);
 		return make_unique<CMockShape>(description);
 	}

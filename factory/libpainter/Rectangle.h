@@ -12,7 +12,7 @@ public:
 	CPoint GetRightBottom()const;
 
 protected:
-	void DrawImpl(ICanvas & canvas)override;
+	void DrawImpl(ICanvas & canvas)const override;
 
 private:
 	CPoint m_leftTop, m_rightBottom;

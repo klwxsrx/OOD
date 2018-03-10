@@ -1,6 +1,6 @@
 #pragma once
 #include "IShapeFactory.h"
-#include "Shape.h"
+#include "IShape.h"
 #include "Rectangle.h"
 #include "Triangle.h"
 #include "Ellipse.h"
@@ -12,13 +12,13 @@ public:
 	CShapeFactory();
 	~CShapeFactory() = default;
 
-	std::unique_ptr<CShape> CreateShape(const std::string & description)override;
+	std::unique_ptr<IShape> CreateShape(const std::string & description)override;
 
 private:
-	std::unique_ptr<CShape> CreateRectangle(std::istream & input);
-	std::unique_ptr<CShape> CreateTriangle(std::istream & input);
-	std::unique_ptr<CShape> CreateEllipse(std::istream & input);
-	std::unique_ptr<CShape> CreateRegularPolygon(std::istream & input);
+	std::unique_ptr<IShape> CreateRectangle(std::istream & input);
+	std::unique_ptr<IShape> CreateTriangle(std::istream & input);
+	std::unique_ptr<IShape> CreateEllipse(std::istream & input);
+	std::unique_ptr<IShape> CreateRegularPolygon(std::istream & input);
 
-	const std::map<std::string, std::function<std::unique_ptr<CShape> (std::istream&)>> m_createShapeActionMap;
+	const std::map<std::string, std::function<std::unique_ptr<IShape> (std::istream&)>> m_createShapeActionMap;
 };

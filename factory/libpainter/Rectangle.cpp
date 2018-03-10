@@ -12,7 +12,7 @@ CRectangle::CRectangle(CPoint const& leftTop, CPoint const& rightBottom, Color c
 	}
 }
 
-void CRectangle::DrawImpl(ICanvas & canvas)
+void CRectangle::DrawImpl(ICanvas & canvas)const
 {	
 	CPoint leftBottom = CPoint(m_leftTop.x, m_rightBottom.y);
 	CPoint rightTop = CPoint(m_rightBottom.x, m_leftTop.y);

@@ -30,7 +30,7 @@ unsigned CRegularPolygon::GetRadius()const
 	return m_radius;
 }
 
-void CRegularPolygon::DrawImpl(ICanvas & canvas)
+void CRegularPolygon::DrawImpl(ICanvas & canvas)const
 {
 	const double stepAngle = M_PI / m_vertexCount * 2;
 	double currentAngle = (M_PI / 2) + stepAngle;

@@ -37,6 +37,9 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{41497b8e-d05f-4c2a-8381-ffc7bc0ea320}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Painter">
+      <UniqueIdentifier>{5cdebf28-211c-4525-b154-b51d520d298a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -90,6 +93,21 @@
     <ClInclude Include="StringUtils.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="IShape.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="IPictureDraft.h">
+      <Filter>Source Files\PictureDraft</Filter>
+    </ClInclude>
+    <ClInclude Include="IDesigner.h">
+      <Filter>Source Files\Designer</Filter>
+    </ClInclude>
+    <ClInclude Include="IPainter.h">
+      <Filter>Source Files\Painter</Filter>
+    </ClInclude>
+    <ClInclude Include="Painter.h">
+      <Filter>Source Files\Painter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -130,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="StringUtils.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Painter.cpp">
+      <Filter>Source Files\Painter</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
