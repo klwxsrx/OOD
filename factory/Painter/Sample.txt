@@ -1,0 +1,5 @@
+Rectangle 0:0 400:400 Black
+Triangle 0:0 400:0 0:400 Blue
+Triangle 0:0 400:0 400:400 Green
+Ellipse 200:200 150 50 Yellow
+RegularPolygon 200:200 100 24 Pink

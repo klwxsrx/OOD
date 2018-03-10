@@ -19,7 +19,7 @@ CPictureDraft CDesigner::CreateDraft(std::istream & inputData)
 {
 	CPictureDraft draft;
 	string line;
-	while (getline(inputData, line))
+	while (getline(inputData, line) && !line.empty())
 	{
 		draft.AddShape(m_factory.CreateShape(line));
 	}

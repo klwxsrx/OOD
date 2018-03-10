@@ -71,5 +71,13 @@ std::unique_ptr<IShape> CShapeFactory::CreateShape(const std::string & descripti
 		throw std::runtime_error("Invalid shape type!");
 	}
 
-	return it->second(stream);
+	try
+	{
+		return it->second(stream);
+	}
+	catch (std::exception const& e)
+	{
+		std::string text("Can`t create shape: \"");
+		throw std::runtime_error(text.append(description).append("\". Reason: ").append(e.what()));
+	}
 }
