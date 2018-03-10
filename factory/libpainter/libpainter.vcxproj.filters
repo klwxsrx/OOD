@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Support Files">
-      <UniqueIdentifier>{ba73d31c-980c-4e12-9d5c-c88efdd5c0d3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Shapes">
       <UniqueIdentifier>{44d427e4-3d63-49c0-80bf-3b9ff9dfc07d}</UniqueIdentifier>
     </Filter>
@@ -25,22 +22,34 @@
     <Filter Include="Source Files\Designer">
       <UniqueIdentifier>{d591d95e-293c-4bc6-8cd5-30add364bdd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PictureDraft">
+      <UniqueIdentifier>{c7a739ee-35ef-4ea2-ae7c-3b9f07e45aec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{ba73d31c-980c-4e12-9d5c-c88efdd5c0d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Point">
+      <UniqueIdentifier>{ca208471-1f82-444f-9de4-7c07b1b0c0e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Color">
+      <UniqueIdentifier>{40359823-5407-4080-85ca-2e1765bf2c52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{41497b8e-d05f-4c2a-8381-ffc7bc0ea320}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
-      <Filter>Support Files</Filter>
+      <Filter>Other</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Support Files</Filter>
+      <Filter>Other</Filter>
     </ClInclude>
     <ClInclude Include="Designer.h">
       <Filter>Source Files\Designer</Filter>
-    </ClInclude>
-    <ClInclude Include="PictureDraft.h">
-      <Filter>Source Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="Shape.h">
       <Filter>Source Files\Shapes</Filter>
@@ -51,13 +60,7 @@
     <ClInclude Include="ICanvas.h">
       <Filter>Source Files\Canvas</Filter>
     </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>Source Files\Canvas</Filter>
-    </ClInclude>
     <ClInclude Include="Rectangle.h">
-      <Filter>Source Files\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
@@ -75,19 +78,25 @@
     <ClInclude Include="ShapeFactory.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="PictureDraft.h">
+      <Filter>Source Files\PictureDraft</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Source Files\Point</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Source Files\Color</Filter>
+    </ClInclude>
     <ClInclude Include="StringUtils.h">
-      <Filter>Support Files</Filter>
+      <Filter>Source Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Support Files</Filter>
+      <Filter>Other</Filter>
     </ClCompile>
     <ClCompile Include="Designer.cpp">
       <Filter>Source Files\Designer</Filter>
-    </ClCompile>
-    <ClCompile Include="PictureDraft.cpp">
-      <Filter>Source Files\Shapes</Filter>
     </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>Source Files\Shapes</Filter>
@@ -110,14 +119,17 @@
     <ClCompile Include="ShapeFactory.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="Point.cpp">
-      <Filter>Source Files\Shapes</Filter>
+    <ClCompile Include="PictureDraft.cpp">
+      <Filter>Source Files\PictureDraft</Filter>
     </ClCompile>
-    <ClCompile Include="StringUtils.cpp">
-      <Filter>Support Files</Filter>
+    <ClCompile Include="Point.cpp">
+      <Filter>Source Files\Point</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
-      <Filter>Source Files\Canvas</Filter>
+      <Filter>Source Files\Color</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

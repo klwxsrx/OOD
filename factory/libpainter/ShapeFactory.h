@@ -15,8 +15,6 @@ public:
 	std::unique_ptr<CShape> CreateShape(const std::string & description)override;
 
 private:
-	//static Color ReadColor(std::istream & input);
-
 	std::unique_ptr<CShape> CreateRectangle(std::istream & input);
 	std::unique_ptr<CShape> CreateTriangle(std::istream & input);
 	std::unique_ptr<CShape> CreateEllipse(std::istream & input);
