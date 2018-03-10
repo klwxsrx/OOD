@@ -2,18 +2,11 @@
 
 struct CPoint
 {
-	CPoint(unsigned x, unsigned y)
-		: x(x), y(y)
-	{
-	}
-	CPoint(CPoint && point)
-		: x(point.x), y(point.y)
-	{
-	}
-	CPoint(CPoint const& point)
-		: x(point.x), y(point.y)
-	{
-	}
+	CPoint();
+	CPoint(unsigned x, unsigned y);
+	CPoint(CPoint && point) = default;
+	CPoint(CPoint const& point) = default;
+
 	bool operator==(CPoint const& p)const
 	{
 		return p.x == x && p.y == y;
@@ -34,5 +27,8 @@ struct CPoint
 		y = point.y;
 		return *this;
 	}
+
 	unsigned x, y;
 };
+
+std::istream& operator>>(std::istream& stream, CPoint& point);

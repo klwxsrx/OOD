@@ -72,6 +72,12 @@
     <ClInclude Include="SvgCanvas.h">
       <Filter>Source Files\Canvas</Filter>
     </ClInclude>
+    <ClInclude Include="ShapeFactory.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>Support Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -99,6 +105,18 @@
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
     <ClCompile Include="SvgCanvas.cpp">
+      <Filter>Source Files\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeFactory.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
+      <Filter>Support Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
       <Filter>Source Files\Canvas</Filter>
     </ClCompile>
   </ItemGroup>

@@ -148,24 +148,30 @@
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RegularPolygon.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="ShapeFactory.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StringUtils.h" />
     <ClInclude Include="SvgCanvas.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Designer.cpp" />
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="PictureDraft.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="RegularPolygon.cpp" />
     <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="ShapeFactory.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="SvgCanvas.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>

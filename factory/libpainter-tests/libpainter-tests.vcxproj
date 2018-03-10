@@ -170,9 +170,12 @@
     <ClInclude Include="TestCanvas.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ColorTests.cpp" />
     <ClCompile Include="DesignerTests.cpp" />
     <ClCompile Include="libpainter-tests.cpp" />
     <ClCompile Include="PictureDraftTests.cpp" />
+    <ClCompile Include="PointTests.cpp" />
+    <ClCompile Include="ShapeFactoryTests.cpp" />
     <ClCompile Include="ShapeTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
