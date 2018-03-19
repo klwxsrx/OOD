@@ -19,7 +19,7 @@ public:
 	{
 		canvas.SetColor(m_color);
 		canvas.DrawLine(m_pointFrom, m_pointTo);
-		canvas.DrawEclipse(m_center, m_horizontalRadius, m_verticalRadius);
+		canvas.DrawEllipse(m_center, m_horizontalRadius, m_verticalRadius);
 	}
 	CPoint m_pointFrom, m_pointTo, m_center;
 	unsigned m_horizontalRadius, m_verticalRadius;

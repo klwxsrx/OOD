@@ -25,7 +25,7 @@ BOOST_FIXTURE_TEST_SUITE(ShapeFactory, ShapeFactory_)
 		auto shape = factory.CreateShape("Rectangle 100:150 200:250 Pink");
 		CRectangle* rectPtr = nullptr;
 
-		BOOST_CHECK_NO_THROW(rectPtr = static_cast<CRectangle*>(shape.get()));
+		BOOST_REQUIRE(rectPtr = dynamic_cast<CRectangle*>(shape.get()));
 		BOOST_CHECK(rectPtr->GetLeftTop() == CPoint(100, 150));
 		BOOST_CHECK(rectPtr->GetRightBottom() == CPoint(200, 250));
 		BOOST_CHECK(rectPtr->GetColor() == Color::Pink);
@@ -47,7 +47,7 @@ BOOST_FIXTURE_TEST_SUITE(ShapeFactory, ShapeFactory_)
 		auto shape = factory.CreateShape("Triangle 100:150 200:250 300:350 Pink");
 		CTriangle* trianglePtr = nullptr;
 
-		BOOST_CHECK_NO_THROW(trianglePtr = static_cast<CTriangle*>(shape.get()));
+		BOOST_REQUIRE(trianglePtr = dynamic_cast<CTriangle*>(shape.get()));
 		BOOST_CHECK(trianglePtr->GetVertex1() == CPoint(100, 150));
 		BOOST_CHECK(trianglePtr->GetVertex2() == CPoint(200, 250));
 		BOOST_CHECK(trianglePtr->GetVertex3() == CPoint(300, 350));
@@ -72,7 +72,7 @@ BOOST_FIXTURE_TEST_SUITE(ShapeFactory, ShapeFactory_)
 		auto shape = factory.CreateShape("Ellipse 100:150 200 100 Pink");
 		CEllipse* ellipsePtr = nullptr;
 
-		BOOST_CHECK_NO_THROW(ellipsePtr = static_cast<CEllipse*>(shape.get()));
+		BOOST_REQUIRE(ellipsePtr = dynamic_cast<CEllipse*>(shape.get()));
 		BOOST_CHECK(ellipsePtr->GetCenter() == CPoint(100, 150));
 		BOOST_CHECK(ellipsePtr->GetHorizontalRadius() == 200);
 		BOOST_CHECK(ellipsePtr->GetVerticalRadius() == 100);
@@ -97,7 +97,7 @@ BOOST_FIXTURE_TEST_SUITE(ShapeFactory, ShapeFactory_)
 		auto shape = factory.CreateShape("RegularPolygon 100:150 200 6 Pink");
 		CRegularPolygon* polygonPtr = nullptr;
 
-		BOOST_CHECK_NO_THROW(polygonPtr = static_cast<CRegularPolygon*>(shape.get()));
+		BOOST_REQUIRE(polygonPtr = dynamic_cast<CRegularPolygon*>(shape.get()));
 		BOOST_CHECK(polygonPtr->GetCenter() == CPoint(100, 150));
 		BOOST_CHECK(polygonPtr->GetRadius() == 200);
 		BOOST_CHECK(polygonPtr->GetVertexCount() == 6);

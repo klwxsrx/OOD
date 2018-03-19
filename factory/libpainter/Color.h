@@ -10,13 +10,7 @@ enum class Color
 	Black,
 };
 
-struct CColor
-{
-	CColor();
-	Color color;
-};
-
-std::istream& operator>>(std::istream& stream, CColor& color);
+std::istream& operator>>(std::istream& stream, Color& color);
 
 struct RgbColor
 {

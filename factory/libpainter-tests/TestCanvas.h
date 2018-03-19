@@ -15,7 +15,7 @@ public:
 		m_lines.push_back(Line(from, to));
 		m_isUntouched = false;
 	}
-	void DrawEclipse(CPoint const& center, unsigned horizontalRadius, unsigned verticalRadius)override
+	void DrawEllipse(CPoint const& center, unsigned horizontalRadius, unsigned verticalRadius)override
 	{
 		m_ellipses.push_back(Ellipse(center, horizontalRadius, verticalRadius));
 		m_isUntouched = false;

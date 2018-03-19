@@ -30,5 +30,5 @@ unsigned CEllipse::GetVerticalRadius()const
 
 void CEllipse::DrawImpl(ICanvas & canvas)const
 {
-	canvas.DrawEclipse(m_center, m_horizontalRadius, m_verticalRadius);
+	canvas.DrawEllipse(m_center, m_horizontalRadius, m_verticalRadius);
 }

@@ -5,9 +5,9 @@ struct Color_
 {
 	void TestColorFromStream(std::istream&& stream, Color expectedColor)
 	{
-		CColor color;
-		BOOST_CHECK_NO_THROW(stream >> color);
-		BOOST_CHECK(color.color == expectedColor);
+		Color color;
+		stream >> color;
+		BOOST_CHECK(color == expectedColor);
 	}
 
 	void TestRgbColor(Color color, unsigned r, unsigned g, unsigned b)
@@ -23,7 +23,7 @@ BOOST_AUTO_TEST_SUITE(ShapeColor)
 
 	BOOST_AUTO_TEST_CASE(throws_error_when_initialized_with_wrong_color)
 	{
-		CColor color;
+		Color color;
 		BOOST_CHECK_THROW(std::stringstream("Unknown") >> color, std::runtime_error);
 	}
 

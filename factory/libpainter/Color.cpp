@@ -1,12 +1,7 @@
 #include "stdafx.h"
 #include "Color.h"
 
-CColor::CColor()
-	: color(Color::Black)
-{
-}
-
-std::istream& operator>>(std::istream& stream, CColor& color)
+std::istream& operator>>(std::istream& stream, Color& color)
 {
 	static const std::map<std::string, Color> colorMap({
 		{ "Black", Color::Black },
@@ -31,7 +26,7 @@ std::istream& operator>>(std::istream& stream, CColor& color)
 		throw std::runtime_error("Invalid color!");
 	}
 
-	color.color = it->second;
+	color = it->second;
 	
 	return stream;
 }

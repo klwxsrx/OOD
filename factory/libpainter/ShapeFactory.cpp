@@ -14,43 +14,43 @@ CShapeFactory::CShapeFactory()
 std::unique_ptr<IShape> CShapeFactory::CreateRectangle(std::istream & input)
 {
 	CPoint leftTop, rightBottom;
-	CColor color;
+	Color color;
 
 	input >> leftTop >> rightBottom >> color;
 
-	return std::move(std::make_unique<CRectangle>(leftTop, rightBottom, color.color));
+	return std::move(std::make_unique<CRectangle>(leftTop, rightBottom, color));
 }
 
 std::unique_ptr<IShape> CShapeFactory::CreateTriangle(std::istream & input)
 {
 	CPoint vertex1, vertex2, vertex3;
-	CColor color;
+	Color color;
 
 	input >> vertex1 >> vertex2 >> vertex3 >> color;
 
-	return std::move(std::make_unique<CTriangle>(vertex1, vertex2, vertex3, color.color));
+	return std::move(std::make_unique<CTriangle>(vertex1, vertex2, vertex3, color));
 }
 
 std::unique_ptr<IShape> CShapeFactory::CreateEllipse(std::istream & input)
 {
 	CPoint center;
 	unsigned horizontalRadius, verticalRadius;
-	CColor color;
+	Color color;
 
 	input >> center >> horizontalRadius >> verticalRadius >> color;
 
-	return std::move(std::make_unique<CEllipse>(center, horizontalRadius, verticalRadius, color.color));
+	return std::move(std::make_unique<CEllipse>(center, horizontalRadius, verticalRadius, color));
 }
 
 std::unique_ptr<IShape> CShapeFactory::CreateRegularPolygon(std::istream & input)
 {
 	CPoint center;
 	unsigned radius, vertexCount;
-	CColor color;
+	Color color;
 
 	input >> center >> radius >> vertexCount >> color;
 
-	return std::move(std::make_unique<CRegularPolygon>(center, radius, vertexCount, color.color));
+	return std::move(std::make_unique<CRegularPolygon>(center, radius, vertexCount, color));
 }
 
 std::unique_ptr<IShape> CShapeFactory::CreateShape(const std::string & description)
