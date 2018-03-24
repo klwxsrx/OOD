@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{e109176b-0afb-4683-aef0-215d98e43666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{60b063c8-df01-4ccd-a75f-7564fc9864a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{8fb484ac-e32d-4ae8-a3a7-ffceebaa2a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Document">
+      <UniqueIdentifier>{7326caa9-4571-4da3-9a55-2c811ba08d86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Document\Image">
+      <UniqueIdentifier>{60555bbf-2b0e-4de5-8478-ffef058546b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Document\Paragraph">
+      <UniqueIdentifier>{e538a2ac-dc30-43fb-bd77-e643840539df}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="IIMage.h">
+      <Filter>Document\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Document\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageDocumentItem.h">
+      <Filter>Document\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="IParagraph.h">
+      <Filter>Document\Paragraph</Filter>
+    </ClInclude>
+    <ClInclude Include="Paragraph.h">
+      <Filter>Document\Paragraph</Filter>
+    </ClInclude>
+    <ClInclude Include="ParagraphDocumentItem.h">
+      <Filter>Document\Paragraph</Filter>
+    </ClInclude>
+    <ClInclude Include="Document.h">
+      <Filter>Document</Filter>
+    </ClInclude>
+    <ClInclude Include="IDocument.h">
+      <Filter>Document</Filter>
+    </ClInclude>
+    <ClInclude Include="IDocumentItem.h">
+      <Filter>Document</Filter>
+    </ClInclude>
+    <ClInclude Include="FileResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="FileUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="IFileResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Document\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageDocumentItem.cpp">
+      <Filter>Document\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="Paragraph.cpp">
+      <Filter>Document\Paragraph</Filter>
+    </ClCompile>
+    <ClCompile Include="ParagraphDocumentItem.cpp">
+      <Filter>Document\Paragraph</Filter>
+    </ClCompile>
+    <ClCompile Include="Document.cpp">
+      <Filter>Document</Filter>
+    </ClCompile>
+    <ClCompile Include="FileResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="FileUtils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
