@@ -1,27 +1,43 @@
 #include "stdafx.h"
 #include "../libeditor/FileResource.h"
+#include "../libeditor/FileUtils.h"
 
 void CreateFile(boost::filesystem::path const& path)
 {
-	boost::filesystem::ofstream(path.string());
-	BOOST_CHECK(boost::filesystem::exists(path));
+	BOOST_CHECK_NO_THROW(boost::filesystem::ofstream(path.string()));
 }
 
-void DeleteFileIfExist(boost::filesystem::path const& path)
+void SetFileReadPermissions(boost::filesystem::path const& path)
 {
-	boost::filesystem::remove(path);
+	BOOST_CHECK_NO_THROW(permissions(path, boost::filesystem::perms::owner_read));
 }
 
-struct Path
+struct TestFileFixture
 {
 	const boost::filesystem::path path;
-	Path()
+	TestFileFixture()
 		: path("test.file")
 	{
+		DeleteFile();
+	}
+	~TestFileFixture()
+	{
+		DeleteFile();		
+	}
+	void DeleteFile()
+	{
+		try
+		{
+			permissions(path, boost::filesystem::perms::owner_all);
+			FileUtils::DeleteFile(path);
+		}
+		catch (std::runtime_error const&)
+		{
+		}
 	}
 };
 
-BOOST_FIXTURE_TEST_SUITE(File_resource, Path)
+BOOST_FIXTURE_TEST_SUITE(File_resource, TestFileFixture)
 
 	BOOST_AUTO_TEST_CASE(can_return_its_path)
 	{
@@ -38,12 +54,17 @@ BOOST_FIXTURE_TEST_SUITE(File_resource, Path)
 		}
 
 		BOOST_CHECK(!boost::filesystem::exists(path));
-		DeleteFileIfExist(path);
 	}
 
 	BOOST_AUTO_TEST_CASE(not_throws_error_when_cant_delete_file)
 	{
-		// TODO: 
+		CreateFile(path);
+		SetFileReadPermissions(path);
+
+		BOOST_CHECK_NO_THROW({
+			CFileResource resource(path);
+		});
+		BOOST_CHECK(boost::filesystem::exists(path));
 	}
 
 BOOST_AUTO_TEST_SUITE_END()

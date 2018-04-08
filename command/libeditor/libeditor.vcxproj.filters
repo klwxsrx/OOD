@@ -23,6 +23,9 @@
     <Filter Include="Document\Paragraph">
       <UniqueIdentifier>{e538a2ac-dc30-43fb-bd77-e643840539df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Command">
+      <UniqueIdentifier>{a86fbd90-44e6-403d-89fb-c8a93e623652}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -67,6 +70,21 @@
     <ClInclude Include="IFileResource.h">
       <Filter>Resource</Filter>
     </ClInclude>
+    <ClInclude Include="ICommand.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertItemCommand.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteItemCommand.h">
+      <Filter>Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeItemCommand.h">
+      <Filter>Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -92,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="FileUtils.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Command</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -149,6 +149,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\libeditor\Command.cpp" />
     <ClCompile Include="..\libeditor\Document.cpp" />
     <ClCompile Include="..\libeditor\FileResource.cpp" />
     <ClCompile Include="..\libeditor\FileUtils.cpp" />
@@ -156,6 +157,10 @@
     <ClCompile Include="..\libeditor\ImageDocumentItem.cpp" />
     <ClCompile Include="..\libeditor\Paragraph.cpp" />
     <ClCompile Include="..\libeditor\ParagraphDocumentItem.cpp" />
+    <ClCompile Include="ChangeItemCommandTests.cpp" />
+    <ClCompile Include="DeleteItemCommandTests.cpp" />
+    <ClCompile Include="InsertItemCommandTests.cpp" />
+    <ClCompile Include="DocumentTests.cpp" />
     <ClCompile Include="FileResourceTests.cpp" />
     <ClCompile Include="ImageDocumentItemTests.cpp" />
     <ClCompile Include="ImageTests.cpp" />

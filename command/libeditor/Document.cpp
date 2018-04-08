@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "Document.h"
 
+CDocument::CDocument()
+	: m_title("Untitled document")
+{
+}
+
 std::shared_ptr<IParagraph> CDocument::InsertParagraph(std::string const & text, boost::optional<size_t> position)
 {
 	return std::shared_ptr<IParagraph>();
@@ -13,7 +18,7 @@ std::shared_ptr<IImage> CDocument::InsertImage(boost::filesystem::path const & p
 
 size_t CDocument::GetItemsCount() const
 {
-	return size_t();
+	return m_items.size();
 }
 
 IDocumentItem::Ptr CDocument::GetItem(size_t index) const
@@ -32,11 +37,12 @@ void CDocument::DeleteItem(size_t index)
 
 void CDocument::SetTitle(std::string const & title)
 {
+	m_title = title;
 }
 
 std::string CDocument::GetTitle() const
 {
-	return std::string();
+	return m_title;
 }
 
 bool CDocument::CanUndo() const

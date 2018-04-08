@@ -28,3 +28,5 @@
 #include <chrono>
 #include <boost\filesystem.hpp>
 #include <boost\format.hpp>
+#include <list>
+#include <algorithm>
