@@ -26,6 +26,9 @@
     <Filter Include="Command">
       <UniqueIdentifier>{a86fbd90-44e6-403d-89fb-c8a93e623652}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DocumentHistory">
+      <UniqueIdentifier>{bada1150-1992-4707-9d4c-efd6e11463d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -85,6 +88,9 @@
     <ClInclude Include="ChangeItemCommand.h">
       <Filter>Command</Filter>
     </ClInclude>
+    <ClInclude Include="History.h">
+      <Filter>DocumentHistory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -113,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="Command.cpp">
       <Filter>Command</Filter>
+    </ClCompile>
+    <ClCompile Include="History.cpp">
+      <Filter>DocumentHistory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

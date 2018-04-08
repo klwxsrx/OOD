@@ -22,10 +22,10 @@ public:
 	/**/ void SetTitle(std::string const & title) override;
 	/**/ std::string GetTitle() const override;
 
-	bool CanUndo() const override;
-	void Undo() override;
-	bool CanRedo() const override;
-	void Redo() override;
+	/**/ bool CanUndo() const override;
+	/**/ void Undo() override;
+	/**/ bool CanRedo() const override;
+	/**/ void Redo() override;
 
 	void Save(boost::filesystem::path const & path) const override;
 

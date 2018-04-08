@@ -30,3 +30,4 @@
 #include <boost\format.hpp>
 #include <list>
 #include <algorithm>
+#include <functional>

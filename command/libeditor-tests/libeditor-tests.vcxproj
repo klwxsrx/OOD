@@ -141,9 +141,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="MockFileResource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -153,12 +150,14 @@
     <ClCompile Include="..\libeditor\Document.cpp" />
     <ClCompile Include="..\libeditor\FileResource.cpp" />
     <ClCompile Include="..\libeditor\FileUtils.cpp" />
+    <ClCompile Include="..\libeditor\History.cpp" />
     <ClCompile Include="..\libeditor\Image.cpp" />
     <ClCompile Include="..\libeditor\ImageDocumentItem.cpp" />
     <ClCompile Include="..\libeditor\Paragraph.cpp" />
     <ClCompile Include="..\libeditor\ParagraphDocumentItem.cpp" />
     <ClCompile Include="ChangeItemCommandTests.cpp" />
     <ClCompile Include="DeleteItemCommandTests.cpp" />
+    <ClCompile Include="HistoryTests.cpp" />
     <ClCompile Include="InsertItemCommandTests.cpp" />
     <ClCompile Include="DocumentTests.cpp" />
     <ClCompile Include="FileResourceTests.cpp" />
