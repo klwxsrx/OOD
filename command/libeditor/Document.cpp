@@ -4,6 +4,7 @@
 #include "ImageDocumentItem.h"
 #include "InsertItemCommand.h"
 #include "DeleteItemCommand.h"
+#include "ChangeItemCommand.h"
 #include "FileResource.h"
 #include "FileUtils.h"
 
@@ -16,7 +17,10 @@ std::shared_ptr<IParagraph> CDocument::InsertParagraph(std::string const & text,
 {
 	ValidateInsertPosition(position);
 
-	std::shared_ptr<CParagraphDocumentItem> item = std::make_shared<CParagraphDocumentItem>(text);
+	std::shared_ptr<CParagraph> paragraph = std::make_shared<CParagraph>(text);
+	paragraph->ConnectOnChange(boost::bind(&CDocument::OnParagraphChange, this, boost::placeholders::_1, boost::placeholders::_2));
+
+	std::shared_ptr<CParagraphDocumentItem> item = std::make_shared<CParagraphDocumentItem>(std::move(paragraph));
 	std::unique_ptr<CInsertItemCommand<DocumentItemsList>> command = std::make_unique<CInsertItemCommand<DocumentItemsList>>(m_items, item, position);
 	m_history.ExecuteCommand(std::move(command));
 	return item->GetParagraph();
@@ -27,7 +31,10 @@ std::shared_ptr<IImage> CDocument::InsertImage(boost::filesystem::path const & p
 	ValidateInsertPosition(position);
 
 	IFileResource::Ptr fileResource = GetCopiedImageResource(path);
-	std::shared_ptr<CImageDocumentItem> item = std::make_shared<CImageDocumentItem>(std::move(fileResource), width, height);
+	std::shared_ptr<CImage> image = std::make_shared<CImage>(std::move(fileResource), width, height);
+	image->ConnectOnResize(boost::bind(&CDocument::OnImageResize, this, boost::placeholders::_1, boost::placeholders::_2));
+
+	std::shared_ptr<CImageDocumentItem> item = std::make_shared<CImageDocumentItem>(std::move(image));
 	std::unique_ptr<CInsertItemCommand<DocumentItemsList>> command = std::make_unique<CInsertItemCommand<DocumentItemsList>>(m_items, item, position);
 	m_history.ExecuteCommand(std::move(command));
 	return item->GetImage();
@@ -38,7 +45,7 @@ size_t CDocument::GetItemsCount() const
 	return m_items.size();
 }
 
-IDocumentItem::Ptr CDocument::GetItem(size_t index) const
+IDocumentItem::Ptr CDocument::GetItem(size_t index)
 {
 	ValidateItemPosition(index);
 
@@ -47,7 +54,7 @@ IDocumentItem::Ptr CDocument::GetItem(size_t index) const
 	return *it;
 }
 
-IDocumentItem::ConstPtr CDocument::GetItem(size_t index)
+IDocumentItem::ConstPtr CDocument::GetItem(size_t index) const
 {
 	ValidateItemPosition(index);
 
@@ -63,9 +70,14 @@ void CDocument::DeleteItem(size_t index)
 	m_history.ExecuteCommand(std::make_unique<CDeleteItemCommand<DocumentItemsList>>(m_items, index));
 }
 
-void CDocument::SetTitle(std::string const & title)
+void CDocument::SetTitle(std::string const& title)
 {
-	m_title = title;
+	if (title.empty())
+	{
+		throw std::runtime_error("Can't set an empty title!");
+	}
+
+	m_history.ExecuteCommand(std::make_unique<CChangeItemCommand<std::string>>(m_title, title));
 }
 
 std::string CDocument::GetTitle() const
@@ -110,6 +122,16 @@ IFileResource::Ptr CDocument::GetCopiedImageResource(boost::filesystem::path sou
 	{
 		throw std::runtime_error("Failed to copy resource file!");
 	}
+}
+
+void CDocument::OnParagraphChange(std::string& paragraph, std::string const& text)
+{
+	m_history.ExecuteCommand(std::make_unique<CChangeItemCommand<std::string>>(paragraph, text));
+}
+
+void CDocument::OnImageResize(ImageSize& image, ImageSize const& newSize)
+{
+	m_history.ExecuteCommand(std::make_unique<CChangeItemCommand<ImageSize>>(image, newSize));
 }
 
 void CDocument::ValidateInsertPosition(boost::optional<size_t> position) const

@@ -3,15 +3,13 @@
 
 CImage::CImage(IFileResource::Ptr && resource, unsigned width, unsigned height)
 	: m_resource(resource)
-	, m_width(width)
-	, m_height(height)
+	, m_size(width, height)
 {
 }
 
 void CImage::Resize(unsigned width, unsigned height)
 {
-	m_width = width;
-	m_height = height;
+	m_onResize(m_size, ImageSize(width, height));
 }
 
 boost::filesystem::path CImage::GetPath()const
@@ -21,10 +19,15 @@ boost::filesystem::path CImage::GetPath()const
 
 unsigned CImage::GetWidth()const
 {
-	return m_width;
+	return m_size.width;
 }
 
 unsigned CImage::GetHeight()const
 {
-	return m_height;
+	return m_size.height;
+}
+
+void CImage::ConnectOnResize(std::function<void(ImageSize&, ImageSize const&)> callback)
+{
+	m_onResize.connect(callback);
 }

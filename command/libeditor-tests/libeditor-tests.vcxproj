@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="..\libeditor\Command.cpp" />
     <ClCompile Include="..\libeditor\Document.cpp" />
+    <ClCompile Include="..\libeditor\DocumentItem.cpp" />
     <ClCompile Include="..\libeditor\DocumentResourcePath.cpp" />
     <ClCompile Include="..\libeditor\FileResource.cpp" />
     <ClCompile Include="..\libeditor\FileUtils.cpp" />

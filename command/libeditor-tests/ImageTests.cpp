@@ -9,6 +9,10 @@ struct Image_
 	Image_()
 		: image(std::make_shared<CMockFileResource>(), 640u, 480u)
 	{
+		auto onChange = [](ImageSize& image, ImageSize const& imageSize) {
+			image = imageSize;
+		};
+		image.ConnectOnResize(onChange);
 	}
 };
 

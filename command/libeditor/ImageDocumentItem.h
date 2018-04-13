@@ -1,13 +1,16 @@
 #pragma once
-#include "IDocumentItem.h"
+#include "DocumentItem.h"
 #include "Image.h"
 
-class CImageDocumentItem : public IDocumentItem
+class CImageDocumentItem : public CDocumentItem
 {
 public:
 	CImageDocumentItem(IFileResource::Ptr && resource, unsigned width, unsigned height);
+	CImageDocumentItem(std::shared_ptr<CImage> && image);
+	~CImageDocumentItem() = default;
 	std::string GetDescription()const override;
-	std::shared_ptr<CImage> GetImage();
+	std::shared_ptr<IImage> GetImage() override;
+	std::shared_ptr<const IImage> GetImage() const override;
 
 private:
 	std::shared_ptr<CImage> m_image;

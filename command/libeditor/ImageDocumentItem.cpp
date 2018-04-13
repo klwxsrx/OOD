@@ -7,12 +7,22 @@ CImageDocumentItem::CImageDocumentItem(IFileResource::Ptr && resource, unsigned 
 {
 }
 
-std::string CImageDocumentItem::GetDescription()const
+CImageDocumentItem::CImageDocumentItem(std::shared_ptr<CImage> && image)
+	: m_image(image)
+{
+}
+
+std::string CImageDocumentItem::GetDescription() const
 {
 	return (boost::format("Image: %1% %2% %3%") % m_image->GetWidth() % m_image->GetHeight() % m_image->GetPath()).str();
 }
 
-std::shared_ptr<CImage> CImageDocumentItem::GetImage()
+std::shared_ptr<IImage> CImageDocumentItem::GetImage()
+{
+	return m_image;
+}
+
+std::shared_ptr<const IImage> CImageDocumentItem::GetImage() const
 {
 	return m_image;
 }

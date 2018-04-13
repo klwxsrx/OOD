@@ -17,8 +17,8 @@ public:
 
 	/**/ size_t GetItemsCount() const override;
 
-	IDocumentItem::Ptr GetItem(size_t index) const override;
-	IDocumentItem::ConstPtr GetItem(size_t index) override;
+	IDocumentItem::Ptr GetItem(size_t index) override;
+	IDocumentItem::ConstPtr GetItem(size_t index) const override;
 
 	void DeleteItem(size_t index) override;
 	
@@ -34,6 +34,8 @@ public:
 
 private:
 	IFileResource::Ptr GetCopiedImageResource(boost::filesystem::path source);
+	void OnParagraphChange(std::string& paragraph, std::string const& text);
+	void OnImageResize(ImageSize& image, ImageSize const& newSize);
 	void ValidateInsertPosition(boost::optional<size_t> position) const;
 	void ValidateItemPosition(boost::optional<size_t> position) const;
 

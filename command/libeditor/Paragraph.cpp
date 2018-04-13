@@ -12,7 +12,15 @@ std::string CParagraph::GetText() const
 	return m_paragraph;
 }
 
-void CParagraph::SetText(std::string const & text)
+void CParagraph::SetText(std::string const& text)
 {
-	m_paragraph = text;
+	if (m_paragraph != text)
+	{
+		m_onChange(m_paragraph, text);
+	}
+}
+
+void CParagraph::ConnectOnChange(std::function<void(std::string&, std::string const&)> callback)
+{
+	m_onChange.connect(callback);
 }

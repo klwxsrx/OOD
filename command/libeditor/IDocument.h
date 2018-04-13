@@ -15,8 +15,8 @@ public:
 
 	virtual size_t GetItemsCount()const = 0;
 
-	virtual IDocumentItem::Ptr GetItem(size_t index)const = 0;
-	virtual IDocumentItem::ConstPtr GetItem(size_t index) = 0;
+	virtual IDocumentItem::Ptr GetItem(size_t index) = 0;
+	virtual IDocumentItem::ConstPtr GetItem(size_t index)const = 0;
 
 	virtual void DeleteItem(size_t index) = 0;
 

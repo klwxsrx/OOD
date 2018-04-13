@@ -128,6 +128,7 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="DeleteItemCommand.h" />
     <ClInclude Include="Document.h" />
+    <ClInclude Include="DocumentItem.h" />
     <ClInclude Include="DocumentResourcePath.h" />
     <ClInclude Include="FileResource.h" />
     <ClInclude Include="FileUtils.h" />
@@ -149,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Document.cpp" />
+    <ClCompile Include="DocumentItem.cpp" />
     <ClCompile Include="DocumentResourcePath.cpp" />
     <ClCompile Include="FileResource.cpp" />
     <ClCompile Include="FileUtils.cpp" />

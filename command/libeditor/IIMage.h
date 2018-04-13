@@ -1,6 +1,14 @@
 #pragma once
 #include <boost\filesystem.hpp>
 
+struct ImageSize
+{
+	ImageSize(unsigned width, unsigned height)
+		: width(width), height(height)
+	{}
+	unsigned width, height;
+};
+
 class IImage
 {
 public:

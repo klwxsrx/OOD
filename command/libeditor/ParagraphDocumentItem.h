@@ -1,15 +1,18 @@
 #pragma once
-#include "IDocumentItem.h"
+#include "DocumentItem.h"
 #include "Paragraph.h"
 
-class CParagraphDocumentItem : public IDocumentItem
+class CParagraphDocumentItem : public CDocumentItem
 {
 public:
 	CParagraphDocumentItem(std::string const& paragraph);
+	CParagraphDocumentItem(std::shared_ptr<IParagraph> && paragraph);
+	~CParagraphDocumentItem() = default;
 	std::string GetDescription() const override;
-	std::shared_ptr<CParagraph> GetParagraph();
+	std::shared_ptr<IParagraph> GetParagraph() override;
+	std::shared_ptr<const IParagraph> GetParagraph() const override;
 
 private:
-	std::shared_ptr<CParagraph> m_paragraph;
+	std::shared_ptr<IParagraph> m_paragraph;
 };
 

@@ -32,6 +32,9 @@
     <Filter Include="Document\ResourcePath">
       <UniqueIdentifier>{bd1133c3-2df6-45e2-8bca-8824e6062e48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Document\DocumentItem">
+      <UniqueIdentifier>{d3f91996-b582-4060-b246-98badcd9f3a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -46,25 +49,16 @@
     <ClInclude Include="Image.h">
       <Filter>Document\Image</Filter>
     </ClInclude>
-    <ClInclude Include="ImageDocumentItem.h">
-      <Filter>Document\Image</Filter>
-    </ClInclude>
     <ClInclude Include="IParagraph.h">
       <Filter>Document\Paragraph</Filter>
     </ClInclude>
     <ClInclude Include="Paragraph.h">
       <Filter>Document\Paragraph</Filter>
     </ClInclude>
-    <ClInclude Include="ParagraphDocumentItem.h">
-      <Filter>Document\Paragraph</Filter>
-    </ClInclude>
     <ClInclude Include="Document.h">
       <Filter>Document</Filter>
     </ClInclude>
     <ClInclude Include="IDocument.h">
-      <Filter>Document</Filter>
-    </ClInclude>
-    <ClInclude Include="IDocumentItem.h">
       <Filter>Document</Filter>
     </ClInclude>
     <ClInclude Include="FileResource.h">
@@ -97,6 +91,18 @@
     <ClInclude Include="DocumentResourcePath.h">
       <Filter>Document\ResourcePath</Filter>
     </ClInclude>
+    <ClInclude Include="IDocumentItem.h">
+      <Filter>Document\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentItem.h">
+      <Filter>Document\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="ParagraphDocumentItem.h">
+      <Filter>Document\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageDocumentItem.h">
+      <Filter>Document\DocumentItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -105,13 +111,7 @@
     <ClCompile Include="Image.cpp">
       <Filter>Document\Image</Filter>
     </ClCompile>
-    <ClCompile Include="ImageDocumentItem.cpp">
-      <Filter>Document\Image</Filter>
-    </ClCompile>
     <ClCompile Include="Paragraph.cpp">
-      <Filter>Document\Paragraph</Filter>
-    </ClCompile>
-    <ClCompile Include="ParagraphDocumentItem.cpp">
       <Filter>Document\Paragraph</Filter>
     </ClCompile>
     <ClCompile Include="Document.cpp">
@@ -131,6 +131,15 @@
     </ClCompile>
     <ClCompile Include="DocumentResourcePath.cpp">
       <Filter>Document\ResourcePath</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentItem.cpp">
+      <Filter>Document\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParagraphDocumentItem.cpp">
+      <Filter>Document\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageDocumentItem.cpp">
+      <Filter>Document\DocumentItem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

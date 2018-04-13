@@ -7,12 +7,22 @@ CParagraphDocumentItem::CParagraphDocumentItem(std::string const& paragraph)
 {
 }
 
+CParagraphDocumentItem::CParagraphDocumentItem(std::shared_ptr<IParagraph> && paragraph)
+	: m_paragraph(paragraph)
+{
+}
+
 std::string CParagraphDocumentItem::GetDescription() const
 {
 	return (boost::format("Paragraph: %1%") % m_paragraph->GetText()).str();
 }
 
-std::shared_ptr<CParagraph> CParagraphDocumentItem::GetParagraph()
+std::shared_ptr<IParagraph> CParagraphDocumentItem::GetParagraph()
+{
+	return m_paragraph;
+}
+
+std::shared_ptr<const IParagraph> CParagraphDocumentItem::GetParagraph() const
 {
 	return m_paragraph;
 }
