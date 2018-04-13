@@ -19,11 +19,11 @@ namespace FileUtils
 		}
 	}
 
-	void DeleteFile(boost::filesystem::path const& path)
+	void Delete(path const& path)
 	{
 		try
 		{
-			remove(path);
+			remove_all(path);
 		}
 		catch (filesystem_error const&)
 		{

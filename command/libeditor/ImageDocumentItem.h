@@ -7,7 +7,8 @@ class CImageDocumentItem : public IDocumentItem
 public:
 	CImageDocumentItem(IFileResource::Ptr && resource, unsigned width, unsigned height);
 	std::string GetDescription()const override;
+	std::shared_ptr<CImage> GetImage();
 
 private:
-	CImage m_image;
+	std::shared_ptr<CImage> m_image;
 };

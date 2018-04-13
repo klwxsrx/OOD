@@ -1,7 +1,7 @@
 #pragma once
 #include "IFileResource.h"
 
-class CFileResource : IFileResource
+class CFileResource : public IFileResource
 {
 public:
 	CFileResource(boost::filesystem::path filePath);

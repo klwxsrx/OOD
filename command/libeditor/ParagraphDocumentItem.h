@@ -7,8 +7,9 @@ class CParagraphDocumentItem : public IDocumentItem
 public:
 	CParagraphDocumentItem(std::string const& paragraph);
 	std::string GetDescription() const override;
+	std::shared_ptr<CParagraph> GetParagraph();
 
 private:
-	CParagraph m_paragraph;
+	std::shared_ptr<CParagraph> m_paragraph;
 };
 

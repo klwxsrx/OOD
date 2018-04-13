@@ -18,7 +18,7 @@ void CHistory::ExecuteCommand(ICommandPtr && command)
 			m_commands.back() = std::move(command);
 			++m_executedCommandsCount;
 		}
-		catch (std::exception const&)
+		catch (...)
 		{
 			m_commands.pop_back();
 			throw;

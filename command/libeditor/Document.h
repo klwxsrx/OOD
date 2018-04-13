@@ -1,10 +1,13 @@
 #pragma once
 #include "IDocument.h"
 #include "IDocumentItem.h"
+#include "IFileResource.h"
+#include "History.h"
+#include "DocumentResourcePath.h"
 
 class CDocument : public IDocument
 {
-	typedef std::list<std::unique_ptr<IDocumentItem>> DocumentItemsList;
+	typedef std::list<IDocumentItem::Ptr> DocumentItemsList;
 
 public:
 	CDocument();
@@ -18,18 +21,24 @@ public:
 	IDocumentItem::ConstPtr GetItem(size_t index) override;
 
 	void DeleteItem(size_t index) override;
+	
+	void SetTitle(std::string const & title) override;
+	std::string GetTitle() const override;
 
-	/**/ void SetTitle(std::string const & title) override;
-	/**/ std::string GetTitle() const override;
-
-	/**/ bool CanUndo() const override;
-	/**/ void Undo() override;
-	/**/ bool CanRedo() const override;
-	/**/ void Redo() override;
+	bool CanUndo() const override;
+	void Undo() override;
+	bool CanRedo() const override;
+	void Redo() override;
 
 	void Save(boost::filesystem::path const & path) const override;
 
 private:
+	IFileResource::Ptr GetCopiedImageResource(boost::filesystem::path source);
+	void ValidateInsertPosition(boost::optional<size_t> position) const;
+	void ValidateItemPosition(boost::optional<size_t> position) const;
+
 	std::string m_title;
 	DocumentItemsList m_items;
+	CHistory m_history;
+	CDocumentResourcePath m_resourcePath;
 };

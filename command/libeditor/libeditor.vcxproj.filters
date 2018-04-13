@@ -29,6 +29,9 @@
     <Filter Include="DocumentHistory">
       <UniqueIdentifier>{bada1150-1992-4707-9d4c-efd6e11463d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Document\ResourcePath">
+      <UniqueIdentifier>{bd1133c3-2df6-45e2-8bca-8824e6062e48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -91,6 +94,9 @@
     <ClInclude Include="History.h">
       <Filter>DocumentHistory</Filter>
     </ClInclude>
+    <ClInclude Include="DocumentResourcePath.h">
+      <Filter>Document\ResourcePath</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -122,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="History.cpp">
       <Filter>DocumentHistory</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentResourcePath.cpp">
+      <Filter>Document\ResourcePath</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

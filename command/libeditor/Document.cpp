@@ -1,5 +1,11 @@
 #include "stdafx.h"
 #include "Document.h"
+#include "ParagraphDocumentItem.h"
+#include "ImageDocumentItem.h"
+#include "InsertItemCommand.h"
+#include "DeleteItemCommand.h"
+#include "FileResource.h"
+#include "FileUtils.h"
 
 CDocument::CDocument()
 	: m_title("Untitled document")
@@ -8,12 +14,23 @@ CDocument::CDocument()
 
 std::shared_ptr<IParagraph> CDocument::InsertParagraph(std::string const & text, boost::optional<size_t> position)
 {
-	return std::shared_ptr<IParagraph>();
+	ValidateInsertPosition(position);
+
+	std::shared_ptr<CParagraphDocumentItem> item = std::make_shared<CParagraphDocumentItem>(text);
+	std::unique_ptr<CInsertItemCommand<DocumentItemsList>> command = std::make_unique<CInsertItemCommand<DocumentItemsList>>(m_items, item, position);
+	m_history.ExecuteCommand(std::move(command));
+	return item->GetParagraph();
 }
 
 std::shared_ptr<IImage> CDocument::InsertImage(boost::filesystem::path const & path, unsigned width, unsigned height, boost::optional<size_t> position)
 {
-	return std::shared_ptr<IImage>();
+	ValidateInsertPosition(position);
+
+	IFileResource::Ptr fileResource = GetCopiedImageResource(path);
+	std::shared_ptr<CImageDocumentItem> item = std::make_shared<CImageDocumentItem>(std::move(fileResource), width, height);
+	std::unique_ptr<CInsertItemCommand<DocumentItemsList>> command = std::make_unique<CInsertItemCommand<DocumentItemsList>>(m_items, item, position);
+	m_history.ExecuteCommand(std::move(command));
+	return item->GetImage();
 }
 
 size_t CDocument::GetItemsCount() const
@@ -23,16 +40,27 @@ size_t CDocument::GetItemsCount() const
 
 IDocumentItem::Ptr CDocument::GetItem(size_t index) const
 {
-	return IDocumentItem::Ptr();
+	ValidateItemPosition(index);
+
+	auto it = m_items.begin();
+	std::advance(it, index);
+	return *it;
 }
 
 IDocumentItem::ConstPtr CDocument::GetItem(size_t index)
 {
-	return IDocumentItem::ConstPtr();
+	ValidateItemPosition(index);
+
+	auto it = m_items.begin();
+	std::advance(it, index);
+	return *it;
 }
 
 void CDocument::DeleteItem(size_t index)
 {
+	ValidateItemPosition(index);
+
+	m_history.ExecuteCommand(std::make_unique<CDeleteItemCommand<DocumentItemsList>>(m_items, index));
 }
 
 void CDocument::SetTitle(std::string const & title)
@@ -47,22 +75,67 @@ std::string CDocument::GetTitle() const
 
 bool CDocument::CanUndo() const
 {
-	return false;
+	return m_history.CanUndo();
 }
 
 void CDocument::Undo()
 {
+	m_history.Undo();
 }
 
 bool CDocument::CanRedo() const
 {
-	return false;
+	return m_history.CanRedo();
 }
 
 void CDocument::Redo()
 {
+	m_history.Redo();
 }
 
 void CDocument::Save(boost::filesystem::path const & path) const
 {
+	// TODO
+}
+
+IFileResource::Ptr CDocument::GetCopiedImageResource(boost::filesystem::path source)
+{
+	try
+	{
+		boost::filesystem::path resourcePath = m_resourcePath.GetTempPath() / FileUtils::GenerateUniqueFileName(source);
+		FileUtils::CopyFile(source, resourcePath);
+		return std::static_pointer_cast<IFileResource>(std::make_shared<CFileResource>(resourcePath));
+	}
+	catch (...)
+	{
+		throw std::runtime_error("Failed to copy resource file!");
+	}
+}
+
+void CDocument::ValidateInsertPosition(boost::optional<size_t> position) const
+{
+	if (position == boost::none)
+	{
+		return;
+	}
+
+	const size_t itemsCount = m_items.size();
+	if ((*position) > itemsCount)
+	{
+		throw std::runtime_error("Invalid insert position!");
+	}
+}
+
+void CDocument::ValidateItemPosition(boost::optional<size_t> position) const
+{
+	if (position == boost::none)
+	{
+		return;
+	}
+
+	const size_t itemsCount = m_items.size();
+	if (itemsCount == 0 || (*position) > itemsCount - 1)
+	{
+		throw std::runtime_error("Invalid delete position!");
+	}
 }

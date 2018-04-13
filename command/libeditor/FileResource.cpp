@@ -12,7 +12,7 @@ CFileResource::~CFileResource()
 {
 	try
 	{
-		FileUtils::DeleteFile(m_filePath);
+		FileUtils::Delete(m_filePath);
 	}
 	catch (std::runtime_error const&)
 	{

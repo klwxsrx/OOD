@@ -95,5 +95,8 @@
     <ClCompile Include="HistoryTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\libeditor\DocumentResourcePath.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

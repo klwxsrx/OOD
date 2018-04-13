@@ -29,7 +29,7 @@ struct TestFileFixture
 		try
 		{
 			permissions(path, boost::filesystem::perms::owner_all);
-			FileUtils::DeleteFile(path);
+			FileUtils::Delete(path);
 		}
 		catch (std::runtime_error const&)
 		{
