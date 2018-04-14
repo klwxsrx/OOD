@@ -36,4 +36,13 @@ BOOST_FIXTURE_TEST_SUITE(Image, Image_)
 		BOOST_CHECK_EQUAL(image.GetHeight(), 768u);
 	}
 
+	BOOST_AUTO_TEST_CASE(can_be_compared)
+	{
+		BOOST_CHECK(CImage(std::make_shared<CFileResource>("Path"), 640u, 480u) == CImage(std::make_shared<CFileResource>("Path"), 640u, 480u));
+
+		BOOST_CHECK(!(CImage(std::make_shared<CFileResource>("Path"), 640u, 480u) == CImage(std::make_shared<CFileResource>("Path1"), 640u, 480u)));
+		BOOST_CHECK(!(CImage(std::make_shared<CFileResource>("Path"), 640u, 480u) == CImage(std::make_shared<CFileResource>("Path"), 641u, 480u)));
+		BOOST_CHECK(!(CImage(std::make_shared<CFileResource>("Path"), 640u, 480u) == CImage(std::make_shared<CFileResource>("Path"), 640u, 481u)));
+	}
+
 BOOST_AUTO_TEST_SUITE_END()

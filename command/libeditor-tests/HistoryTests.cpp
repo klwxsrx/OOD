@@ -51,7 +51,7 @@ BOOST_FIXTURE_TEST_SUITE(History, HistoryFixture)
 			throw std::runtime_error("Test failed!");
 		});
 
-		BOOST_CHECK_NO_THROW(history.ExecuteCommand(std::move(command1)));
+		BOOST_CHECK_NO_THROW(history.Push(std::move(command1)));
 		BOOST_CHECK(executed1);
 	}
 
@@ -66,10 +66,10 @@ BOOST_FIXTURE_TEST_SUITE(History, HistoryFixture)
 			unexecuted2 = true;
 		});
 
-		history.ExecuteCommand(std::move(command1));
+		history.Push(std::move(command1));
 		BOOST_CHECK(history.CanUndo());
 
-		history.ExecuteCommand(std::move(command2));
+		history.Push(std::move(command2));
 		BOOST_CHECK(history.CanUndo());
 
 		BOOST_CHECK_NO_THROW(history.Undo());
@@ -95,10 +95,10 @@ BOOST_FIXTURE_TEST_SUITE(History, HistoryFixture)
 			executed2 = true;
 		}, []() {});
 
-		history.ExecuteCommand(std::move(command1));
+		history.Push(std::move(command1));
 		BOOST_CHECK(!history.CanRedo());
 
-		history.ExecuteCommand(std::move(command2));
+		history.Push(std::move(command2));
 		BOOST_CHECK(!history.CanRedo());
 
 		executed1 = false;
@@ -147,12 +147,12 @@ BOOST_FIXTURE_TEST_SUITE(History, HistoryFixture)
 			executed2 = true;
 		}, []() {});
 
-		history.ExecuteCommand(std::move(command1));
+		history.Push(std::move(command1));
 		history.Undo();
 
 		executed1 = false;
 		executed2 = false;
-		history.ExecuteCommand(std::move(command2));
+		history.Push(std::move(command2));
 		BOOST_CHECK(!executed1);
 		BOOST_CHECK(executed2);
 		BOOST_CHECK(!history.CanRedo());
@@ -167,12 +167,12 @@ BOOST_FIXTURE_TEST_SUITE(History, HistoryFixture)
 		auto command1 = std::make_unique<CMockCommand>([]() {}, [&unexecuted]() {
 			unexecuted = true;
 		});
-		history.ExecuteCommand(std::move(command1));
+		history.Push(std::move(command1));
 
 		auto command2 = std::make_unique<CMockCommand>([]() {
 			throw std::logic_error("Test error");
 		}, []() {});
-		BOOST_CHECK_THROW(history.ExecuteCommand(std::move(command2)), std::logic_error);
+		BOOST_CHECK_THROW(history.Push(std::move(command2)), std::logic_error);
 
 		BOOST_CHECK(!unexecuted);
 		BOOST_CHECK(!history.CanRedo());
@@ -188,7 +188,7 @@ BOOST_FIXTURE_TEST_SUITE(History, HistoryFixture)
 		auto command1 = std::make_unique<CMockCommand>([&executed]() {
 			executed = true;
 		}, []() {});
-		history.ExecuteCommand(std::move(command1));
+		history.Push(std::move(command1));
 		history.Undo();
 
 		auto command2 = std::make_unique<CMockCommand>([]() {
@@ -196,7 +196,7 @@ BOOST_FIXTURE_TEST_SUITE(History, HistoryFixture)
 		}, []() {});
 
 		executed = false;
-		BOOST_CHECK_THROW(history.ExecuteCommand(std::move(command2)), std::logic_error);
+		BOOST_CHECK_THROW(history.Push(std::move(command2)), std::logic_error);
 		BOOST_CHECK(!history.CanUndo());
 		BOOST_CHECK(history.CanRedo());
 		

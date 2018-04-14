@@ -31,3 +31,10 @@ void CImage::ConnectOnResize(std::function<void(ImageSize&, ImageSize const&)> c
 {
 	m_onResize.connect(callback);
 }
+
+bool CImage::operator==(CImage const& other) const
+{
+	return m_resource->GetPath() == other.m_resource->GetPath()
+		&& m_size.height == other.m_size.height
+		&& m_size.width == other.m_size.width;
+}

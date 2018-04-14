@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "History.h"
 
-void CHistory::ExecuteCommand(ICommandPtr && command)
+void CHistory::Push(ICommandPtr && command)
 {
 	if (CanRedo())
 	{

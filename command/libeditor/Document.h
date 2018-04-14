@@ -15,7 +15,7 @@ public:
 	std::shared_ptr<IParagraph> InsertParagraph(std::string const & text, boost::optional<size_t> position = boost::none) override;
 	std::shared_ptr<IImage> InsertImage(boost::filesystem::path const & path, unsigned width, unsigned height, boost::optional<size_t> position = boost::none) override;
 
-	/**/ size_t GetItemsCount() const override;
+	size_t GetItemsCount() const override;
 
 	IDocumentItem::Ptr GetItem(size_t index) override;
 	IDocumentItem::ConstPtr GetItem(size_t index) const override;
@@ -32,12 +32,14 @@ public:
 
 	void Save(boost::filesystem::path const & path) const override;
 
+	boost::filesystem::path GetTempPath() const;
+
 private:
 	IFileResource::Ptr GetCopiedImageResource(boost::filesystem::path source);
 	void OnParagraphChange(std::string& paragraph, std::string const& text);
 	void OnImageResize(ImageSize& image, ImageSize const& newSize);
 	void ValidateInsertPosition(boost::optional<size_t> position) const;
-	void ValidateItemPosition(boost::optional<size_t> position) const;
+	void ValidateItemPosition(size_t position) const;
 
 	std::string m_title;
 	DocumentItemsList m_items;

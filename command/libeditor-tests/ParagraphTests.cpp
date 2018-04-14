@@ -29,4 +29,14 @@ BOOST_AUTO_TEST_SUITE(Paragraph)
 		paragraph.SetText(text); // text will not change
 	}
 
+	BOOST_AUTO_TEST_CASE(can_be_compared)
+	{
+		CParagraph paragraph1("Test");
+		CParagraph paragraph2("Test");
+		CParagraph paragraph3("Test1");
+
+		BOOST_CHECK(paragraph1 == paragraph2);
+		BOOST_CHECK(!(paragraph1 == paragraph3));
+	}
+
 BOOST_AUTO_TEST_SUITE_END()

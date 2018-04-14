@@ -5,8 +5,8 @@ class CDocumentResourcePath
 public:
 	~CDocumentResourcePath();
 
-	boost::filesystem::path GetTempPath();
+	boost::filesystem::path GetTempPath() const;
 
 private:
-	boost::optional<boost::filesystem::path> m_tempPath;
+	mutable boost::optional<boost::filesystem::path> m_tempPath;
 };

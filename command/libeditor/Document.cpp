@@ -22,7 +22,7 @@ std::shared_ptr<IParagraph> CDocument::InsertParagraph(std::string const & text,
 
 	std::shared_ptr<CParagraphDocumentItem> item = std::make_shared<CParagraphDocumentItem>(std::move(paragraph));
 	std::unique_ptr<CInsertItemCommand<DocumentItemsList>> command = std::make_unique<CInsertItemCommand<DocumentItemsList>>(m_items, item, position);
-	m_history.ExecuteCommand(std::move(command));
+	m_history.Push(std::move(command));
 	return item->GetParagraph();
 }
 
@@ -36,7 +36,7 @@ std::shared_ptr<IImage> CDocument::InsertImage(boost::filesystem::path const & p
 
 	std::shared_ptr<CImageDocumentItem> item = std::make_shared<CImageDocumentItem>(std::move(image));
 	std::unique_ptr<CInsertItemCommand<DocumentItemsList>> command = std::make_unique<CInsertItemCommand<DocumentItemsList>>(m_items, item, position);
-	m_history.ExecuteCommand(std::move(command));
+	m_history.Push(std::move(command));
 	return item->GetImage();
 }
 
@@ -67,7 +67,7 @@ void CDocument::DeleteItem(size_t index)
 {
 	ValidateItemPosition(index);
 
-	m_history.ExecuteCommand(std::make_unique<CDeleteItemCommand<DocumentItemsList>>(m_items, index));
+	m_history.Push(std::make_unique<CDeleteItemCommand<DocumentItemsList>>(m_items, index));
 }
 
 void CDocument::SetTitle(std::string const& title)
@@ -77,7 +77,7 @@ void CDocument::SetTitle(std::string const& title)
 		throw std::runtime_error("Can't set an empty title!");
 	}
 
-	m_history.ExecuteCommand(std::make_unique<CChangeItemCommand<std::string>>(m_title, title));
+	m_history.Push(std::make_unique<CChangeItemCommand<std::string>>(m_title, title));
 }
 
 std::string CDocument::GetTitle() const
@@ -126,12 +126,12 @@ IFileResource::Ptr CDocument::GetCopiedImageResource(boost::filesystem::path sou
 
 void CDocument::OnParagraphChange(std::string& paragraph, std::string const& text)
 {
-	m_history.ExecuteCommand(std::make_unique<CChangeItemCommand<std::string>>(paragraph, text));
+	m_history.Push(std::make_unique<CChangeItemCommand<std::string>>(paragraph, text));
 }
 
 void CDocument::OnImageResize(ImageSize& image, ImageSize const& newSize)
 {
-	m_history.ExecuteCommand(std::make_unique<CChangeItemCommand<ImageSize>>(image, newSize));
+	m_history.Push(std::make_unique<CChangeItemCommand<ImageSize>>(image, newSize));
 }
 
 void CDocument::ValidateInsertPosition(boost::optional<size_t> position) const
@@ -148,16 +148,16 @@ void CDocument::ValidateInsertPosition(boost::optional<size_t> position) const
 	}
 }
 
-void CDocument::ValidateItemPosition(boost::optional<size_t> position) const
+void CDocument::ValidateItemPosition(size_t position) const
 {
-	if (position == boost::none)
-	{
-		return;
-	}
-
 	const size_t itemsCount = m_items.size();
-	if (itemsCount == 0 || (*position) > itemsCount - 1)
+	if (itemsCount == 0 || position > itemsCount - 1)
 	{
-		throw std::runtime_error("Invalid delete position!");
+		throw std::runtime_error("Invalid item position!");
 	}
+}
+
+boost::filesystem::path CDocument::GetTempPath() const
+{
+	return m_resourcePath.GetTempPath();
 }

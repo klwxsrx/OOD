@@ -6,7 +6,7 @@ class CHistory
 	typedef std::unique_ptr<ICommand> ICommandPtr;
 
 public:
-	void ExecuteCommand(ICommandPtr && command);
+	void Push(ICommandPtr && command);
 	void Undo();
 	void Redo();
 

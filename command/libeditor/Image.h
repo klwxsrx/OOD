@@ -14,6 +14,8 @@ public:
 	unsigned GetHeight()const override;
 	void ConnectOnResize(std::function<void(ImageSize&, ImageSize const&)> callback);
 
+	bool operator==(CImage const& other) const;
+
 private:
 	ImageSize m_size;
 	IFileResource::Ptr m_resource;

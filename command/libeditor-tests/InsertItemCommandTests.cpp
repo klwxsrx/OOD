@@ -27,7 +27,7 @@ struct NonEmptyContainerFixture : public EmptyContainerFixture
 
 BOOST_FIXTURE_TEST_SUITE(InsertItemCommand, EmptyContainerFixture)
 
-	BOOST_AUTO_TEST_SUITE(execution)
+	BOOST_AUTO_TEST_SUITE(while_executing)
 
 		BOOST_AUTO_TEST_CASE(inserts_in_empty_container_without_position)
 		{
@@ -111,7 +111,7 @@ BOOST_FIXTURE_TEST_SUITE(InsertItemCommand, EmptyContainerFixture)
 
 	BOOST_AUTO_TEST_SUITE_END()
 
-	BOOST_AUTO_TEST_SUITE(unexecution)
+	BOOST_AUTO_TEST_SUITE(while_unexecuting)
 
 		BOOST_FIXTURE_TEST_CASE(removes_last_item_from_back, NonEmptyContainerFixture)
 		{

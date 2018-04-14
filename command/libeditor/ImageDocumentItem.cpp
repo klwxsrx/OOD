@@ -7,6 +7,11 @@ CImageDocumentItem::CImageDocumentItem(IFileResource::Ptr && resource, unsigned 
 {
 }
 
+CImageDocumentItem::CImageDocumentItem(std::shared_ptr<CImage> const& image)
+	: m_image(image)
+{
+}
+
 CImageDocumentItem::CImageDocumentItem(std::shared_ptr<CImage> && image)
 	: m_image(image)
 {

@@ -9,6 +9,8 @@ public:
 	void SetText(std::string const & text) override;
 	void ConnectOnChange(std::function<void(std::string&, std::string const&)> callback);
 
+	bool operator==(CParagraph const& other) const;
+
 private:
 	std::string m_paragraph;
 	boost::signals2::signal<void(std::string&, std::string const&)> m_onChange;

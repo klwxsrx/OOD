@@ -24,3 +24,8 @@ void CParagraph::ConnectOnChange(std::function<void(std::string&, std::string co
 {
 	m_onChange.connect(callback);
 }
+
+bool CParagraph::operator==(CParagraph const& other) const
+{
+	return m_paragraph == other.m_paragraph;
+}
