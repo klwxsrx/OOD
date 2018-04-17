@@ -7,6 +7,7 @@
 #include "ChangeItemCommand.h"
 #include "FileResource.h"
 #include "FileUtils.h"
+#include "DocumentHtmlExporter.h"
 
 CDocument::CDocument()
 	: m_title("Untitled document")
@@ -107,7 +108,12 @@ void CDocument::Redo()
 
 void CDocument::Save(boost::filesystem::path const & path) const
 {
-	// TODO
+	std::shared_ptr<CDocumentHtmlExporter> htmlExporter = std::make_unique<CDocumentHtmlExporter>(*this, path);
+	std::shared_ptr<IDocumentExporter> exporterPtr(htmlExporter);
+	std::for_each(m_items.begin(), m_items.end(), [&exporterPtr] (IDocumentItem::ConstPtr const& item) {
+		item->AcceptExporter(exporterPtr);
+	});
+	htmlExporter->Export();
 }
 
 IFileResource::Ptr CDocument::GetCopiedImageResource(boost::filesystem::path source)

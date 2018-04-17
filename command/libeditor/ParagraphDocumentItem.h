@@ -11,6 +11,7 @@ public:
 	std::string GetDescription() const override;
 	std::shared_ptr<IParagraph> GetParagraph() override;
 	std::shared_ptr<const IParagraph> GetParagraph() const override;
+	void AcceptExporter(std::shared_ptr<IDocumentExporter>& exporter) const override;
 
 private:
 	std::shared_ptr<IParagraph> m_paragraph;

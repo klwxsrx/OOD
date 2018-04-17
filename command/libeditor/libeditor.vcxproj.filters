@@ -35,6 +35,9 @@
     <Filter Include="Document\DocumentItem">
       <UniqueIdentifier>{d3f91996-b582-4060-b246-98badcd9f3a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DocumentExporter">
+      <UniqueIdentifier>{88411c5a-f535-4c03-8d7d-4ac00393188d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -103,6 +106,12 @@
     <ClInclude Include="ImageDocumentItem.h">
       <Filter>Document\DocumentItem</Filter>
     </ClInclude>
+    <ClInclude Include="IDocumentExporter.h">
+      <Filter>DocumentExporter</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentHtmlExporter.h">
+      <Filter>DocumentExporter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -141,5 +150,6 @@
     <ClCompile Include="ImageDocumentItem.cpp">
       <Filter>Document\DocumentItem</Filter>
     </ClCompile>
+    <ClCompile Include="DocumentHtmlExporter.cpp" />
   </ItemGroup>
 </Project>

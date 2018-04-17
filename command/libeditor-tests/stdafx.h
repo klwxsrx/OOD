@@ -34,3 +34,4 @@
 #include <boost\bind.hpp>
 #include <list>
 #include <algorithm>
+#include <boost\regex.hpp>

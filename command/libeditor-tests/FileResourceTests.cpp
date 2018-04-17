@@ -12,15 +12,15 @@ void SetFileReadPermissions(boost::filesystem::path const& path)
 	BOOST_CHECK_NO_THROW(permissions(path, boost::filesystem::perms::owner_read));
 }
 
-struct TestFileFixture
+struct CreatedFileFixture
 {
 	const boost::filesystem::path path;
-	TestFileFixture()
+	CreatedFileFixture()
 		: path("test.file")
 	{
 		DeleteFile();
 	}
-	~TestFileFixture()
+	~CreatedFileFixture()
 	{
 		DeleteFile();		
 	}
@@ -37,7 +37,7 @@ struct TestFileFixture
 	}
 };
 
-BOOST_FIXTURE_TEST_SUITE(File_resource, TestFileFixture)
+BOOST_FIXTURE_TEST_SUITE(File_resource, CreatedFileFixture)
 
 	BOOST_AUTO_TEST_CASE(can_return_its_path)
 	{
