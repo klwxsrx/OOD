@@ -57,4 +57,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="classAdapter.png">
+      <Filter>ClassAdapter</Filter>
+    </Image>
+    <Image Include="objectAdapter.png">
+      <Filter>ObjectAdapter</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
