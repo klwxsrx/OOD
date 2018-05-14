@@ -84,6 +84,15 @@
     <ClInclude Include="IOutlineStyle.h">
       <Filter>Style</Filter>
     </ClInclude>
+    <ClInclude Include="GroupShape.h">
+      <Filter>Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupFillStyle.h">
+      <Filter>Style</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupOutlineStyle.h">
+      <Filter>Style</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -108,6 +117,15 @@
       <Filter>Canvas</Filter>
     </ClCompile>
     <ClCompile Include="OutlineShapeStyle.cpp">
+      <Filter>Style</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupShape.cpp">
+      <Filter>Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupFillStyle.cpp">
+      <Filter>Style</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupOutlineStyle.cpp">
       <Filter>Style</Filter>
     </ClCompile>
   </ItemGroup>

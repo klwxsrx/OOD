@@ -8,9 +8,9 @@ CShape::CShape()
 
 void CShape::Draw(ICanvas& canvas) const
 {
-	canvas.SetLineWidth(m_outlineStyle.GetStrokeWidth());
-	canvas.SetLineColor(m_outlineStyle.IsEnabled() ? m_outlineStyle.GetColor().value() : Color::TRANSPARENT_COLOR);
-	canvas.BeginFill(m_fillStyle.IsEnabled() ? m_fillStyle.GetColor().value() : Color::TRANSPARENT_COLOR);
+	canvas.SetLineWidth(m_outlineStyle.GetStrokeWidth().value());
+	canvas.SetLineColor((m_outlineStyle.IsEnabled() && m_outlineStyle.IsEnabled().value()) ? m_outlineStyle.GetColor().value() : Color::TRANSPARENT_COLOR);
+	canvas.BeginFill((m_fillStyle.IsEnabled() && m_fillStyle.IsEnabled().value()) ? m_fillStyle.GetColor().value() : Color::TRANSPARENT_COLOR);
 	DrawImpl(canvas);
 	canvas.EndFill();
 }

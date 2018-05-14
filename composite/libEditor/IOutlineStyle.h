@@ -4,7 +4,7 @@
 class IOutlineStyle : public IStyle
 {
 public:
-	virtual double GetStrokeWidth() const = 0;
+	virtual boost::optional<double> GetStrokeWidth() const = 0;
 	virtual void SetStrokeWidth(double width) = 0;
 
 	virtual ~IOutlineStyle() = default;

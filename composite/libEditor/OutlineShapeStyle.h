@@ -7,7 +7,7 @@ class COutlineShapeStyle : public IOutlineStyle, public CShapeStyle
 public:
 	COutlineShapeStyle(bool isEnabled, RGBAColor color, double strokeWidth);
 
-	double GetStrokeWidth() const override;
+	boost::optional<double> GetStrokeWidth() const override;
 	void SetStrokeWidth(double width) override;
 
 	boost::optional<bool> IsEnabled() const override;

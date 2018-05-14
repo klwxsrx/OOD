@@ -6,7 +6,7 @@ COutlineShapeStyle::COutlineShapeStyle(bool isEnabled, RGBAColor color, double s
 {
 }
 
-double COutlineShapeStyle::GetStrokeWidth() const
+boost::optional<double> COutlineShapeStyle::GetStrokeWidth() const
 {
 	return m_strokeWidth;
 }
