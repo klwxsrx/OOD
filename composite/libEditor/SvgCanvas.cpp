@@ -36,9 +36,12 @@ void CSvgCanvas::MoveTo(PointD const& point)
 
 void CSvgCanvas::LineTo(PointD const& point)
 {
-	m_canvas << "<line x1=\"" << m_currentPoint.x << "\" y1=\"" << m_currentPoint.y << "\" x2=\"" << point.x << "\" y2=\"" << point.y
-		<< "\" stroke=\"#" << std::hex << std::setw(8) << std::setfill('0') << m_currentOutlineColor << std::dec << "\" stroke-width=\""
-		<< m_lineWidth << "\" />";
+	if (!m_fillEnabled)
+	{
+		m_canvas << "<line x1=\"" << m_currentPoint.x << "\" y1=\"" << m_currentPoint.y << "\" x2=\"" << point.x << "\" y2=\"" << point.y
+			<< "\" stroke=\"#" << std::hex << std::setw(8) << std::setfill('0') << m_currentOutlineColor << std::dec << "\" stroke-width=\""
+			<< m_lineWidth << "\" />";
+	}
 	MoveTo(point);
 }
 
@@ -67,6 +70,8 @@ void CSvgCanvas::DrawFill()
 		{
 			m_canvas << point.x << "," << point.y << " ";
 		}
-		m_canvas << "\" fill=\"#" << std::hex << std::setw(8) << std::setfill('0') << m_currentFillColor << std::dec << "\" stroke=\"none\" />";
+		m_canvas << "\" fill=\"#" << std::hex << std::setw(8) << std::setfill('0') << m_currentFillColor << std::dec
+			<< "\" stroke=\"#" << std::hex << std::setw(8) << std::setfill('0') << m_currentOutlineColor << std::dec
+			<< "\" stroke-width=\""<< m_lineWidth << "\" />";
 	}
 }
