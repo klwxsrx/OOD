@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\libEditor\Ellipse.cpp" />
+    <ClCompile Include="..\libEditor\OutlineShapeStyle.cpp" />
     <ClCompile Include="..\libEditor\Rectangle.cpp" />
     <ClCompile Include="..\libEditor\Shape.cpp" />
     <ClCompile Include="..\libEditor\ShapeStyle.cpp" />

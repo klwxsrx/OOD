@@ -78,6 +78,12 @@
     <ClInclude Include="SvgCanvas.h">
       <Filter>Canvas</Filter>
     </ClInclude>
+    <ClInclude Include="OutlineShapeStyle.h">
+      <Filter>Style</Filter>
+    </ClInclude>
+    <ClInclude Include="IOutlineStyle.h">
+      <Filter>Style</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -100,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="SvgCanvas.cpp">
       <Filter>Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="OutlineShapeStyle.cpp">
+      <Filter>Style</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

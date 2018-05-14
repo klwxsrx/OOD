@@ -5,6 +5,7 @@ class CSvgCanvas : public ICanvas
 {
 public:
 	void SetLineColor(RGBAColor color) override;
+	void SetLineWidth(double width) override;
 	void BeginFill(RGBAColor color) override;
 	void EndFill() override;
 	void MoveTo(PointD const& point) override;
@@ -22,5 +23,6 @@ private:
 	std::stringstream m_canvas;
 	RGBAColor m_currentFillColor = Color::TRANSPARENT_COLOR;
 	RGBAColor m_currentOutlineColor = Color::TRANSPARENT_COLOR;
+	double m_lineWidth = 0;
 };
 

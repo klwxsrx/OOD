@@ -11,6 +11,8 @@ public:
 	boost::optional<RGBAColor> GetColor() const override;
 	void SetColor(RGBAColor color) override;
 
+	virtual ~CShapeStyle() = default;
+
 private:
 	boost::optional<bool> m_isEnabled;
 	boost::optional<RGBAColor> m_color;

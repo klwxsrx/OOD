@@ -2,24 +2,25 @@
 #include "Shape.h"
 
 CShape::CShape()
-	: m_fillStyle(false, Color::TRANSPARENT_COLOR), m_outlineStyle(true, Color::BLACK_COLOR)
+	: m_fillStyle(false, Color::TRANSPARENT_COLOR), m_outlineStyle(true, Color::BLACK_COLOR, 2.0)
 {
 }
 
 void CShape::Draw(ICanvas& canvas) const
 {
+	canvas.SetLineWidth(m_outlineStyle.GetStrokeWidth());
 	canvas.SetLineColor(m_outlineStyle.IsEnabled() ? m_outlineStyle.GetColor().value() : Color::TRANSPARENT_COLOR);
 	canvas.BeginFill(m_fillStyle.IsEnabled() ? m_fillStyle.GetColor().value() : Color::TRANSPARENT_COLOR);
 	DrawImpl(canvas);
 	canvas.EndFill();
 }
 
-IStyle& CShape::GetOutlineStyle()
+IOutlineStyle& CShape::GetOutlineStyle()
 {
 	return m_outlineStyle;
 }
 
-const IStyle& CShape::GetOutlineStyle() const
+const IOutlineStyle& CShape::GetOutlineStyle() const
 {
 	return m_outlineStyle;
 }

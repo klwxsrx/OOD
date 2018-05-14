@@ -1,6 +1,6 @@
 #pragma once
 #include "IShape.h"
-#include "ShapeStyle.h"
+#include "OutlineShapeStyle.h"
 
 class CShape : public IShape
 {
@@ -9,8 +9,8 @@ public:
 
 	void Draw(ICanvas& canvas) const override;
 
-	IStyle& GetOutlineStyle() override;
-	const IStyle& GetOutlineStyle() const override;
+	IOutlineStyle& GetOutlineStyle() override;
+	const IOutlineStyle& GetOutlineStyle() const override;
 
 	IStyle& GetFillStyle() override;
 	const IStyle& GetFillStyle() const override;
@@ -22,6 +22,7 @@ public:
 	virtual ~CShape() = default;
 
 private:
-	CShapeStyle m_outlineStyle, m_fillStyle;
+	COutlineShapeStyle m_outlineStyle;
+	CShapeStyle m_fillStyle;
 };
 
