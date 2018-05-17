@@ -25,7 +25,7 @@ RectD CTriangle::GetFrame()
 
 	const PointD leftTop = { horizontalBounds.first.x, verticalBounds.first.y };
 	const double width = horizontalBounds.second.x - horizontalBounds.first.x;
-	const double height = verticalBounds.second.x - verticalBounds.first.x;
+	const double height = verticalBounds.second.y - verticalBounds.first.y;
 
 	return  { leftTop, width, height };
 }
@@ -44,11 +44,11 @@ void CTriangle::SetFrame(RectD const& rect)
 		point.x += horizontalOffset;
 		point.y += verticalOffset;
 
-		const double relativeXCoordinate = point.x - currentFrame.leftTop.x;
-		const double relativeYCoordinate = point.y - currentFrame.leftTop.y;
+		const double relativeXCoordinate = point.x - rect.leftTop.x;
+		const double relativeYCoordinate = point.y - rect.leftTop.y;
 
-		point.x = relativeXCoordinate * horizontalScale + currentFrame.leftTop.x;
-		point.y = relativeYCoordinate * verticalScale + currentFrame.leftTop.y;
+		point.x = relativeXCoordinate * horizontalScale + rect.leftTop.x;
+		point.y = relativeYCoordinate * verticalScale + rect.leftTop.y;
 	};
 
 	updatePointPosition(m_vertex1);

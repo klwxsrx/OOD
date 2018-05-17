@@ -5,6 +5,11 @@ template <typename T>
 struct Point
 {
 	T x, y;
+
+	bool operator==(Point const& other) const
+	{
+		return other.x == x && other.y == y;
+	}
 };
 
 template <typename T>

@@ -21,15 +21,12 @@ void CEllipse::SetFrame(RectD const& rect)
 {
 	const RectD currentFrame = GetFrame();
 
-	const double horizontalOffset = rect.leftTop.x - currentFrame.leftTop.x;
-	const double verticalOffset = rect.leftTop.y - currentFrame.leftTop.y;
-
-	m_center.x += horizontalOffset;
-	m_center.y += verticalOffset;
-
 	const double horizontalScale = rect.width / currentFrame.width;
 	const double verticalScale = rect.height / currentFrame.height;
 
 	m_horizontalRadius *= horizontalScale;
 	m_verticalRadius *= verticalScale;
+
+	m_center.x = rect.leftTop.x + m_horizontalRadius;
+	m_center.y = rect.leftTop.y + m_verticalRadius;
 }

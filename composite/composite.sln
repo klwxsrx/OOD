@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "composite", "composite\comp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libeditor", "libEditor\libEditor.vcxproj", "{7C0F829F-2B75-4537-8824-40118529BACC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libeditorTests", "libeditorTests\libeditorTests.vcxproj", "{6DB23BCF-A034-4A79-A1E5-7BD62C5EF5AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{7C0F829F-2B75-4537-8824-40118529BACC}.Release|x64.Build.0 = Release|x64
 		{7C0F829F-2B75-4537-8824-40118529BACC}.Release|x86.ActiveCfg = Release|Win32
 		{7C0F829F-2B75-4537-8824-40118529BACC}.Release|x86.Build.0 = Release|Win32
+		{6DB23BCF-A034-4A79-A1E5-7BD62C5EF5AE}.Debug|x64.ActiveCfg = Debug|x64
+		{6DB23BCF-A034-4A79-A1E5-7BD62C5EF5AE}.Debug|x64.Build.0 = Debug|x64
+		{6DB23BCF-A034-4A79-A1E5-7BD62C5EF5AE}.Debug|x86.ActiveCfg = Debug|Win32
+		{6DB23BCF-A034-4A79-A1E5-7BD62C5EF5AE}.Debug|x86.Build.0 = Debug|Win32
+		{6DB23BCF-A034-4A79-A1E5-7BD62C5EF5AE}.Release|x64.ActiveCfg = Release|x64
+		{6DB23BCF-A034-4A79-A1E5-7BD62C5EF5AE}.Release|x64.Build.0 = Release|x64
+		{6DB23BCF-A034-4A79-A1E5-7BD62C5EF5AE}.Release|x86.ActiveCfg = Release|Win32
+		{6DB23BCF-A034-4A79-A1E5-7BD62C5EF5AE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

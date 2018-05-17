@@ -18,8 +18,10 @@ public:
 	std::shared_ptr<IGroupShape> GetGroup() override;
 	std::shared_ptr<const IGroupShape> GetGroup() const override;
 
-	virtual void DrawImpl(ICanvas& canvas) const = 0;
 	virtual ~CShape() = default;
+
+protected:
+	virtual void DrawImpl(ICanvas& canvas) const = 0;
 
 private:
 	COutlineShapeStyle m_outlineStyle;

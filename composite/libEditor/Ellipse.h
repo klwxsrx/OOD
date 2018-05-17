@@ -6,9 +6,11 @@ class CEllipse : public CShape
 public:
 	CEllipse(PointD const& center, double horizontalRadius, double verticalRadius);
 
-	void DrawImpl(ICanvas& canvas) const override;
 	RectD GetFrame() override;
 	void SetFrame(RectD const& rect) override;
+
+protected:
+	void DrawImpl(ICanvas& canvas) const override;
 
 private:
 	PointD m_center;

@@ -6,9 +6,11 @@ class CRectangle : public CShape
 public:
 	CRectangle(PointD leftTop, double width, double height);
 
-	void DrawImpl(ICanvas& canvas) const override;
 	RectD GetFrame() override;
 	void SetFrame(RectD const& rect) override;
+
+protected:
+	void DrawImpl(ICanvas& canvas) const override;
 
 private:
 	PointD m_leftTop;

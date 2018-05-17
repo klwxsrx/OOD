@@ -58,7 +58,43 @@ RectD CGroupShape::GetFrame()
 
 void CGroupShape::SetFrame(RectD const& rect)
 {
-	// TODO
+	if (m_shapes.empty())
+	{
+		return;
+	}
+
+	const RectD currentFrame = GetFrame();
+	const double frameOffsetX = rect.leftTop.x - currentFrame.leftTop.x;
+	const double frameOffsetY = rect.leftTop.y - currentFrame.leftTop.y;
+
+	const auto moveShapeFunc = [frameOffsetX, frameOffsetY](std::shared_ptr<IShape>& shape) {
+		RectD shapeFrame = shape->GetFrame();
+		shapeFrame.leftTop.x += frameOffsetX;
+		shapeFrame.leftTop.y += frameOffsetY;
+		shape->SetFrame(shapeFrame);
+	};
+
+	const PointD leftTop = rect.leftTop;
+	const double frameScaleX = rect.width / currentFrame.width;
+	const double frameScaleY = rect.height / currentFrame.height;
+
+	const auto resizeShapeFunc = [leftTop, frameScaleX, frameScaleY](std::shared_ptr<IShape>& shape) {
+		RectD shapeFrame = shape->GetFrame();
+		const double shapeOffsetX = shapeFrame.leftTop.x - leftTop.x;
+		const double shapeOffsetY = shapeFrame.leftTop.y - leftTop.y;
+
+		shapeFrame.leftTop.x = leftTop.x + (shapeOffsetX * frameScaleX);
+		shapeFrame.leftTop.y = leftTop.y + (shapeOffsetY * frameScaleY);
+		shapeFrame.width *= frameScaleX;
+		shapeFrame.height *= frameScaleY;
+		shape->SetFrame(shapeFrame);
+	};
+
+	for (std::shared_ptr<IShape>& shape : m_shapes)
+	{
+		moveShapeFunc(shape);
+		resizeShapeFunc(shape);
+	}
 }
 
 IOutlineStyle& CGroupShape::GetOutlineStyle()

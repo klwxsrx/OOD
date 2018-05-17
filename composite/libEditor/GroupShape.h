@@ -3,7 +3,7 @@
 #include "GroupFillStyle.h"
 #include "GroupOutlineStyle.h"
 
-class CGroupShape :	public IGroupShape, std::enable_shared_from_this<CGroupShape>
+class CGroupShape :	public IGroupShape, public std::enable_shared_from_this<CGroupShape>
 {
 public:
 	CGroupShape();
