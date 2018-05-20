@@ -8,13 +8,13 @@ CGroupShape::CGroupShape()
 
 void CGroupShape::Draw(ICanvas& canvas) const
 {
-	for (std::shared_ptr<IShape> const& shape : m_shapes)
+	for (auto&& shape : m_shapes)
 	{
 		shape->Draw(canvas);
 	}
 }
 
-RectD CGroupShape::GetFrame()
+RectD CGroupShape::GetFrame() const
 {
 	if (m_shapes.empty())
 	{
@@ -26,31 +26,16 @@ RectD CGroupShape::GetFrame()
 	double bottomY = std::numeric_limits<double>::min();
 	double leftX = std::numeric_limits<double>::max();
 
-	for (std::shared_ptr<IShape> const& shape : m_shapes)
+	for (auto&& shape : m_shapes)
 	{
 		RectD const& frame = shape->GetFrame();
 		PointD const& shapeLeftTop = frame.leftTop;
 		PointD const& shapeRightBottom = {shapeLeftTop.x + frame.width, shapeLeftTop.y + frame.height};
 
-		if (shapeLeftTop.x < leftX)
-		{
-			leftX = shapeLeftTop.x;
-		}
-
-		if (shapeLeftTop.y < topY)
-		{
-			 topY = shapeLeftTop.y;
-		}
-
-		if (shapeRightBottom.x > rightX)
-		{
-			rightX = shapeRightBottom.x;
-		}
-
-		if (shapeRightBottom.y > bottomY)
-		{
-			bottomY = shapeRightBottom.y;
-		}
+		leftX = std::min(leftX, shapeLeftTop.x);
+		topY = std::min(topY, shapeLeftTop.y);
+		rightX = std::max(rightX, shapeRightBottom.x);
+		bottomY = std::max(bottomY, shapeRightBottom.y);
 	}
 
 	return { { leftX, topY },  rightX - leftX, bottomY - topY };
@@ -67,19 +52,15 @@ void CGroupShape::SetFrame(RectD const& rect)
 	const double frameOffsetX = rect.leftTop.x - currentFrame.leftTop.x;
 	const double frameOffsetY = rect.leftTop.y - currentFrame.leftTop.y;
 
-	const auto moveShapeFunc = [frameOffsetX, frameOffsetY](std::shared_ptr<IShape>& shape) {
-		RectD shapeFrame = shape->GetFrame();
-		shapeFrame.leftTop.x += frameOffsetX;
-		shapeFrame.leftTop.y += frameOffsetY;
-		shape->SetFrame(shapeFrame);
-	};
-
 	const PointD leftTop = rect.leftTop;
 	const double frameScaleX = rect.width / currentFrame.width;
 	const double frameScaleY = rect.height / currentFrame.height;
 
-	const auto resizeShapeFunc = [leftTop, frameScaleX, frameScaleY](std::shared_ptr<IShape>& shape) {
+	const auto updateShapeFrame = [&](std::shared_ptr<IShape> const& shape) {	
 		RectD shapeFrame = shape->GetFrame();
+		shapeFrame.leftTop.x += frameOffsetX;
+		shapeFrame.leftTop.y += frameOffsetY;
+
 		const double shapeOffsetX = shapeFrame.leftTop.x - leftTop.x;
 		const double shapeOffsetY = shapeFrame.leftTop.y - leftTop.y;
 
@@ -90,11 +71,7 @@ void CGroupShape::SetFrame(RectD const& rect)
 		shape->SetFrame(shapeFrame);
 	};
 
-	for (std::shared_ptr<IShape>& shape : m_shapes)
-	{
-		moveShapeFunc(shape);
-		resizeShapeFunc(shape);
-	}
+	boost::range::for_each(m_shapes, updateShapeFrame);
 }
 
 IOutlineStyle& CGroupShape::GetOutlineStyle()

@@ -12,7 +12,7 @@ public:
 
 	void Draw(ICanvas& canvas) const override;
 
-	RectD GetFrame() override;
+	RectD GetFrame() const override;
 	void SetFrame(RectD const& rect) override;
 
 	IOutlineStyle& GetOutlineStyle() override;

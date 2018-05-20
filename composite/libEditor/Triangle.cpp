@@ -14,7 +14,7 @@ void CTriangle::DrawImpl(ICanvas& canvas) const
 	canvas.LineTo(m_vertex1);
 }
 
-RectD CTriangle::GetFrame()
+RectD CTriangle::GetFrame() const
 {
 	const std::pair<PointD, PointD> horizontalBounds = std::minmax({ m_vertex1, m_vertex2, m_vertex3 }, [](PointD const& vertex1, PointD const& vertex2) {
 		return vertex1.x < vertex2.x;

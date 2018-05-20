@@ -19,3 +19,4 @@
 #include <iomanip>
 #include <iostream>
 #include <memory>
+#include <boost/range/algorithm/for_each.hpp>

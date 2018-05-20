@@ -6,7 +6,7 @@ class CEllipse : public CShape
 public:
 	CEllipse(PointD const& center, double horizontalRadius, double verticalRadius);
 
-	RectD GetFrame() override;
+	RectD GetFrame() const override;
 	void SetFrame(RectD const& rect) override;
 
 protected:

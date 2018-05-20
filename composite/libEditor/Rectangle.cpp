@@ -16,7 +16,7 @@ void CRectangle::DrawImpl(ICanvas& canvas) const
 	
 }
 
-RectD CRectangle::GetFrame()
+RectD CRectangle::GetFrame() const
 {
 	return { m_leftTop, m_width, m_height };
 }

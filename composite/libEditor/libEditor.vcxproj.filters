@@ -99,6 +99,9 @@
     <ClInclude Include="IOutlineStyleEnumerator.h">
       <Filter>Style</Filter>
     </ClInclude>
+    <ClInclude Include="Slide.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="GroupOutlineStyle.cpp">
       <Filter>Style</Filter>
+    </ClCompile>
+    <ClCompile Include="Slide.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

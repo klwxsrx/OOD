@@ -12,7 +12,7 @@ void CEllipse::DrawImpl(ICanvas& canvas) const
 	canvas.DrawEllipse(m_center, m_horizontalRadius, m_verticalRadius);
 }
 
-RectD CEllipse::GetFrame()
+RectD CEllipse::GetFrame() const
 {
 	return { { m_center.x - m_horizontalRadius, m_center.y - m_verticalRadius }, m_horizontalRadius * 2, m_verticalRadius * 2 };
 }

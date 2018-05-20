@@ -8,7 +8,7 @@ class IGroupShape;
 class IShape : public IDrawable
 {
 public:
-	virtual RectD GetFrame() = 0;
+	virtual RectD GetFrame() const = 0;
 	virtual void SetFrame(RectD const& rect) = 0;
 
 	virtual IOutlineStyle& GetOutlineStyle() = 0;

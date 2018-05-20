@@ -6,7 +6,7 @@ class CTriangle : public CShape
 public:
 	CTriangle(PointD vertex1, PointD vertex2, PointD vertex3);
 
-	RectD GetFrame() override;
+	RectD GetFrame() const override;
 	void SetFrame(RectD const& rect) override;
 
 protected:
