@@ -8,7 +8,6 @@
 #include "targetver.h"
 
 #define WIN32_LEAN_AND_MEAN             // Исключите редко используемые компоненты из заголовков Windows
-#pragma warning (disable: 4996)
 
 
 
@@ -23,7 +22,8 @@
 #include <chrono>
 #include <boost\filesystem.hpp>
 #include <boost\format.hpp>
-#include <boost\signals2.hpp>
 #include <boost\bind.hpp>
 #include <list>
 #include <algorithm>
+
+#include <boost/signals2.hpp> // TODO: delete

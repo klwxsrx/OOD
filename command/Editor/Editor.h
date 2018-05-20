@@ -22,6 +22,7 @@ private:
 	void Redo(std::istream& args);
 	void Save(std::istream& args);
 	std::string ReadLineFromRemainingInput(std::istream& in);
+	boost::optional<size_t> ReadPositionFromInput(std::istream& in);
 
 	void ClearConsole();
 

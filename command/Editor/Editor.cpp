@@ -62,8 +62,8 @@ void CEditor::PrintCarriage()
 
 void CEditor::PrintHelp()
 {
-	m_out << "InsertParagraph [text]" << std::endl
-		<< "InsertImage <image> <width> <height>" << std::endl
+	m_out << "InsertParagraph <position=end> [text]" << std::endl
+		<< "InsertImage <position=end> <image> <width> <height>" << std::endl
 		<< "SetTitle <title>" << std::endl
 		<< "ReplaceText <index> [text]" << std::endl
 		<< "ResizeImage <index> <width> <height>" << std::endl
@@ -91,15 +91,35 @@ void CEditor::PrintDocument()
 
 void CEditor::InsertParagraph(std::istream& args)
 {
+	const std::string usageCommand("\nInsertParagraph <position=end> [text]");
+	boost::optional<size_t> position;
+	try
+	{
+		position = ReadPositionFromInput(args);
+	}
+	catch (std::runtime_error const& e)
+	{
+		throw std::runtime_error(e.what() + usageCommand);
+	}
+
 	std::string text = ReadLineFromRemainingInput(args);
-	m_document.InsertParagraph(text);
+	m_document.InsertParagraph(text, position);
 }
 
 void CEditor::InsertImage(std::istream& args)
 {
-	std::string imagePath;
-	const std::string usageCommand("\nInsertImage <imagePath> <width> <height>");
+	const std::string usageCommand("\nInsertImage <position=end> <imagePath> <width> <height>");
+	boost::optional<size_t> position;
+	try
+	{
+		position = ReadPositionFromInput(args);
+	}
+	catch (std::runtime_error const& e)
+	{
+		throw std::runtime_error(e.what() + usageCommand);
+	}
 
+	std::string imagePath;
 	args >> imagePath;
 	if (args.fail())
 	{
@@ -120,7 +140,7 @@ void CEditor::InsertImage(std::istream& args)
 		throw std::runtime_error("Height must be an unsigned integer!" + usageCommand);
 	}
 
-	m_document.InsertImage(imagePath, width, height);
+	m_document.InsertImage(imagePath, width, height, position);
 }
 
 void CEditor::SetTitle(std::istream& args)
@@ -237,4 +257,26 @@ std::string CEditor::ReadLineFromRemainingInput(std::istream& in)
 	std::string result;
 	std::getline(in, result);
 	return result.erase(0, 1);
+}
+
+boost::optional<size_t> CEditor::ReadPositionFromInput(std::istream& in)
+{
+	std::string positionStr;
+	size_t position;
+	boost::optional<size_t> optionalPosition;
+
+	in >> positionStr;
+	if (positionStr == "end")
+	{
+		optionalPosition = boost::none;
+	}
+	else if (std::stringstream(positionStr) >> position)
+	{
+		optionalPosition = position;
+	}
+	else
+	{
+		throw std::runtime_error("Position must be an unsigned integer or \"end\"!");
+	}
+	return optionalPosition;
 }

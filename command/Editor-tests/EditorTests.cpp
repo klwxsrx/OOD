@@ -41,8 +41,8 @@ BOOST_FIXTURE_TEST_SUITE(Editor, EditorFixture)
 	{
 		VerifyCommandHandling("UnknownCommand", R"text(Unknown command!
 
-InsertParagraph [text]
-InsertImage <image> <width> <height>
+InsertParagraph <position=end> [text]
+InsertImage <position=end> <image> <width> <height>
 SetTitle <title>
 ReplaceText <index> [text]
 ResizeImage <index> <width> <height>
@@ -59,13 +59,49 @@ History: ----/----
 > )text");
 	}
 
+	BOOST_AUTO_TEST_CASE(returns_error_when_insertParagraph_command_executed_without_correct_position_params)
+	{
+		VerifyCommandHandling("InsertParagraph Some paragraph text", R"text(Error!
+Position must be an unsigned integer or "end"!
+InsertParagraph <position=end> [text]
+
+Title: Untitled document
+Empty!
+History: ----/----
+
+
+> )text");
+
+		VerifyCommandHandling("InsertParagraph", R"text(Error!
+Position must be an unsigned integer or "end"!
+InsertParagraph <position=end> [text]
+
+Title: Untitled document
+Empty!
+History: ----/----
+
+
+> )text");
+	}
+
 	BOOST_AUTO_TEST_CASE(can_handle_insertParagraph_command)
 	{
-		VerifyCommandHandling("InsertParagraph Some paragraph text", R"text(Success!
+		VerifyCommandHandling("InsertParagraph end Some paragraph text", R"text(Success!
 
 
 Title: Untitled document
 0: Paragraph: Some paragraph text
+History: Undo/----
+
+
+> )text");
+
+		VerifyCommandHandling("InsertParagraph 0 Some new paragraph text", R"text(Success!
+
+
+Title: Untitled document
+0: Paragraph: Some new paragraph text
+1: Paragraph: Some paragraph text
 History: Undo/----
 
 
@@ -75,8 +111,19 @@ History: Undo/----
 	BOOST_AUTO_TEST_CASE(returns_error_where_InsertImage_command_executed_without_correct_params)
 	{
 		VerifyCommandHandling("InsertImage", R"text(Error!
+Position must be an unsigned integer or "end"!
+InsertImage <position=end> <imagePath> <width> <height>
+
+Title: Untitled document
+Empty!
+History: ----/----
+
+
+> )text");
+
+		VerifyCommandHandling("InsertImage end", R"text(Error!
 ImagePath is required!
-InsertImage <imagePath> <width> <height>
+InsertImage <position=end> <imagePath> <width> <height>
 
 Title: Untitled document
 Empty!
@@ -85,9 +132,9 @@ History: ----/----
 
 > )text");
 
-		VerifyCommandHandling("InsertImage test.jpg", R"text(Error!
+		VerifyCommandHandling("InsertImage end test.jpg", R"text(Error!
 Width must be an unsigned integer!
-InsertImage <imagePath> <width> <height>
+InsertImage <position=end> <imagePath> <width> <height>
 
 Title: Untitled document
 Empty!
@@ -96,9 +143,9 @@ History: ----/----
 
 > )text");
 
-		VerifyCommandHandling("InsertImage test.jpg a", R"text(Error!
+		VerifyCommandHandling("InsertImage end test.jpg a", R"text(Error!
 Width must be an unsigned integer!
-InsertImage <imagePath> <width> <height>
+InsertImage <position=end> <imagePath> <width> <height>
 
 Title: Untitled document
 Empty!
@@ -107,9 +154,9 @@ History: ----/----
 
 > )text");
 
-		VerifyCommandHandling("InsertImage test.jpg 640", R"text(Error!
+		VerifyCommandHandling("InsertImage end test.jpg 640", R"text(Error!
 Height must be an unsigned integer!
-InsertImage <imagePath> <width> <height>
+InsertImage <position=end> <imagePath> <width> <height>
 
 Title: Untitled document
 Empty!
@@ -118,9 +165,9 @@ History: ----/----
 
 > )text");
 
-		VerifyCommandHandling("InsertImage test.jpg 640 b", R"text(Error!
+		VerifyCommandHandling("InsertImage end test.jpg 640 b", R"text(Error!
 Height must be an unsigned integer!
-InsertImage <imagePath> <width> <height>
+InsertImage <position=end> <imagePath> <width> <height>
 
 Title: Untitled document
 Empty!
@@ -132,7 +179,25 @@ History: ----/----
 
 	BOOST_AUTO_TEST_CASE(can_handle_insertImage_command)
 	{
-		BOOST_CHECK(input << "InsertImage test.jpg 640 480");
+		BOOST_CHECK(input << "InsertImage end test.jpg 640 480");
+		editor.HandleCommand();
+		BOOST_CHECK_EQUAL(document.GetItemsCount(), 1);
+		auto imagePath = document.GetItem(0)->GetImage()->GetPath();
+
+		BOOST_CHECK_EQUAL(output.str(), (boost::format(R"text(Success!
+
+
+Title: Untitled document
+0: Image: 640 480 "%1%"
+History: Undo/----
+
+
+> )text") % imagePath.string()).str());
+	}
+
+	BOOST_AUTO_TEST_CASE(can_handle_insertImage_command_by_position)
+	{
+		BOOST_CHECK(input << "InsertImage 0 test.jpg 640 480");
 		editor.HandleCommand();
 		BOOST_CHECK_EQUAL(document.GetItemsCount(), 1);
 		auto imagePath = document.GetItem(0)->GetImage()->GetPath();
