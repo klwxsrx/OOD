@@ -1,77 +1,94 @@
 #include "stdafx.h"
 #include "GroupOutlineStyle.h"
 
-CGroupOutlineStyle::CGroupOutlineStyle(std::list<std::shared_ptr<IShape>>& shapes)
-	: m_shapes(shapes)
+CGroupOutlineStyle::CGroupOutlineStyle(IOutlineStyleEnumerator& enumerator)
+	: m_enumerator(enumerator)
 {
 }
 
 
 boost::optional<bool> CGroupOutlineStyle::IsEnabled() const
 {
-	if (m_shapes.empty())
-	{
-		return boost::optional<bool>();
-	}
+	boost::optional<boost::optional<bool>> firstShapeValue;
+	bool isCommonValue = true;
 
-	boost::optional<bool> firstShapeValue = m_shapes.front()->GetOutlineStyle().IsEnabled();
-	bool isCommonValue = std::all_of(m_shapes.begin(), m_shapes.end(), [&firstShapeValue](std::shared_ptr<IShape> const& shape) {
-		return shape->GetOutlineStyle().IsEnabled() == firstShapeValue;
+	m_enumerator.EnumerateOutlineStyles([&](IOutlineStyle& style) {
+		if (!firstShapeValue.is_initialized())
+		{
+			firstShapeValue = style.IsEnabled();
+		}
+		if (firstShapeValue.value() != style.IsEnabled())
+		{
+			isCommonValue = false;
+			return false;
+		}
+		return true;
 	});
-
-	return isCommonValue ? firstShapeValue : boost::optional<bool>();
+	return (firstShapeValue.is_initialized() && isCommonValue) ? (*firstShapeValue) : boost::optional<bool>();
 }
 
 void CGroupOutlineStyle::Enable(bool enable)
 {
-	for (std::shared_ptr<IShape> const& shape : m_shapes)
-	{
-		shape->GetOutlineStyle().Enable(enable);
-	}
+	m_enumerator.EnumerateOutlineStyles([&](IOutlineStyle& style) {
+		style.Enable(enable);
+		return true;
+	});
 }
 
 boost::optional<RGBAColor> CGroupOutlineStyle::GetColor() const
 {
-	if (m_shapes.empty())
-	{
-		return boost::optional<RGBAColor>();
-	}
+	boost::optional<boost::optional<RGBAColor>> firstShapeValue;
+	bool isCommonValue = true;
 
-	boost::optional<RGBAColor> firstShapeValue = m_shapes.front()->GetOutlineStyle().GetColor();
-	bool isCommonValue = std::all_of(m_shapes.begin(), m_shapes.end(), [&firstShapeValue](std::shared_ptr<IShape> const& shape) {
-		return shape->GetOutlineStyle().GetColor() == firstShapeValue;
+	m_enumerator.EnumerateOutlineStyles([&](IOutlineStyle& style) {
+		if (!firstShapeValue.is_initialized())
+		{
+			firstShapeValue = style.GetColor();
+		}
+		if (firstShapeValue.value() != style.GetColor())
+		{
+			isCommonValue = false;
+			return false;
+		}
+		return true;
 	});
 
-	return isCommonValue ? firstShapeValue : boost::optional<RGBAColor>();
+	return (firstShapeValue.is_initialized() && isCommonValue) ? (*firstShapeValue) : boost::optional<RGBAColor>();
 }
 
 void CGroupOutlineStyle::SetColor(RGBAColor color)
 {
-	for (std::shared_ptr<IShape> const& shape : m_shapes)
-	{
-		shape->GetOutlineStyle().SetColor(color);
-	}
+	m_enumerator.EnumerateOutlineStyles([&](IOutlineStyle& style) {
+		style.SetColor(color);
+		return true;
+	});
 }
 
 boost::optional<double> CGroupOutlineStyle::GetStrokeWidth() const
 {
-	if (m_shapes.empty())
-	{
-		return boost::optional<double>();
-	}
+	boost::optional<boost::optional<double>> firstShapeValue;
+	bool isCommonValue = true;
 
-	boost::optional<double> firstShapeValue = m_shapes.front()->GetOutlineStyle().GetStrokeWidth();
-	bool isCommonValue = std::all_of(m_shapes.begin(), m_shapes.end(), [&firstShapeValue](std::shared_ptr<IShape> const& shape) {
-		return shape->GetOutlineStyle().GetStrokeWidth() == firstShapeValue;
+	m_enumerator.EnumerateOutlineStyles([&](IOutlineStyle& style) {
+		if (!firstShapeValue.is_initialized())
+		{
+			firstShapeValue = style.GetStrokeWidth();
+		}
+		if (firstShapeValue.value() != style.GetStrokeWidth())
+		{
+			isCommonValue = false;
+			return false;
+		}
+		return true;
 	});
 
-	return isCommonValue ? firstShapeValue : boost::optional<double>();
+	return (firstShapeValue.is_initialized() && isCommonValue) ? (*firstShapeValue) : boost::optional<double>();
 }
 
 void CGroupOutlineStyle::SetStrokeWidth(double width)
 {
-	for (std::shared_ptr<IShape> const& shape : m_shapes)
-	{
-		shape->GetOutlineStyle().SetStrokeWidth(width);
-	}
+	m_enumerator.EnumerateOutlineStyles([&](IOutlineStyle& style) {
+		style.SetStrokeWidth(width);
+		return true;
+	});
 }

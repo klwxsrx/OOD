@@ -2,7 +2,7 @@
 #include "IDrawable.h"
 #include "IShapes.h"
 
-class ISlide : public IDrawable
+class ISlide : public IDrawable // TODO: slide
 {
 public:
 	virtual double GetWidth() const = 0;

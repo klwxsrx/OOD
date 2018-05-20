@@ -2,7 +2,7 @@
 #include "GroupShape.h"
 
 CGroupShape::CGroupShape()
-	: m_fillStyle(m_shapes), m_outlineStyle(m_shapes)
+	: m_fillStyle(*this), m_outlineStyle(*this)
 {
 }
 
@@ -180,5 +180,27 @@ void CGroupShape::ValidateItemPosition(size_t index)
 	if (index >= containerSize)
 	{
 		throw std::runtime_error("Index out of range!");
+	}
+}
+
+void CGroupShape::EnumerateFillStyles(std::function<bool(IStyle&)> func) const
+{
+	for (auto&& shape : m_shapes)
+	{
+		if (!func(shape->GetFillStyle()))
+		{
+			break;
+		}
+	}
+}
+
+void CGroupShape::EnumerateOutlineStyles(std::function<bool(IOutlineStyle&)> func) const
+{
+	for (auto&& shape : m_shapes)
+	{
+		if (!func(shape->GetOutlineStyle()))
+		{
+			break;
+		}
 	}
 }

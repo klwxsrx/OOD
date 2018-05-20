@@ -1,10 +1,11 @@
 #pragma once
 #include "IShape.h"
+#include "IOutlineStyleEnumerator.h"
 
 class CGroupOutlineStyle : public IOutlineStyle
 {
 public:
-	CGroupOutlineStyle(std::list<std::shared_ptr<IShape>>& shapes);
+	CGroupOutlineStyle(IOutlineStyleEnumerator& enumerator);
 
 	boost::optional<bool> IsEnabled() const override;
 	void Enable(bool enable) override;
@@ -14,6 +15,6 @@ public:
 	void SetStrokeWidth(double width) override;
 
 private:
-	std::list<std::shared_ptr<IShape>>& m_shapes;
+	IOutlineStyleEnumerator& m_enumerator;
 };
 

@@ -1,10 +1,11 @@
 #pragma once
 #include "IShape.h"
+#include "IFillStyleEnumerator.h"
 
 class CGroupFillStyle : public IStyle
 {
 public:
-	CGroupFillStyle(std::list<std::shared_ptr<IShape>>& shapes);
+	CGroupFillStyle(IFillStyleEnumerator& enumerator);
 
 	boost::optional<bool> IsEnabled() const override;
 	void Enable(bool enable) override;
@@ -12,6 +13,6 @@ public:
 	void SetColor(RGBAColor color) override;
 
 private:
-	std::list<std::shared_ptr<IShape>>& m_shapes;
+	IFillStyleEnumerator& m_enumerator;
 };
 

@@ -93,6 +93,12 @@
     <ClInclude Include="GroupOutlineStyle.h">
       <Filter>Style</Filter>
     </ClInclude>
+    <ClInclude Include="IFillStyleEnumerator.h">
+      <Filter>Style</Filter>
+    </ClInclude>
+    <ClInclude Include="IOutlineStyleEnumerator.h">
+      <Filter>Style</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

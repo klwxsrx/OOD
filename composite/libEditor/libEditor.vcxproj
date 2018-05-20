@@ -129,8 +129,10 @@
     <ClInclude Include="ICanvas.h" />
     <ClInclude Include="IGroupShape.h" />
     <ClInclude Include="IOutlineStyle.h" />
+    <ClInclude Include="IOutlineStyleEnumerator.h" />
     <ClInclude Include="IShape.h" />
     <ClInclude Include="IShapes.h" />
+    <ClInclude Include="IFillStyleEnumerator.h" />
     <ClInclude Include="ISlide.h" />
     <ClInclude Include="IStyle.h" />
     <ClInclude Include="OutlineShapeStyle.h" />

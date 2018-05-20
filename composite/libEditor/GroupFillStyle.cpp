@@ -1,53 +1,64 @@
 #include "stdafx.h"
 #include "GroupFillStyle.h"
 
-CGroupFillStyle::CGroupFillStyle(std::list<std::shared_ptr<IShape>>& shapes)
-	: m_shapes(shapes)
+CGroupFillStyle::CGroupFillStyle(IFillStyleEnumerator& enumerator)
+	: m_enumerator(enumerator)
 {
 }
 
 boost::optional<bool> CGroupFillStyle::IsEnabled() const
 {
-	if (m_shapes.empty())
-	{
-		return boost::optional<bool>();
-	}
+	boost::optional<boost::optional<bool>> firstShapeValue;
+	bool isCommonValue = true;
 
-	boost::optional<bool> firstShapeValue = m_shapes.front()->GetFillStyle().IsEnabled();
-	bool isCommonValue = std::all_of(m_shapes.begin(), m_shapes.end(), [&firstShapeValue](std::shared_ptr<IShape> const& shape) {
-		return shape->GetFillStyle().IsEnabled() == firstShapeValue;
+	m_enumerator.EnumerateFillStyles([&](IStyle& style) {
+		if (!firstShapeValue.is_initialized())
+		{
+			firstShapeValue = style.IsEnabled();
+		}
+		if (firstShapeValue.value() != style.IsEnabled())
+		{
+			isCommonValue = false;
+			return false;
+		}
+		return true;
 	});
-
-	return isCommonValue ? firstShapeValue : boost::optional<bool>();
+	return (firstShapeValue.is_initialized() && isCommonValue) ? (*firstShapeValue) : boost::optional<bool>();
 }
 
 void CGroupFillStyle::Enable(bool enable)
 {
-	for (std::shared_ptr<IShape> const& shape : m_shapes)
-	{
-		shape->GetFillStyle().Enable(enable);
-	}
+	m_enumerator.EnumerateFillStyles([&](IStyle& style) {
+		style.Enable(enable);
+		return true;
+	});
 }
 
 boost::optional<RGBAColor> CGroupFillStyle::GetColor() const
 {
-	if (m_shapes.empty())
-	{
-		return boost::optional<RGBAColor>();
-	}
+	boost::optional<boost::optional<RGBAColor>> firstShapeValue;
+	bool isCommonValue = true;
 
-	boost::optional<RGBAColor> firstShapeValue = m_shapes.front()->GetFillStyle().GetColor();
-	bool isCommonValue = std::all_of(m_shapes.begin(), m_shapes.end(), [&firstShapeValue](std::shared_ptr<IShape> const& shape) {
-		return shape->GetFillStyle().GetColor() == firstShapeValue;
+	m_enumerator.EnumerateFillStyles([&](IStyle& style) {
+		if (!firstShapeValue.is_initialized())
+		{
+			firstShapeValue = style.GetColor();
+		}
+		if (firstShapeValue.value() != style.GetColor())
+		{
+			isCommonValue = false;
+			return false;
+		}
+		return true;
 	});
 
-	return isCommonValue ? firstShapeValue : boost::optional<RGBAColor>();
+	return (firstShapeValue.is_initialized() && isCommonValue) ? (*firstShapeValue) : boost::optional<RGBAColor>();
 }
 
 void CGroupFillStyle::SetColor(RGBAColor color)
 {
-	for (std::shared_ptr<IShape> const& shape : m_shapes)
-	{
-		shape->GetFillStyle().SetColor(color);
-	}
+	m_enumerator.EnumerateFillStyles([&](IStyle& style) {
+		style.SetColor(color);
+		return true;
+	});
 }

@@ -19,10 +19,10 @@ private:
 
 	bool m_fillEnabled = false;
 	std::vector<PointD> m_currentPolyline;
-	PointD m_currentPoint;
+	PointD m_currentPoint = {0, 0};
 	std::stringstream m_canvas;
 	RGBAColor m_currentFillColor = Color::TRANSPARENT_COLOR;
-	RGBAColor m_currentOutlineColor = Color::TRANSPARENT_COLOR;
+	RGBAColor m_currentOutlineColor = Color::BLACK_COLOR;
 	double m_lineWidth = 0;
 };
 

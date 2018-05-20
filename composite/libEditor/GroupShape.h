@@ -1,9 +1,11 @@
 #pragma once
 #include "IGroupShape.h"
+#include "IFillStyleEnumerator.h"
+#include "IOutlineStyleEnumerator.h"
 #include "GroupFillStyle.h"
 #include "GroupOutlineStyle.h"
 
-class CGroupShape :	public IGroupShape, public std::enable_shared_from_this<CGroupShape>
+class CGroupShape :	public IGroupShape, private IFillStyleEnumerator, private IOutlineStyleEnumerator, public std::enable_shared_from_this<CGroupShape>
 {
 public:
 	CGroupShape();
@@ -29,8 +31,10 @@ public:
 
 private:
 	void ValidateItemPosition(size_t index);
+	void EnumerateFillStyles(std::function<bool(IStyle&)> func) const override;
+	void EnumerateOutlineStyles(std::function<bool(IOutlineStyle&)> func) const override;
 
-	std::list<std::shared_ptr<IShape>> m_shapes;
+	std::vector<std::shared_ptr<IShape>> m_shapes;
 	CGroupOutlineStyle m_outlineStyle;
 	CGroupFillStyle m_fillStyle;
 };
