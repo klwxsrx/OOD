@@ -32,7 +32,7 @@ private:
 private:
 	static unsigned MAX_QUARTERS_COUNT;
 
-	unsigned m_ballsCount = 0;
+	unsigned m_ballsCount;
 	unsigned m_quartersCount = 0;
 	CSoldState m_soldState;
 	CSoldOutState m_soldOutState;

@@ -8,7 +8,7 @@ CSoldState::CSoldState(IGumballMachine& gumballMachine, std::ostream& out)
 
 void CSoldState::InsertQuarter()
 {
-	if (m_gumballMachine.GetBallCount() != m_gumballMachine.GetMaxQuartersCount())
+	if (m_gumballMachine.GetQuartersCount() != m_gumballMachine.GetMaxQuartersCount())
 	{
 		m_out << "You inserted a quarter\n";
 		m_gumballMachine.AddQuarter();

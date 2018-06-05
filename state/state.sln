@@ -13,6 +13,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiGumBallMachine", "Mult
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiGumBallMachineTests", "MultiGumBallMachineTests\MultiGumBallMachineTests.vcxproj", "{65AAAA92-64F4-436C-A13E-7387F86714BC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NaiveMultiGumBallMachine", "NaiveMultiGumBallMachine\NaiveMultiGumBallMachine.vcxproj", "{5F297698-CD73-4643-A531-148092CA27E9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NaiveMultiGumBallMachineTests", "NaiveMultiGumBallMachineTests\NaiveMultiGumBallMachineTests.vcxproj", "{522E1417-F362-4FE2-96B9-39A3ADE40C3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +65,22 @@ Global
 		{65AAAA92-64F4-436C-A13E-7387F86714BC}.Release|x64.Build.0 = Release|x64
 		{65AAAA92-64F4-436C-A13E-7387F86714BC}.Release|x86.ActiveCfg = Release|Win32
 		{65AAAA92-64F4-436C-A13E-7387F86714BC}.Release|x86.Build.0 = Release|Win32
+		{5F297698-CD73-4643-A531-148092CA27E9}.Debug|x64.ActiveCfg = Debug|x64
+		{5F297698-CD73-4643-A531-148092CA27E9}.Debug|x64.Build.0 = Debug|x64
+		{5F297698-CD73-4643-A531-148092CA27E9}.Debug|x86.ActiveCfg = Debug|Win32
+		{5F297698-CD73-4643-A531-148092CA27E9}.Debug|x86.Build.0 = Debug|Win32
+		{5F297698-CD73-4643-A531-148092CA27E9}.Release|x64.ActiveCfg = Release|x64
+		{5F297698-CD73-4643-A531-148092CA27E9}.Release|x64.Build.0 = Release|x64
+		{5F297698-CD73-4643-A531-148092CA27E9}.Release|x86.ActiveCfg = Release|Win32
+		{5F297698-CD73-4643-A531-148092CA27E9}.Release|x86.Build.0 = Release|Win32
+		{522E1417-F362-4FE2-96B9-39A3ADE40C3A}.Debug|x64.ActiveCfg = Debug|x64
+		{522E1417-F362-4FE2-96B9-39A3ADE40C3A}.Debug|x64.Build.0 = Debug|x64
+		{522E1417-F362-4FE2-96B9-39A3ADE40C3A}.Debug|x86.ActiveCfg = Debug|Win32
+		{522E1417-F362-4FE2-96B9-39A3ADE40C3A}.Debug|x86.Build.0 = Debug|Win32
+		{522E1417-F362-4FE2-96B9-39A3ADE40C3A}.Release|x64.ActiveCfg = Release|x64
+		{522E1417-F362-4FE2-96B9-39A3ADE40C3A}.Release|x64.Build.0 = Release|x64
+		{522E1417-F362-4FE2-96B9-39A3ADE40C3A}.Release|x86.ActiveCfg = Release|Win32
+		{522E1417-F362-4FE2-96B9-39A3ADE40C3A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
