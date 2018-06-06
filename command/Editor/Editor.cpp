@@ -13,7 +13,7 @@ CEditor::CEditor(IDocument& document, std::istream& in, std::ostream& out)
 		{ "Undo", std::bind(&CEditor::Undo, this, std::placeholders::_1) },
 		{ "Redo", std::bind(&CEditor::Redo, this, std::placeholders::_1) },
 		{ "Save", std::bind(&CEditor::Save, this, std::placeholders::_1) },
-})
+	})
 {
 	PrintHelp();
 	PrintDocument();

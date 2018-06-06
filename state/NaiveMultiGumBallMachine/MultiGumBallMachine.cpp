@@ -131,7 +131,7 @@ std::string CGumballMachine::ToString() const
 
 	auto fmt = boost::format(R"(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: %1% gumball%2%
 Money: %3% quarter%4%
 Machine is %5%

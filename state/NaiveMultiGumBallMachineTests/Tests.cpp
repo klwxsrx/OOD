@@ -25,7 +25,7 @@ BOOST_FIXTURE_TEST_SUITE(GumballMachine, GumballMachineFixture)
 		{
 			BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 3 gumballs
 Money: 0 quarters
 Machine is waiting for quarter
@@ -40,7 +40,7 @@ Machine is waiting for quarter
 				BOOST_CHECK_EQUAL(outputStream.str(), "You inserted a quarter\nA quarter fell into money receiver...\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 3 gumballs
 Money: 1 quarter
 Machine is waiting for turn of crank
@@ -54,7 +54,7 @@ Machine is waiting for turn of crank
 				BOOST_CHECK_EQUAL(outputStream.str(), "You haven't inserted a quarter\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 3 gumballs
 Money: 0 quarters
 Machine is waiting for quarter
@@ -67,7 +67,7 @@ Machine is waiting for quarter
 				BOOST_CHECK_EQUAL(outputStream.str(), "You turned but there's no quarter\nYou need to pay first\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 3 gumballs
 Money: 0 quarters
 Machine is waiting for quarter
@@ -80,7 +80,7 @@ Machine is waiting for quarter
 				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has emptied\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 0 quarters
 Machine is sold out
@@ -93,7 +93,7 @@ Machine is sold out
 				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has refilled\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 7 gumballs
 Money: 0 quarters
 Machine is waiting for quarter
@@ -119,7 +119,7 @@ Machine is waiting for quarter
 				BOOST_CHECK_EQUAL(outputStream.str(), "You inserted a quarter\nA quarter fell into money receiver...\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 3 gumballs
 Money: 2 quarters
 Machine is waiting for turn of crank
@@ -130,7 +130,7 @@ Machine is waiting for turn of crank
 				machine.InsertQuarter();
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 3 gumballs
 Money: 5 quarters
 Machine is waiting for turn of crank
@@ -141,7 +141,7 @@ Machine is waiting for turn of crank
 				BOOST_CHECK_EQUAL(outputStream.str(), "You can't insert another one quarter\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 3 gumballs
 Money: 5 quarters
 Machine is waiting for turn of crank
@@ -154,7 +154,7 @@ Machine is waiting for turn of crank
 				BOOST_CHECK_EQUAL(outputStream.str(), "Quarter(s) returned\nA 1 quarter comes rolling out the money slot...\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 3 gumballs
 Money: 0 quarters
 Machine is waiting for quarter
@@ -171,7 +171,7 @@ Machine is waiting for quarter
 				BOOST_CHECK_EQUAL(outputStream.str(), "Quarter(s) returned\nA 3 quarter comes rolling out the money slot...\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 3 gumballs
 Money: 0 quarters
 Machine is waiting for quarter
@@ -184,7 +184,7 @@ Machine is waiting for quarter
 				BOOST_CHECK_EQUAL(outputStream.str(), "You turned...\nA gumball comes rolling out the slot...\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 2 gumballs
 Money: 0 quarters
 Machine is waiting for quarter
@@ -201,7 +201,7 @@ Machine is waiting for quarter
 				BOOST_CHECK_EQUAL(outputStream.str(), "You turned...\nA gumball comes rolling out the slot...\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 2 gumballs
 Money: 2 quarters
 Machine is waiting for turn of crank
@@ -222,7 +222,7 @@ Machine is waiting for turn of crank
 				BOOST_CHECK_EQUAL(outputStream.str(), "You turned...\nA gumball comes rolling out the slot...\nOops, out of gumballs\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 0 quarters
 Machine is sold out
@@ -245,7 +245,7 @@ Machine is sold out
 				BOOST_CHECK_EQUAL(outputStream.str(), "You turned...\nA gumball comes rolling out the slot...\nOops, out of gumballs\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 2 quarters
 Machine is sold out
@@ -258,7 +258,7 @@ Machine is sold out
 				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has emptied\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 1 quarter
 Machine is sold out
@@ -271,7 +271,7 @@ Machine is sold out
 				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has refilled\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 7 gumballs
 Money: 1 quarter
 Machine is waiting for turn of crank
@@ -306,7 +306,7 @@ Machine is waiting for turn of crank
 				BOOST_CHECK_EQUAL(outputStream.str(), "You can't insert a quarter, the machine is sold out\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 2 quarters
 Machine is sold out
@@ -319,7 +319,7 @@ Machine is sold out
 				BOOST_CHECK_EQUAL(outputStream.str(), "Quarter(s) returned\nA 2 quarter comes rolling out the money slot...\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 0 quarters
 Machine is sold out
@@ -332,7 +332,7 @@ Machine is sold out
 				BOOST_CHECK_EQUAL(outputStream.str(), "You turned but there's no gumballs\nNo gumball dispensed\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 2 quarters
 Machine is sold out
@@ -345,7 +345,7 @@ Machine is sold out
 				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has emptied\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 2 quarters
 Machine is sold out
@@ -358,7 +358,7 @@ Machine is sold out
 				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has refilled\n");
 				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 7 gumballs
 Money: 2 quarters
 Machine is waiting for turn of crank
@@ -384,7 +384,7 @@ Machine is waiting for turn of crank
 			BOOST_CHECK_EQUAL(outputStream.str(), "You can't insert a quarter, the machine is sold out\n");
 			BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 0 quarters
 Machine is sold out
@@ -397,7 +397,7 @@ Machine is sold out
 			BOOST_CHECK_EQUAL(outputStream.str(), "You can't eject, you haven't inserted a quarter(s)\n");
 			BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 0 quarters
 Machine is sold out
@@ -410,7 +410,7 @@ Machine is sold out
 			BOOST_CHECK_EQUAL(outputStream.str(), "You turned but there's no gumballs\nNo gumball dispensed\n");
 			BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 0 quarters
 Machine is sold out
@@ -423,7 +423,7 @@ Machine is sold out
 			BOOST_CHECK_EQUAL(outputStream.str(), "The machine has emptied\n");
 			BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 0 gumballs
 Money: 0 quarters
 Machine is sold out
@@ -436,7 +436,7 @@ Machine is sold out
 			BOOST_CHECK_EQUAL(outputStream.str(), "The machine has refilled\n");
 			BOOST_CHECK_EQUAL(machine.ToString(), R"text(
 Mighty Gumball, Inc.
-C++-enabled Standing Gumball Model #2016 (with state)
+C++-enabled Standing Gumball Model #2016 (without state)
 Inventory: 7 gumballs
 Money: 0 quarters
 Machine is waiting for quarter

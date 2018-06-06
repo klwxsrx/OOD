@@ -8,10 +8,10 @@ public:
 
 	void HandleCommand();
 	void PrintHelp();
-	void PrintCarriage();
 	void PrintDocument();
 
 private:
+	void PrintCarriage();
 	void InsertParagraph(std::istream& args);
 	void InsertImage(std::istream& args);
 	void SetTitle(std::istream& args);

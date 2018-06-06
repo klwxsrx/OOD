@@ -147,10 +147,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MachineControlPanel.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\MultiGumBallMachine\GumballMachine.cpp" />
+    <ClCompile Include="..\MultiGumBallMachine\HasQuarterState.cpp" />
+    <ClCompile Include="..\MultiGumBallMachine\NoQuarterState.cpp" />
+    <ClCompile Include="..\MultiGumBallMachine\SoldOutState.cpp" />
+    <ClCompile Include="..\MultiGumBallMachine\SoldState.cpp" />
+    <ClCompile Include="MachineControlPanel.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
