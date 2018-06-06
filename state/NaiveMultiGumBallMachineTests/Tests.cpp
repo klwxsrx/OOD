@@ -74,6 +74,32 @@ Machine is waiting for quarter
 )text");
 			}
 
+			BOOST_AUTO_TEST_CASE(can_be_emptied)
+			{
+				machine.Refill(0);
+				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has emptied\n");
+				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
+Mighty Gumball, Inc.
+C++-enabled Standing Gumball Model #2016 (with state)
+Inventory: 0 gumballs
+Money: 0 quarters
+Machine is sold out
+)text");
+			}
+
+			BOOST_AUTO_TEST_CASE(can_be_refilled)
+			{
+				machine.Refill(7);
+				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has refilled\n");
+				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
+Mighty Gumball, Inc.
+C++-enabled Standing Gumball Model #2016 (with state)
+Inventory: 7 gumballs
+Money: 0 quarters
+Machine is waiting for quarter
+)text");
+			}
+
 		BOOST_AUTO_TEST_SUITE_END()
 
 		struct GumballMachineWithInsertedQuarterFixture : public GumballMachineFixture
@@ -226,6 +252,32 @@ Machine is sold out
 )text");
 			}
 
+			BOOST_AUTO_TEST_CASE(can_be_emptied)
+			{
+				machine.Refill(0);
+				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has emptied\n");
+				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
+Mighty Gumball, Inc.
+C++-enabled Standing Gumball Model #2016 (with state)
+Inventory: 0 gumballs
+Money: 1 quarter
+Machine is sold out
+)text");
+			}
+
+			BOOST_AUTO_TEST_CASE(can_be_refilled)
+			{
+				machine.Refill(7);
+				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has refilled\n");
+				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
+Mighty Gumball, Inc.
+C++-enabled Standing Gumball Model #2016 (with state)
+Inventory: 7 gumballs
+Money: 1 quarter
+Machine is waiting for turn of crank
+)text");
+			}
+
 		BOOST_AUTO_TEST_SUITE_END()
 
 		struct GumballMachineWithSoldOutGumballsWithQuartersFixture : public GumballMachineWithInsertedQuarterFixture
@@ -287,6 +339,32 @@ Machine is sold out
 )text");
 			}
 
+			BOOST_AUTO_TEST_CASE(can_be_emptied)
+			{
+				machine.Refill(0);
+				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has emptied\n");
+				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
+Mighty Gumball, Inc.
+C++-enabled Standing Gumball Model #2016 (with state)
+Inventory: 0 gumballs
+Money: 2 quarters
+Machine is sold out
+)text");
+			}
+
+			BOOST_AUTO_TEST_CASE(can_be_refilled)
+			{
+				machine.Refill(7);
+				BOOST_CHECK_EQUAL(outputStream.str(), "The machine has refilled\n");
+				BOOST_CHECK_EQUAL(machine.ToString(), R"text(
+Mighty Gumball, Inc.
+C++-enabled Standing Gumball Model #2016 (with state)
+Inventory: 7 gumballs
+Money: 2 quarters
+Machine is waiting for turn of crank
+)text");
+			}
+
 		BOOST_AUTO_TEST_SUITE_END()
 
 		struct GumballMachineWithSoldOutGumballsWithoutQuartersFixture : public GumballMachineWithSoldOutGumballsWithQuartersFixture
@@ -336,6 +414,32 @@ C++-enabled Standing Gumball Model #2016 (with state)
 Inventory: 0 gumballs
 Money: 0 quarters
 Machine is sold out
+)text");
+		}
+
+		BOOST_AUTO_TEST_CASE(can_be_emptied)
+		{
+			machine.Refill(0);
+			BOOST_CHECK_EQUAL(outputStream.str(), "The machine has emptied\n");
+			BOOST_CHECK_EQUAL(machine.ToString(), R"text(
+Mighty Gumball, Inc.
+C++-enabled Standing Gumball Model #2016 (with state)
+Inventory: 0 gumballs
+Money: 0 quarters
+Machine is sold out
+)text");
+		}
+
+		BOOST_AUTO_TEST_CASE(can_be_refilled)
+		{
+			machine.Refill(7);
+			BOOST_CHECK_EQUAL(outputStream.str(), "The machine has refilled\n");
+			BOOST_CHECK_EQUAL(machine.ToString(), R"text(
+Mighty Gumball, Inc.
+C++-enabled Standing Gumball Model #2016 (with state)
+Inventory: 7 gumballs
+Money: 0 quarters
+Machine is waiting for quarter
 )text");
 		}
 

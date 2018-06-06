@@ -8,6 +8,7 @@ public:
 	void InsertQuarter();
 	void EjectQuarter();
 	void TurnCrank();
+	void Refill(unsigned numBalls);
 	std::string ToString() const;
 
 private:

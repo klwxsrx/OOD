@@ -48,6 +48,11 @@ void CSoldState::Dispense()
 	}
 }
 
+void CSoldState::Refill(unsigned numBalls)
+{
+	m_out << "You can't refill machine while machine dispense gumball\n";
+}
+
 std::string CSoldState::ToString() const
 {
 	return "delivering a gumball";

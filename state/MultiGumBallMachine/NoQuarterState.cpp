@@ -28,6 +28,15 @@ void CNoQuarterState::Dispense()
 	m_out << "You need to pay first\n";
 }
 
+void CNoQuarterState::Refill(unsigned numBalls)
+{
+	m_gumballMachine.SetBallsCount(numBalls);
+	if (m_gumballMachine.GetBallCount() == 0)
+	{
+		m_gumballMachine.SetSoldOutState();
+	}
+}
+
 std::string CNoQuarterState::ToString() const
 {
 	return "waiting for quarter";

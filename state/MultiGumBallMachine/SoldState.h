@@ -11,6 +11,7 @@ public:
 	void EjectQuarter() override;
 	void TurnCrank() override;
 	void Dispense() override;
+	void Refill(unsigned numBalls) override;
 	std::string ToString() const override;
 
 private:

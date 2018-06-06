@@ -95,6 +95,32 @@ void CGumballMachine::TurnCrank()
 	Dispense();
 }
 
+void CGumballMachine::Refill(unsigned numBalls)
+{
+	switch (m_state)
+	{
+	case State::NoQuarter:
+	case State::HasQuarter:
+	case State::SoldOut:
+		m_ballsCount = numBalls;
+		if (m_ballsCount == 0)
+		{
+			m_state = State::SoldOut;
+			m_out << "The machine has emptied\n";
+		}
+		else
+		{
+			m_state = (m_quartersCount == 0) ? State::NoQuarter : State::HasQuarter;
+			m_out << "The machine has refilled\n";
+		}
+		break;
+
+	case State::Sold:
+		m_out << "You can't refill machine while machine dispense gumball\n";
+		break;
+	}
+}
+
 std::string CGumballMachine::ToString() const
 {
 	std::string state =

@@ -3,6 +3,7 @@
 class IGumballMachine
 {
 public:
+	virtual void SetBallsCount(unsigned) = 0;
 	virtual void ReleaseBall() = 0;
 	virtual unsigned GetBallCount() const = 0;
 	virtual void AddQuarter() = 0;

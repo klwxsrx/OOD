@@ -13,9 +13,11 @@ public:
 	void InsertQuarter();
 	void EjectQuarter();
 	void TurnCrank();
+	void Refill(unsigned numBalls);
 	std::string ToString() const;
 
 private:
+	void SetBallsCount(unsigned numBalls) override;
 	void ReleaseBall() override;
 	unsigned GetBallCount() const override;
 	void AddQuarter() override;

@@ -37,6 +37,15 @@ void CHasQuarterState::Dispense()
 	m_out << "No gumball dispensed\n";
 }
 
+void CHasQuarterState::Refill(unsigned numBalls)
+{
+	m_gumballMachine.SetBallsCount(numBalls);
+	if (m_gumballMachine.GetBallCount() == 0)
+	{
+		m_gumballMachine.SetSoldOutState();
+	}
+}
+
 std::string CHasQuarterState::ToString() const
 {
 	return "waiting for turn of crank";

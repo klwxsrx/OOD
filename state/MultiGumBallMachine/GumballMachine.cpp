@@ -34,6 +34,11 @@ void CGumballMachine::TurnCrank()
 	m_state->Dispense();
 }
 
+void CGumballMachine::Refill(unsigned numBalls)
+{
+	m_state->Refill(numBalls);
+}
+
 std::string CGumballMachine::ToString() const
 {
 	auto fmt = boost::format(R"(
@@ -44,6 +49,19 @@ Money: %3% quarter%4%
 Machine is %5%
 )");
 	return (fmt % m_ballsCount % (m_ballsCount != 1 ? "s" : "") % m_quartersCount % (m_quartersCount != 1 ? "s" : "") % m_state->ToString()).str();
+}
+
+void CGumballMachine::SetBallsCount(unsigned numBalls)
+{
+	m_ballsCount = numBalls;
+	if (m_ballsCount == 0)
+	{
+		m_out << "The machine has emptied\n";
+	}
+	else
+	{
+		m_out << "The machine has refilled\n";
+	}
 }
 
 void CGumballMachine::ReleaseBall()
