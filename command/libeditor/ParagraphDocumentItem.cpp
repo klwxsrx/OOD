@@ -2,13 +2,8 @@
 #include "ParagraphDocumentItem.h"
 
 
-CParagraphDocumentItem::CParagraphDocumentItem(std::string const& paragraph)
-	: m_paragraph(std::make_shared<CParagraph>(paragraph))
-{
-}
-
-CParagraphDocumentItem::CParagraphDocumentItem(std::shared_ptr<IParagraph> && paragraph)
-	: m_paragraph(paragraph)
+CParagraphDocumentItem::CParagraphDocumentItem(std::string const& paragraph, IHistory& history)
+	: m_paragraph(std::make_shared<CParagraph>(paragraph, history))
 {
 }
 

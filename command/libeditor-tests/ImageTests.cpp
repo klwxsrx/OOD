@@ -2,17 +2,15 @@
 #include "MockFileResource.h"
 #include "../libeditor/IFileResource.h"
 #include "../libeditor/Image.h"
+#include "../libeditor/History.h"
 
 struct Image_
 {
+	CHistory history;
 	CImage image;
 	Image_()
-		: image(std::make_shared<CMockFileResource>(), 640u, 480u)
+		: image(std::make_shared<CMockFileResource>(), ImageSize(640u, 480u), history)
 	{
-		auto onChange = [](ImageSize& image, ImageSize const& imageSize) {
-			image = imageSize;
-		};
-		image.ConnectOnResize(onChange);
 	}
 };
 
@@ -38,11 +36,12 @@ BOOST_FIXTURE_TEST_SUITE(Image, Image_)
 
 	BOOST_AUTO_TEST_CASE(can_be_compared)
 	{
-		BOOST_CHECK(CImage(std::make_shared<CFileResource>("Path"), 640u, 480u) == CImage(std::make_shared<CFileResource>("Path"), 640u, 480u));
+		CHistory history;
+		BOOST_CHECK(CImage(std::make_shared<CFileResource>("Path"), ImageSize(640u, 480u), history) == CImage(std::make_shared<CFileResource>("Path"), ImageSize(640u, 480u), history));
 
-		BOOST_CHECK(!(CImage(std::make_shared<CFileResource>("Path"), 640u, 480u) == CImage(std::make_shared<CFileResource>("Path1"), 640u, 480u)));
-		BOOST_CHECK(!(CImage(std::make_shared<CFileResource>("Path"), 640u, 480u) == CImage(std::make_shared<CFileResource>("Path"), 641u, 480u)));
-		BOOST_CHECK(!(CImage(std::make_shared<CFileResource>("Path"), 640u, 480u) == CImage(std::make_shared<CFileResource>("Path"), 640u, 481u)));
+		BOOST_CHECK(!(CImage(std::make_shared<CFileResource>("Path"), ImageSize(640u, 480u), history) == CImage(std::make_shared<CFileResource>("Path1"), ImageSize(640u, 480u), history)));
+		BOOST_CHECK(!(CImage(std::make_shared<CFileResource>("Path"), ImageSize(640u, 480u), history) == CImage(std::make_shared<CFileResource>("Path"), ImageSize(641u, 480u), history)));
+		BOOST_CHECK(!(CImage(std::make_shared<CFileResource>("Path"), ImageSize(640u, 480u), history) == CImage(std::make_shared<CFileResource>("Path"), ImageSize(640u, 481u), history)));
 	}
 
 BOOST_AUTO_TEST_SUITE_END()

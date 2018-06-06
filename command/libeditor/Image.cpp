@@ -1,15 +1,17 @@
 #include "stdafx.h"
 #include "Image.h"
+#include "ChangeItemCommand.h"
 
-CImage::CImage(IFileResource::Ptr && resource, unsigned width, unsigned height)
+CImage::CImage(IFileResource::Ptr && resource, ImageSize const& size, IHistory& history)
 	: m_resource(resource)
-	, m_size(width, height)
+	, m_size(size)
+	, m_history(history)
 {
 }
 
 void CImage::Resize(unsigned width, unsigned height)
 {
-	m_onResize(m_size, ImageSize(width, height));
+	m_history.Push(std::make_unique<CChangeItemCommand<ImageSize>>(m_size, ImageSize(width, height)));
 }
 
 boost::filesystem::path CImage::GetPath()const
@@ -25,11 +27,6 @@ unsigned CImage::GetWidth()const
 unsigned CImage::GetHeight()const
 {
 	return m_size.height;
-}
-
-void CImage::ConnectOnResize(std::function<void(ImageSize&, ImageSize const&)> callback)
-{
-	m_onResize.connect(callback);
 }
 
 bool CImage::operator==(CImage const& other) const

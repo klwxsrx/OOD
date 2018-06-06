@@ -1,17 +1,15 @@
 #pragma once
-#include "ICommand.h"
+#include "IHistory.h"
 
-class CHistory
+class CHistory : public IHistory
 {
-	typedef std::unique_ptr<ICommand> ICommandPtr;
-
 public:
-	void Push(ICommandPtr && command);
-	void Undo();
-	void Redo();
+	void Push(ICommandPtr && command) override;
+	void Undo() override;
+	void Redo() override;
 
-	bool CanUndo()const;
-	bool CanRedo()const;
+	bool CanUndo()const override;
+	bool CanRedo()const override;
 
 private:
 	std::deque<ICommandPtr> m_commands;

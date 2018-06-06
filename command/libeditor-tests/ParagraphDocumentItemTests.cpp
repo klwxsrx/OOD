@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "../libeditor/ParagraphDocumentItem.h"
 #include "../libeditor/IDocumentExporter.h"
+#include "../libeditor/History.h"
 
 class CTestParagraphExporter : public IDocumentExporter
 {
@@ -17,14 +18,15 @@ public:
 
 struct ParagraphDocumentItemFixture
 {
-	std::shared_ptr<CParagraph> paragraph;
+	CHistory history;
+	std::shared_ptr<IParagraph> paragraph;
 	CParagraphDocumentItem item;
 	CParagraphDocumentItem* itemPtr;
 	CParagraphDocumentItem const* itemConstPtr;
 	ParagraphDocumentItemFixture()
-		: paragraph(std::make_shared<CParagraph>("Some text"))
-		, item(paragraph), itemPtr(&item), itemConstPtr(&item)
+		: item("Some text", history), itemPtr(&item), itemConstPtr(&item)
 	{
+		paragraph = item.GetParagraph();
 	}
 };
 
@@ -32,7 +34,8 @@ BOOST_AUTO_TEST_SUITE(ParagraphDocumentItem)
 	
 	BOOST_AUTO_TEST_CASE(returns_description_of_paragraph)
 	{
-		CParagraphDocumentItem item("Test!");
+		CHistory history;
+		CParagraphDocumentItem item("Test!", history);
 		BOOST_CHECK_EQUAL(item.GetDescription(), "Paragraph: Test!");
 	}
 

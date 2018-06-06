@@ -139,6 +139,7 @@
     <ClInclude Include="IDocumentExporter.h" />
     <ClInclude Include="IDocumentItem.h" />
     <ClInclude Include="IFileResource.h" />
+    <ClInclude Include="IHistory.h" />
     <ClInclude Include="IIMage.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageDocumentItem.h" />

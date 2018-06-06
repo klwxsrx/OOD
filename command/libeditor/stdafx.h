@@ -19,5 +19,3 @@
 #include <boost\bind.hpp>
 #include <list>
 #include <algorithm>
-
-#include <boost/signals2.hpp> // TODO: delete

@@ -33,5 +33,3 @@
 #include <list>
 #include <algorithm>
 #include <boost\regex.hpp>
-
-#include <boost/signals2.hpp> // TODO: delete

@@ -112,6 +112,9 @@
     <ClInclude Include="DocumentHtmlExporter.h">
       <Filter>DocumentExporter</Filter>
     </ClInclude>
+    <ClInclude Include="IHistory.h">
+      <Filter>DocumentHistory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

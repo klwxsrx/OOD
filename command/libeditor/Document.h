@@ -36,8 +36,6 @@ public:
 
 private:
 	IFileResource::Ptr GetCopiedImageResource(boost::filesystem::path source);
-	void OnParagraphChange(std::string& paragraph, std::string const& text);
-	void OnImageResize(ImageSize& image, ImageSize const& newSize);
 	void ValidateInsertPosition(boost::optional<size_t> position) const;
 	void ValidateItemPosition(size_t position) const;
 

@@ -8,3 +8,5 @@ public:
 
 	virtual ~ICommand() = default;
 };
+
+typedef std::unique_ptr<ICommand> ICommandPtr;

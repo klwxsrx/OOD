@@ -2,18 +2,8 @@
 #include "ImageDocumentItem.h"
 
 
-CImageDocumentItem::CImageDocumentItem(IFileResource::Ptr && resource, unsigned width, unsigned height)
-	: m_image(std::make_shared<CImage>(std::move(resource), width, height))
-{
-}
-
-CImageDocumentItem::CImageDocumentItem(std::shared_ptr<CImage> const& image)
-	: m_image(image)
-{
-}
-
-CImageDocumentItem::CImageDocumentItem(std::shared_ptr<CImage> && image)
-	: m_image(image)
+CImageDocumentItem::CImageDocumentItem(IFileResource::Ptr && resource, ImageSize const& imageSize, IHistory& history)
+	: m_image(std::make_shared<CImage>(std::move(resource), imageSize, history))
 {
 }
 

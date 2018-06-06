@@ -3,8 +3,8 @@
 #include "ParagraphDocumentItem.h"
 #include "ImageDocumentItem.h"
 #include "InsertItemCommand.h"
-#include "DeleteItemCommand.h"
 #include "ChangeItemCommand.h"
+#include "DeleteItemCommand.h"
 #include "FileResource.h"
 #include "FileUtils.h"
 #include "DocumentHtmlExporter.h"
@@ -18,12 +18,11 @@ std::shared_ptr<IParagraph> CDocument::InsertParagraph(std::string const & text,
 {
 	ValidateInsertPosition(position);
 
-	std::shared_ptr<CParagraph> paragraph = std::make_shared<CParagraph>(text);
-	paragraph->ConnectOnChange(boost::bind(&CDocument::OnParagraphChange, this, boost::placeholders::_1, boost::placeholders::_2));
+	std::shared_ptr<CParagraphDocumentItem> item = std::make_shared<CParagraphDocumentItem>(text, m_history);
 
-	std::shared_ptr<CParagraphDocumentItem> item = std::make_shared<CParagraphDocumentItem>(std::move(paragraph));
 	std::unique_ptr<CInsertItemCommand<DocumentItemsList>> command = std::make_unique<CInsertItemCommand<DocumentItemsList>>(m_items, item, position);
 	m_history.Push(std::move(command));
+
 	return item->GetParagraph();
 }
 
@@ -32,12 +31,11 @@ std::shared_ptr<IImage> CDocument::InsertImage(boost::filesystem::path const & p
 	ValidateInsertPosition(position);
 
 	IFileResource::Ptr fileResource = GetCopiedImageResource(path);
-	std::shared_ptr<CImage> image = std::make_shared<CImage>(std::move(fileResource), width, height);
-	image->ConnectOnResize(boost::bind(&CDocument::OnImageResize, this, boost::placeholders::_1, boost::placeholders::_2));
+	std::shared_ptr<CImageDocumentItem> item = std::make_shared<CImageDocumentItem>(std::move(fileResource), ImageSize(width, height), m_history);
 
-	std::shared_ptr<CImageDocumentItem> item = std::make_shared<CImageDocumentItem>(std::move(image));
 	std::unique_ptr<CInsertItemCommand<DocumentItemsList>> command = std::make_unique<CInsertItemCommand<DocumentItemsList>>(m_items, item, position);
 	m_history.Push(std::move(command));
+
 	return item->GetImage();
 }
 
@@ -128,16 +126,6 @@ IFileResource::Ptr CDocument::GetCopiedImageResource(boost::filesystem::path sou
 	{
 		throw std::runtime_error("Failed to copy resource file!");
 	}
-}
-
-void CDocument::OnParagraphChange(std::string& paragraph, std::string const& text)
-{
-	m_history.Push(std::make_unique<CChangeItemCommand<std::string>>(paragraph, text));
-}
-
-void CDocument::OnImageResize(ImageSize& image, ImageSize const& newSize)
-{
-	m_history.Push(std::make_unique<CChangeItemCommand<ImageSize>>(image, newSize));
 }
 
 void CDocument::ValidateInsertPosition(boost::optional<size_t> position) const
