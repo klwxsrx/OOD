@@ -14,58 +14,6 @@
    <string>Chart Drawer</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QCustomPlot" name="chartPlot" native="true">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>190</y>
-      <width>480</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QListView" name="itemList">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>235</width>
-      <height>140</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="addButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>155</y>
-      <width>115</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Add new</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="deleteButton">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>155</y>
-      <width>115</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Delete selected</string>
-    </property>
-   </widget>
    <widget class="QGroupBox" name="viewGroupBox">
     <property name="enabled">
      <bool>false</bool>
@@ -214,17 +162,58 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="listWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>235</width>
+      <height>175</height>
+     </rect>
+    </property>
+    <widget class="QListView" name="itemList">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>235</width>
+       <height>140</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addButton">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>145</y>
+       <width>115</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add new</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="deleteButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>145</y>
+       <width>115</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete selected</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>QCustomPlot</class>
-   <extends>QWidget</extends>
-   <header>lib/qcustomplot.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

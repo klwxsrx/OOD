@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::initialize()
 {
-    m_ui->itemList->setModel(m_model.get());
-    m_model->addHarmonicItem(m_builder->build(Trigonometric::Function::SIN, 1.5, 2.0, 3.14));
+    QSharedPointer<CListPresenter> listPresenter = QSharedPointer<CListPresenter>::create(m_model, m_ui->listWidget);
+
+    m_model->addHarmonicItem(m_builder->build(Trigonometric::Function::SIN, 1.5, 2.0, 3.14)); // TODO: delete
 }

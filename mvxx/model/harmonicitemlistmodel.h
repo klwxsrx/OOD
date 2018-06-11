@@ -1,21 +1,19 @@
 #ifndef HARMONICITEMLISTMODEL_H
 #define HARMONICITEMLISTMODEL_H
 
-#include <QAbstractListModel>
 #include <QList>
 #include <QVariant>
-#include <QSharedPointer>
-#include "iharmonicitem.h"
+#include "iharmonicitemlistmodel.h"
 
-class CHarmonicItemListModel final : public QAbstractListModel
+class CHarmonicItemListModel final : public IHarmonicItemListModel
 {
     Q_OBJECT
 public:
     int rowCount(QModelIndex const&) const override;
     QVariant data(QModelIndex const& index, int role) const override;
 
-    void addHarmonicItem(QSharedPointer<IHarmonicItem> const& item);
-    void removeHarmonicItem(int index);
+    void addHarmonicItem(QSharedPointer<IHarmonicItem> const& item) override;
+    void removeHarmonicItem(int index) override;
 
 private:
     QList<QSharedPointer<IHarmonicItem>> m_list;

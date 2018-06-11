@@ -1,7 +1,6 @@
 #ifndef HARMONICBUILDER_H
 #define HARMONICBUILDER_H
 
-#include <QSharedPointer>
 #include "harmonicitem.h"
 #include "iharmonicitembuilder.h"
 

@@ -5,9 +5,10 @@
 #include <QSharedPointer>
 #include "model/harmonicitemlistmodel.h"
 #include "model/harmonicitembuilder.h"
+#include "presenter/listpresenter.h"
 
 namespace Ui {
-class MainWindow;
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
