@@ -15,7 +15,7 @@ public:
     QVariant data(QModelIndex const& index, int role) const override;
 
     void addHarmonicItem(QSharedPointer<IHarmonicItem> const& item);
-    void removeHarmonicItem(size_t index);
+    void removeHarmonicItem(int index);
 
 private:
     QList<QSharedPointer<IHarmonicItem>> m_list;

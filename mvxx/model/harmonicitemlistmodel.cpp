@@ -29,7 +29,7 @@ void CHarmonicItemListModel::addHarmonicItem(QSharedPointer<IHarmonicItem> const
     emit layoutChanged();
 }
 
-void CHarmonicItemListModel::removeHarmonicItem(size_t index)
+void CHarmonicItemListModel::removeHarmonicItem(int index)
 {
     emit layoutAboutToBeChanged();
     m_list.removeAt(index);
