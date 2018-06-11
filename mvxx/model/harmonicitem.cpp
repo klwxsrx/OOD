@@ -5,27 +5,27 @@ CHarmonicItem::CHarmonicItem(Trigonometric::Function func, double ampl, double f
 {
 }
 
-Trigonometric::Function CHarmonicItem::GetFunction() const
+Trigonometric::Function CHarmonicItem::getFunction() const
 {
     return m_function;
 }
 
-double CHarmonicItem::GetAmplitude() const
+double CHarmonicItem::getAmplitude() const
 {
     return m_amplitude;
 }
 
-double CHarmonicItem::GetFrequency() const
+double CHarmonicItem::getFrequency() const
 {
     return m_frequency;
 }
 
-double CHarmonicItem::GetPhase() const
+double CHarmonicItem::getPhase() const
 {
     return m_phase;
 }
 
-QString CHarmonicItem::ToString() const
+QString CHarmonicItem::toString() const
 {
-    return Trigonometric::HarmonicToString(m_function, m_amplitude, m_frequency, m_phase);
+    return Trigonometric::harmonicToString(m_function, m_amplitude, m_frequency, m_phase);
 }

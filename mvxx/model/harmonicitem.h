@@ -9,11 +9,11 @@ class CHarmonicItem final : public IHarmonicItem
 public:
     CHarmonicItem(Trigonometric::Function func, double ampl, double freq, double phase);
 
-    virtual Trigonometric::Function GetFunction() const override;
-    virtual double GetAmplitude() const override;
-    virtual double GetFrequency() const override;
-    virtual double GetPhase() const override;
-    virtual QString ToString() const override;
+    virtual Trigonometric::Function getFunction() const override;
+    virtual double getAmplitude() const override;
+    virtual double getFrequency() const override;
+    virtual double getPhase() const override;
+    virtual QString toString() const override;
 
 private:
     Trigonometric::Function m_function;

@@ -1,6 +1,6 @@
 #include "trigonometric.h"
 
-QString Trigonometric::FunctionToString(Function func)
+QString Trigonometric::functionToString(Function func)
 {
     switch (func) {
     case Function::SIN:
@@ -12,10 +12,10 @@ QString Trigonometric::FunctionToString(Function func)
     }
 }
 
-QString Trigonometric::HarmonicToString(Function func, double ampl, double freq, double phase)
+QString Trigonometric::harmonicToString(Function func, double ampl, double freq, double phase)
 {
     return QString::number(ampl) + " * " +
-        FunctionToString(func) + "(" +
+        functionToString(func) + "(" +
         QString::number(freq) + " * x + " +
         QString::number(phase) + ")";
 }

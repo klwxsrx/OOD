@@ -16,7 +16,7 @@ QVariant CHarmonicItemListModel::data(QModelIndex const& index, int role) const
     {
         case Qt::DisplayRole:
         case Qt::EditRole:
-            return m_list.at(index.row())->ToString();
+            return m_list.at(index.row())->toString();
     default:
         return QVariant();
     }

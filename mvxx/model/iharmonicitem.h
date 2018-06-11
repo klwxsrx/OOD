@@ -6,11 +6,11 @@
 class IHarmonicItem
 {
 public:
-    virtual Trigonometric::Function GetFunction() const = 0;
-    virtual double GetAmplitude() const = 0;
-    virtual double GetFrequency() const = 0;
-    virtual double GetPhase() const = 0;
-    virtual QString ToString() const = 0;
+    virtual Trigonometric::Function getFunction() const = 0;
+    virtual double getAmplitude() const = 0;
+    virtual double getFrequency() const = 0;
+    virtual double getPhase() const = 0;
+    virtual QString toString() const = 0;
 
     virtual ~IHarmonicItem() = default;
 };

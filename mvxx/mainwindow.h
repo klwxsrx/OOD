@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSharedPointer>
+#include "model/harmonicitemlistmodel.h"
+#include "model/harmonicitembuilder.h"
 
 namespace Ui {
 class MainWindow;
@@ -13,10 +16,14 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    ~MainWindow() = default;
+
+    void initialize();
 
 private:
-    Ui::MainWindow *ui;
+    QSharedPointer<Ui::MainWindow> m_ui;
+    QSharedPointer<CHarmonicItemListModel> m_model;
+    QSharedPointer<CHarmonicItemBuilder> m_builder;
 };
 
 #endif // MAINWINDOW_H
