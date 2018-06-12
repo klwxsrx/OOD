@@ -31,7 +31,8 @@ SOURCES += \
     model/harmonicitemlistmodel.cpp \
     utils/trigonometric.cpp \
     model/harmonicitembuilder.cpp \
-    presenter/listpresenter.cpp
+    view/listview.cpp \
+    view/editharmonicview.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,8 +43,9 @@ HEADERS += \
     model/harmonicitemlistmodel.h \
     model/harmonicitembuilder.h \
     model/iharmonicitembuilder.h \
-    presenter/listpresenter.h \
-    model/iharmonicitemlistmodel.h
+    model/iharmonicitemlistmodel.h \
+    view/listview.h \
+    view/editharmonicview.h
 
 FORMS += \
         mainwindow.ui \

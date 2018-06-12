@@ -11,6 +11,7 @@ class IHarmonicItemListModel : public QAbstractListModel
 public:
     virtual void addHarmonicItem(QSharedPointer<IHarmonicItem> const& item) = 0;
     virtual void removeHarmonicItem(int index) = 0;
+    virtual bool empty() const = 0;
 
     virtual ~IHarmonicItemListModel() = default;
 };

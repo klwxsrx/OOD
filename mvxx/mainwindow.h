@@ -5,7 +5,8 @@
 #include <QSharedPointer>
 #include "model/harmonicitemlistmodel.h"
 #include "model/harmonicitembuilder.h"
-#include "presenter/listpresenter.h"
+#include "view/listview.h"
+#include "view/editharmonicview.h"
 
 namespace Ui {
     class MainWindow;
@@ -21,10 +22,15 @@ public:
 
     void initialize();
 
+private slots:
+    void onListDeleteButtonClicked(QModelIndex const& index);
+
 private:
     QSharedPointer<Ui::MainWindow> m_ui;
     QSharedPointer<CHarmonicItemListModel> m_model;
     QSharedPointer<CHarmonicItemBuilder> m_builder;
+    QSharedPointer<CListView> m_listView;
+    QSharedPointer<CEditHarmonicView> m_editHarmonicView;
 };
 
 #endif // MAINWINDOW_H

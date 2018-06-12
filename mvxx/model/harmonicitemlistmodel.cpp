@@ -35,3 +35,8 @@ void CHarmonicItemListModel::removeHarmonicItem(int index)
     m_list.removeAt(index);
     emit layoutChanged();
 }
+
+bool CHarmonicItemListModel::empty() const
+{
+    return m_list.empty();
+}

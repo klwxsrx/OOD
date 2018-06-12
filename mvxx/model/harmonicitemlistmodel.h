@@ -14,6 +14,7 @@ public:
 
     void addHarmonicItem(QSharedPointer<IHarmonicItem> const& item) override;
     void removeHarmonicItem(int index) override;
+    bool empty() const override;
 
 private:
     QList<QSharedPointer<IHarmonicItem>> m_list;

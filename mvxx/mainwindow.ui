@@ -132,7 +132,7 @@
       <string>Phase:</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="frequencyField_2">
+    <widget class="QLineEdit" name="phaseField">
      <property name="enabled">
       <bool>false</bool>
      </property>

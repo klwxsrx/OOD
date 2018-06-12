@@ -13,7 +13,20 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::initialize()
 {
-    QSharedPointer<CListPresenter> listPresenter = QSharedPointer<CListPresenter>::create(m_model, m_ui->listWidget);
+    m_listView = QSharedPointer<CListView>::create(m_model, m_ui->listWidget);
+    CListView::connect(m_listView.get(), SIGNAL(deleteButtonClicked(QModelIndex)), this, SLOT(onListDeleteButtonClicked(QModelIndex)));
+
+    m_editHarmonicView = QSharedPointer<CEditHarmonicView>::create(m_model, m_ui->viewGroupBox);
+    CListView::connect(m_listView.get(), SIGNAL(itemChanged(QModelIndex)), m_editHarmonicView.get(), SLOT(onItemChanged(QModelIndex)));
 
     m_model->addHarmonicItem(m_builder->build(Trigonometric::Function::SIN, 1.5, 2.0, 3.14)); // TODO: delete
+    m_model->addHarmonicItem(m_builder->build(Trigonometric::Function::SIN, 1.34, 5.25, 0)); // TODO: delete
+}
+
+void MainWindow::onListDeleteButtonClicked(QModelIndex const& index)
+{
+    if (index.isValid())
+    {
+        m_model->removeHarmonicItem(index.row());
+    }
 }
