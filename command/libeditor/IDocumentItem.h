@@ -18,7 +18,7 @@ public:
 	virtual std::shared_ptr<const IParagraph> GetParagraph()const = 0;
 
 	virtual std::string GetDescription()const = 0;
-	virtual void AcceptExporter(std::shared_ptr<IDocumentExporter>& exporter)const = 0;
+	virtual void AcceptExporter(IDocumentExporter* exporter)const = 0;
 
 	virtual ~IDocumentItem() = default;
 };

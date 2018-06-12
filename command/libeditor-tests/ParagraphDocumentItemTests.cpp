@@ -53,11 +53,10 @@ BOOST_AUTO_TEST_SUITE(ParagraphDocumentItem)
 
 	BOOST_FIXTURE_TEST_CASE(returns_paragraph_to_exporter, ParagraphDocumentItemFixture)
 	{
-		std::shared_ptr<IDocumentExporter> exporter = std::make_unique<CTestParagraphExporter>();
-		item.AcceptExporter(exporter);
+		std::unique_ptr<CTestParagraphExporter> exporter = std::make_unique<CTestParagraphExporter>();
+		item.AcceptExporter(exporter.get());
 
-		CTestParagraphExporter* testExporterPtr = static_cast<CTestParagraphExporter*>(exporter.get());
-		BOOST_CHECK(testExporterPtr->m_paragraph == paragraph);
+		BOOST_CHECK(exporter->m_paragraph == paragraph);
 	}
 
 BOOST_AUTO_TEST_SUITE_END()

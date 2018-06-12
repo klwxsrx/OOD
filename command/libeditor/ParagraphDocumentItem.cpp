@@ -22,7 +22,7 @@ std::shared_ptr<const IParagraph> CParagraphDocumentItem::GetParagraph() const
 	return m_paragraph;
 }
 
-void CParagraphDocumentItem::AcceptExporter(std::shared_ptr<IDocumentExporter>& exporter) const
+void CParagraphDocumentItem::AcceptExporter(IDocumentExporter* exporter) const
 {
 	exporter->AddParagraph(m_paragraph);
 }

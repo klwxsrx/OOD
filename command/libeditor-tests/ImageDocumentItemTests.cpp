@@ -53,11 +53,10 @@ BOOST_AUTO_TEST_SUITE(ImageDocumentItem)
 
 	BOOST_FIXTURE_TEST_CASE(returns_image_to_exporter, ImageDocumentItemFixture)
 	{
-		std::shared_ptr<IDocumentExporter> exporter = std::make_unique<CTestImageExporter>();
-		item.AcceptExporter(exporter);
+		std::unique_ptr<CTestImageExporter> exporter = std::make_unique<CTestImageExporter>();
+		item.AcceptExporter(exporter.get());
 
-		CTestImageExporter* testExporterPtr = static_cast<CTestImageExporter*>(exporter.get());
-		BOOST_CHECK(testExporterPtr->m_image == image);
+		BOOST_CHECK(exporter->m_image == image);
 	}
 
 BOOST_AUTO_TEST_SUITE_END()

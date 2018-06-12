@@ -153,6 +153,8 @@
     <ClCompile Include="ImageDocumentItem.cpp">
       <Filter>Document\DocumentItem</Filter>
     </ClCompile>
-    <ClCompile Include="DocumentHtmlExporter.cpp" />
+    <ClCompile Include="DocumentHtmlExporter.cpp">
+      <Filter>DocumentExporter</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

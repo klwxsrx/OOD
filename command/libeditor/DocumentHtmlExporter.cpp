@@ -14,6 +14,17 @@ CDocumentHtmlExporter::CDocumentHtmlExporter(CDocument const& document, boost::f
 	WriteDocumentHeader(document);
 }
 
+CDocumentHtmlExporter::~CDocumentHtmlExporter()
+{
+	try
+	{
+		WriteDocumentFooter();
+	}
+	catch (...)
+	{
+	}
+}
+
 void CDocumentHtmlExporter::AddParagraph(std::shared_ptr<IParagraph> const& paragraph)
 {
 	m_resultFile << "<p>" << EncodeString(paragraph->GetText()) << "</p>";
@@ -23,11 +34,6 @@ void CDocumentHtmlExporter::AddImage(std::shared_ptr<IImage> const& image)
 {
 	boost::filesystem::path relativeResourcePath = CopyImageResource(image->GetPath());
 	m_resultFile << (boost::format(R"text(<img src="%1%" alt="" style="width:%2%px;height:%3%px;"></img>)text") % relativeResourcePath.string() % image->GetWidth() % image->GetHeight());
-}
-
-void CDocumentHtmlExporter::Export()
-{
-	m_resultFile << "</body></html>";
 }
 
 void CDocumentHtmlExporter::OpenFileForSave(std::string const& path)
@@ -42,6 +48,14 @@ void CDocumentHtmlExporter::OpenFileForSave(std::string const& path)
 void CDocumentHtmlExporter::WriteDocumentHeader(CDocument const& document)
 {
 	m_resultFile << (boost::format(R"text(<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/><title>%1%</title></head><body><h1>%1%</h1>)text") % EncodeString(document.GetTitle()));
+}
+
+void CDocumentHtmlExporter::WriteDocumentFooter()
+{
+	if (m_resultFile.good())
+	{
+		m_resultFile << "</body></html>";
+	}
 }
 
 std::string CDocumentHtmlExporter::EncodeString(std::string const& str)

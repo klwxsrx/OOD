@@ -106,12 +106,10 @@ void CDocument::Redo()
 
 void CDocument::Save(boost::filesystem::path const & path) const
 {
-	std::shared_ptr<CDocumentHtmlExporter> htmlExporter = std::make_unique<CDocumentHtmlExporter>(*this, path);
-	std::shared_ptr<IDocumentExporter> exporterPtr(htmlExporter);
-	std::for_each(m_items.begin(), m_items.end(), [&exporterPtr] (IDocumentItem::ConstPtr const& item) {
-		item->AcceptExporter(exporterPtr);
+	std::unique_ptr<CDocumentHtmlExporter> htmlExporter = std::make_unique<CDocumentHtmlExporter>(*this, path);
+	std::for_each(m_items.begin(), m_items.end(), [&htmlExporter] (IDocumentItem::ConstPtr const& item) {
+		item->AcceptExporter(htmlExporter.get());
 	});
-	htmlExporter->Export();
 }
 
 IFileResource::Ptr CDocument::GetCopiedImageResource(boost::filesystem::path source)
