@@ -1,7 +1,6 @@
 #include "editharmonicview.h"
 
-CEditHarmonicView::CEditHarmonicView(QSharedPointer<IHarmonicItemListModel> const& model, QWidget* editWidget)
-    : m_model(model)
+CEditHarmonicView::CEditHarmonicView(QWidget* editWidget)
 {
     m_groupBox = editWidget;
 

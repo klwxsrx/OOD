@@ -24,8 +24,3 @@ double CHarmonicItem::getPhase() const
 {
     return m_phase;
 }
-
-QString CHarmonicItem::toString() const
-{
-    return Trigonometric::harmonicToString(m_function, m_amplitude, m_frequency, m_phase);
-}

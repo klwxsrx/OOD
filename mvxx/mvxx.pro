@@ -27,25 +27,29 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     lib/qcustomplot.cpp \
-    model/harmonicitem.cpp \
-    model/harmonicitemlistmodel.cpp \
+    model/list/harmonicitem.cpp \
     utils/trigonometric.cpp \
-    model/harmonicitembuilder.cpp \
+    model/list/harmonicitembuilder.cpp \
     view/listview.cpp \
-    view/editharmonicview.cpp
+    view/editharmonicview.cpp \
+    model/list/harmoniclist.cpp \
+    model/harmonicsmodel.cpp \
+    model/harmoniclistviewmodel.cpp \
+    controller/listcontroller.cpp
 
 HEADERS += \
         mainwindow.h \
     lib/qcustomplot.h \
     utils/trigonometric.h \
-    model/iharmonicitem.h \
-    model/harmonicitem.h \
-    model/harmonicitemlistmodel.h \
-    model/harmonicitembuilder.h \
-    model/iharmonicitembuilder.h \
-    model/iharmonicitemlistmodel.h \
+    model/list/harmonicitem.h \
+    model/list/harmonicitembuilder.h \
     view/listview.h \
-    view/editharmonicview.h
+    view/editharmonicview.h \
+    model/harmoniclistviewmodel.h \
+    model/list/harmoniclist.h \
+    model/harmonicsmodel.h \
+    model/iharmonicsmodel.h \
+    controller/listcontroller.h
 
 FORMS += \
         mainwindow.ui \

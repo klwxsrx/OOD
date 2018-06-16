@@ -4,29 +4,20 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , m_ui(QSharedPointer<Ui::MainWindow>::create())
-    , m_model(QSharedPointer<CHarmonicItemListModel>::create())
-    , m_builder(QSharedPointer<CHarmonicItemBuilder>::create())
+    , m_model(QSharedPointer<CHarmonicsModel>::create(QSharedPointer<CHarmonicList>::create()))
 {
     m_ui->setupUi(this);
-    initialize();
+    initListView();
 }
 
-void MainWindow::initialize()
+void MainWindow::initListView()
 {
-    m_listView = QSharedPointer<CListView>::create(m_model, m_ui->listWidget);
-    CListView::connect(m_listView.get(), SIGNAL(deleteButtonClicked(QModelIndex)), this, SLOT(onListDeleteButtonClicked(QModelIndex)));
+    auto viewModel = QSharedPointer<CHarmonicListViewModel>::create(m_model);
+    auto view = QSharedPointer<CListView>::create(viewModel, m_ui->listWidget);
 
-    m_editHarmonicView = QSharedPointer<CEditHarmonicView>::create(m_model, m_ui->viewGroupBox);
-    CListView::connect(m_listView.get(), SIGNAL(itemChanged(QModelIndex)), m_editHarmonicView.get(), SLOT(onItemChanged(QModelIndex)));
+    m_listController = QSharedPointer<CListController>::create(view, m_model);
 
-    m_model->addHarmonicItem(m_builder->build(Trigonometric::Function::SIN, 1.5, 2.0, 3.14)); // TODO: delete
-    m_model->addHarmonicItem(m_builder->build(Trigonometric::Function::SIN, 1.34, 5.25, 0)); // TODO: delete
-}
-
-void MainWindow::onListDeleteButtonClicked(QModelIndex const& index)
-{
-    if (index.isValid())
-    {
-        m_model->removeHarmonicItem(index.row());
-    }
+    m_model->addHarmonicItem(Trigonometric::Function::SIN, 1.3, 3.14, 2.12); // TODO: delete
+    m_model->addHarmonicItem(Trigonometric::Function::COS, 2.3, 4.32, 5.0);
+    m_model->addHarmonicItem(Trigonometric::Function::COS, 3.14, 5.67, 9.62);
 }

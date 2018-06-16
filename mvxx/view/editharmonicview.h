@@ -4,13 +4,13 @@
 #include <QLineEdit>
 #include <QRadioButton>
 #include <QLabel>
-#include "model/iharmonicitemlistmodel.h"
+#include <QModelIndex> // TODO: delete
 
 class CEditHarmonicView : public QObject
 {
     Q_OBJECT
 public:
-    CEditHarmonicView(QSharedPointer<IHarmonicItemListModel> const& model, QWidget* editWidget);
+    CEditHarmonicView(QWidget* editWidget);
 
 public slots:
     void onItemChanged(QModelIndex const& index);
@@ -18,7 +18,6 @@ public slots:
 private:
     void updateEnabledState(bool enable);
 
-    QSharedPointer<IHarmonicItemListModel> m_model;
     QWidget* m_groupBox;
     QLineEdit* m_amplitudeField;
     QRadioButton* m_sinRadio;
