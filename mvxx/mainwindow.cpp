@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->setupUi(this);
     initListView();
     initEditItemView();
+    initHarmonicPlotView();
 }
 
 void MainWindow::initListView()
@@ -29,4 +30,10 @@ void MainWindow::initEditItemView()
     auto view = QSharedPointer<CEditHarmonicView>::create(viewModel, m_ui->editWidget);
 
     m_editController = QSharedPointer<CEditHarmonicController>::create(view, viewModel);
+}
+
+void MainWindow::initHarmonicPlotView()
+{
+    auto viewModel = QSharedPointer<CHarmonicFunctionViewModel>::create(m_model);
+    m_plotView = QSharedPointer<CHarmonicPlotView>::create(viewModel, m_ui->plotWidget);
 }

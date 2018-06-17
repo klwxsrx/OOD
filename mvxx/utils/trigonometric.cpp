@@ -19,3 +19,14 @@ QString Trigonometric::harmonicToString(Function func, double ampl, double freq,
         QString::number(freq) + " * x + " +
         QString::number(phase) + ")";
 }
+
+Trigonometric::CalculateFunction Trigonometric::getCalculateFunction(Function func, double ampl, double freq, double phase)
+{
+    const CalculateFunction trigonometricFunction = (func == Trigonometric::Function::SIN)
+            ? qAsin
+            : qAcos;
+
+    return [&](double x) {
+        return (ampl * trigonometricFunction(freq * x + phase));
+    };
+}

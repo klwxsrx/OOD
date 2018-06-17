@@ -37,7 +37,9 @@ SOURCES += \
     model/harmoniclistviewmodel.cpp \
     controller/listcontroller.cpp \
     model/editharmonicviewmodel.cpp \
-    controller/editharmoniccontroller.cpp
+    controller/editharmoniccontroller.cpp \
+    view/harmonicplotview.cpp \
+    model/harmonicfunctionviewmodel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -54,7 +56,9 @@ HEADERS += \
     controller/listcontroller.h \
     model/editharmonicviewmodel.h \
     model/iharmonicviewmodel.h \
-    controller/editharmoniccontroller.h
+    controller/editharmoniccontroller.h \
+    view/harmonicplotview.h \
+    model/harmonicfunctionviewmodel.h
 
 FORMS += \
         mainwindow.ui \

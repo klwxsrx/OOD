@@ -10,6 +10,8 @@
 #include "model/editharmonicviewmodel.h"
 #include "view/editharmonicview.h"
 #include "controller/editharmoniccontroller.h"
+#include "model/harmonicfunctionviewmodel.h"
+#include "view/harmonicplotview.h"
 
 namespace Ui {
     class MainWindow;
@@ -25,11 +27,13 @@ public:
 private:
     void initListView();
     void initEditItemView();
+    void initHarmonicPlotView();
 
     QSharedPointer<Ui::MainWindow> m_ui;
     QSharedPointer<IHarmonicsModel> m_model;
     QSharedPointer<CListController> m_listController;
     QSharedPointer<CEditHarmonicController> m_editController;
+    QSharedPointer<CHarmonicPlotView> m_plotView;
 };
 
 #endif // MAINWINDOW_H
