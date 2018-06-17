@@ -15,11 +15,11 @@ private:
     QSharedPointer<IHarmonicViewModel> m_model;
 
 private slots:
-    void onAmplitudeChanged(QString);
+    void onAmplitudeChanged(double);
     void onSinRadioSelected();
     void onCosRadioSelected();
-    void onFrequencyChanged(QString);
-    void onPhaseChanged(QString);
+    void onFrequencyChanged(double);
+    void onPhaseChanged(double);
 };
 
 #endif // EDITHARMONICCONTROLLER_H

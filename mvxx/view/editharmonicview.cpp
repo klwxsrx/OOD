@@ -8,23 +8,23 @@ CEditHarmonicView::CEditHarmonicView(QSharedPointer<IHarmonicViewModel> const& m
 
     m_amplitudeField = m_groupBox->findChild<QLineEdit*>("amplitudeField");
     Q_ASSERT(m_amplitudeField);
-    m_amplitudeField->connect(m_amplitudeField, SIGNAL(textEdited(QString)), this, SIGNAL(onAmplitudeChanged(QString)));
+    m_amplitudeField->connect(m_amplitudeField, SIGNAL(editingFinished()), this, SLOT(onAmplitudeChanged()));
 
     m_cosRadio = m_groupBox->findChild<QRadioButton*>("cosRadio");
     Q_ASSERT(m_cosRadio);
-    m_cosRadio->connect(m_cosRadio, SIGNAL(released()), this, SIGNAL(onCosRadioSelected()));
+    m_cosRadio->connect(m_cosRadio, SIGNAL(released()), this, SIGNAL(cosRadioSelected()));
 
     m_sinRadio = m_groupBox->findChild<QRadioButton*>("sinRadio");
     Q_ASSERT(m_sinRadio);
-    m_sinRadio->connect(m_sinRadio, SIGNAL(released()), this, SIGNAL(onSinRadioSelected()));
+    m_sinRadio->connect(m_sinRadio, SIGNAL(released()), this, SIGNAL(sinRadioSelected()));
 
     m_frequencyField = m_groupBox->findChild<QLineEdit*>("frequencyField");
     Q_ASSERT(m_frequencyField);
-    m_frequencyField->connect(m_frequencyField, SIGNAL(textEdited(QString)), this, SIGNAL(onFrequencyChanged(QString)));
+    m_frequencyField->connect(m_frequencyField, SIGNAL(editingFinished()), this, SLOT(onFrequencyChanged()));
 
     m_phaseField = m_groupBox->findChild<QLineEdit*>("phaseField");
     Q_ASSERT(m_phaseField);
-    m_phaseField->connect(m_phaseField, SIGNAL(textEdited(QString)), this, SIGNAL(onPhaseChanged(QString)));
+    m_phaseField->connect(m_phaseField, SIGNAL(editingFinished()), this, SLOT(onPhaseChanged()));
 
     m_resultLabel = m_groupBox->findChild<QLabel*>("resultLabel");
     Q_ASSERT(m_resultLabel);
@@ -67,4 +67,19 @@ void CEditHarmonicView::updateEnabledState(bool enable)
         m_frequencyField->clear();
         m_phaseField->clear();
     }
+}
+
+void CEditHarmonicView::onAmplitudeChanged()
+{
+    emit amplitudeChanged(m_amplitudeField->text().toDouble());
+}
+
+void CEditHarmonicView::onFrequencyChanged()
+{
+    emit frequencyChanged(m_frequencyField->text().toDouble());
+}
+
+void CEditHarmonicView::onPhaseChanged()
+{
+    emit phaseChanged(m_phaseField->text().toDouble());
 }

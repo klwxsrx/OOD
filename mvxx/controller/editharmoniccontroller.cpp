@@ -4,16 +4,16 @@ CEditHarmonicController::CEditHarmonicController(QSharedPointer<CEditHarmonicVie
     : m_view(view)
     , m_model(model)
 {
-    m_view->connect(m_view.get(), SIGNAL(onAmplitudeChanged(QString)), this, SLOT(onAmplitudeChanged(QString)));
-    m_view->connect(m_view.get(), SIGNAL(onSinRadioSelected()), this, SLOT(onSinRadioSelected()));
-    m_view->connect(m_view.get(), SIGNAL(onCosRadioSelected()), this, SLOT(onCosRadioSelected()));
-    m_view->connect(m_view.get(), SIGNAL(onFrequencyChanged(QString)), this, SLOT(onFrequencyChanged(QString)));
-    m_view->connect(m_view.get(), SIGNAL(onPhaseChanged(QString)), this, SLOT(onPhaseChanged(QString)));
+    m_view->connect(m_view.get(), SIGNAL(amplitudeChanged(double)), this, SLOT(onAmplitudeChanged(double)));
+    m_view->connect(m_view.get(), SIGNAL(sinRadioSelected()), this, SLOT(onSinRadioSelected()));
+    m_view->connect(m_view.get(), SIGNAL(cosRadioSelected()), this, SLOT(onCosRadioSelected()));
+    m_view->connect(m_view.get(), SIGNAL(frequencyChanged(double)), this, SLOT(onFrequencyChanged(double)));
+    m_view->connect(m_view.get(), SIGNAL(phaseChanged(double)), this, SLOT(onPhaseChanged(double)));
 }
 
-void CEditHarmonicController::onAmplitudeChanged(QString string)
+void CEditHarmonicController::onAmplitudeChanged(double value)
 {
-    m_model->SetAmplitude(string.toDouble());
+    m_model->SetAmplitude(value);
 }
 
 void CEditHarmonicController::onSinRadioSelected()
@@ -26,12 +26,12 @@ void CEditHarmonicController::onCosRadioSelected()
     m_model->SetFunction(Trigonometric::Function::COS);
 }
 
-void CEditHarmonicController::onFrequencyChanged(QString string)
+void CEditHarmonicController::onFrequencyChanged(double value)
 {
-    m_model->SetFrequency(string.toDouble());
+    m_model->SetFrequency(value);
 }
 
-void CEditHarmonicController::onPhaseChanged(QString string)
+void CEditHarmonicController::onPhaseChanged(double value)
 {
-m_model->SetPhase(string.toDouble());
+m_model->SetPhase(value);
 }

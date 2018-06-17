@@ -23,7 +23,7 @@ void CListView::initialize()
     QListView::connect(m_list, SIGNAL(pressed(QModelIndex)), this, SLOT(onItemPressed(QModelIndex)));
     QListView::connect(m_list, SIGNAL(activated(QModelIndex)), this, SLOT(onItemPressed(QModelIndex)));
     QPushButton::connect(m_deleteButton, SIGNAL(released()), this, SIGNAL(deleteButtonClicked()));
-    QPushButton::connect(m_addButton, SIGNAL(released()), this, SIGNAL(addButtonCLicked()));
+    QPushButton::connect(m_addButton, SIGNAL(released()), this, SIGNAL(addButtonClicked()));
 }
 
 void CListView::onItemPressed(QModelIndex const& index)

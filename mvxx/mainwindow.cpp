@@ -16,7 +16,7 @@ void MainWindow::initListView()
     auto viewModel = QSharedPointer<CHarmonicListViewModel>::create(m_model);
     auto view = QSharedPointer<CListView>::create(viewModel, m_ui->listWidget);
 
-    m_listController = QSharedPointer<CListController>::create(view, m_model); // TODO: viewModel
+    m_listController = QSharedPointer<CListController>::create(view, viewModel);
 
     m_model->addHarmonicItem(Trigonometric::Function::SIN, 1.3, 3.14, 2.12); // TODO: delete
     m_model->addHarmonicItem(Trigonometric::Function::COS, 2.3, 4.32, 5.0);

@@ -6,6 +6,26 @@ CHarmonicListViewModel::CHarmonicListViewModel(QSharedPointer<IHarmonicsModel> c
     m_model->connect(m_model.get(), SIGNAL(dataUpdated()), this, SLOT(onModelDataChanged()));
 }
 
+void CHarmonicListViewModel::setCurrentItemIndex(QVariant index)
+{
+    m_model->setCurrentItemIndex(index);
+}
+
+void CHarmonicListViewModel::addHarmonicItem(Trigonometric::Function func, double ampl, double freq, double phase)
+{
+    m_model->addHarmonicItem(func, ampl, freq, phase);
+}
+
+void CHarmonicListViewModel::removeHarmonicItem(int index)
+{
+    m_model->removeHarmonicItem(index);
+}
+
+QVariant CHarmonicListViewModel::getCurrentItemIndex() const
+{
+    return m_model->getCurrentItemIndex();
+}
+
 int CHarmonicListViewModel::rowCount(QModelIndex const&) const
 {
     return m_model->getSize();
@@ -36,6 +56,5 @@ QVariant CHarmonicListViewModel::data(QModelIndex const& index, int role) const
 
 void CHarmonicListViewModel::onModelDataChanged()
 {
-    emit layoutAboutToBeChanged(); // TODO: delete if not needed
     emit layoutChanged();
 }

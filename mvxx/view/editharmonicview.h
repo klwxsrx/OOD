@@ -28,12 +28,17 @@ private:
     QLineEdit* m_phaseField;
     QLabel* m_resultLabel;
 
+private slots:
+    void onAmplitudeChanged();
+    void onFrequencyChanged();
+    void onPhaseChanged();
+
 signals:
-    void onAmplitudeChanged(QString);
-    void onSinRadioSelected();
-    void onCosRadioSelected();
-    void onFrequencyChanged(QString);
-    void onPhaseChanged(QString);
+    void amplitudeChanged(double);
+    void sinRadioSelected();
+    void cosRadioSelected();
+    void frequencyChanged(double);
+    void phaseChanged(double);
 };
 
 #endif // EDITHARMONICVIEW_H

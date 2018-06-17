@@ -3,21 +3,21 @@
 
 #include <QSharedPointer>
 #include "view/listview.h"
-#include "model/iharmonicsmodel.h"
+#include "model/harmoniclistviewmodel.h"
 
 class CListController : public QObject
 {
     Q_OBJECT
 public:
-    CListController(QSharedPointer<CListView> const& listView, QSharedPointer<IHarmonicsModel> const& model);
+    CListController(QSharedPointer<CListView> const& listView, QSharedPointer<CHarmonicListViewModel> const& model);
 
 private:
     QSharedPointer<CListView> m_view;
-    QSharedPointer<IHarmonicsModel> m_model;
+    QSharedPointer<CHarmonicListViewModel> m_model;
 
 private slots:
-    void addButtonClicked();
-    void deleteButtonClicked();
+    void onAddButtonClicked();
+    void onDeleteButtonClicked();
     void onItemChange(QModelIndex const& index);
 };
 

@@ -12,10 +12,6 @@ class CListView final : public QObject
 public:
     CListView(QSharedPointer<QAbstractListModel> const& model, QWidget* listWidget);
 
-private slots:
-    void onItemPressed(QModelIndex const& index);
-    void onDataChanged();
-
 private:
     void initialize();
 
@@ -24,9 +20,13 @@ private:
     QPushButton* m_addButton;
     QPushButton* m_deleteButton;
 
+private slots:
+    void onItemPressed(QModelIndex const& index);
+    void onDataChanged();
+
 signals:
     void itemPressed(QModelIndex const& index);
-    void addButtonCLicked();
+    void addButtonClicked();
     void deleteButtonClicked();
 };
 

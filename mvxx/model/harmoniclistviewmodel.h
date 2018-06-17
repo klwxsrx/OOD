@@ -11,6 +11,11 @@ class CHarmonicListViewModel final : public QAbstractListModel
 public:
     CHarmonicListViewModel(QSharedPointer<IHarmonicsModel> const& model);
 
+    void setCurrentItemIndex(QVariant index);
+    void addHarmonicItem(Trigonometric::Function func, double ampl, double freq, double phase);
+    void removeHarmonicItem(int index);
+
+    QVariant getCurrentItemIndex() const;
     int rowCount(QModelIndex const&) const override;
     QVariant data(QModelIndex const& index, int role) const override;
 
