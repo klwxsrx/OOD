@@ -16,10 +16,11 @@ public:
 private:
     void initializePlot();
     void clearPlot();
-    void drawHarmonic(Trigonometric::CalculateFunction const& function);
+    void drawHarmonic(QVector<Trigonometric::CalculateFunction> const& functions);
     void updateYAxisRange(QVector<double> yCoordinates);
 
-    static QPair<QVector<double>, QVector<double>> getHarmonicData(Trigonometric::CalculateFunction const& function);
+    static QPair<QVector<double>, QVector<double>> getHarmonicData(QVector<Trigonometric::CalculateFunction> const& functions);
+    static QVector<double> getXCoordinateRange();
 
     static const QPair<double, double> X_AXIS_RANGE;
     static const double PLOT_POINTS_COUNT;
@@ -28,7 +29,7 @@ private:
     QSharedPointer<CHarmonicFunctionViewModel> m_model;
 
 private slots:
-    void onFunctionUpdated();
+    void onDataUpdated();
 };
 
 #endif // HARMONICPLOTVIEW_H

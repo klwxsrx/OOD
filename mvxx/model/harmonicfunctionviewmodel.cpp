@@ -3,30 +3,28 @@
 CHarmonicFunctionViewModel::CHarmonicFunctionViewModel(QSharedPointer<IHarmonicsModel> const& model)
     : m_model(model)
 {
-    m_model->connect(m_model.get(), SIGNAL(currentItemChanged()), this, SLOT(onCurrentItemChanged()));
+    m_model->connect(m_model.get(), SIGNAL(dataUpdated()), this, SLOT(onItemsChanged()));
 }
 
-Trigonometric::CalculateFunction CHarmonicFunctionViewModel::getFunction() const
+QVector<Trigonometric::CalculateFunction> CHarmonicFunctionViewModel::getFunctions() const
 {
-    return m_function;
+    return m_functions;
 }
 
-void CHarmonicFunctionViewModel::onCurrentItemChanged()
+void CHarmonicFunctionViewModel::onItemsChanged()
 {
-    QVariant index = m_model->getCurrentItemIndex();
-    if (index.isValid())
+    m_functions = QVector<Trigonometric::CalculateFunction>();
+    int size = m_model->getSize();
+    for (int index = 0; index < size; ++index)
     {
-        QSharedPointer<const CHarmonicItem> item = m_model->getHarmonicItem(index.toInt());
-        m_function = Trigonometric::getCalculateFunction(
+        QSharedPointer<const CHarmonicItem> item = m_model->getHarmonicItem(index);
+        auto function = Trigonometric::getCalculateFunction(
             item->getFunction(),
             item->getAmplitude(),
             item->getFrequency(),
             item->getPhase()
         );
+        m_functions.push_back(std::move(function));
     }
-    else
-    {
-        m_function = Trigonometric::CalculateFunction();
-    }
-    emit functionUpdated();
+    emit dataUpdated();
 }

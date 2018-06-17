@@ -2,6 +2,7 @@
 #define HARMONICFUNCTIONVIEWMODEL_H
 
 #include <QObject>
+#include <QVector>
 #include "iharmonicsmodel.h"
 
 class CHarmonicFunctionViewModel : public QObject
@@ -10,17 +11,17 @@ class CHarmonicFunctionViewModel : public QObject
 public:
     CHarmonicFunctionViewModel(QSharedPointer<IHarmonicsModel> const& model);
 
-    Trigonometric::CalculateFunction getFunction() const;
+    QVector<Trigonometric::CalculateFunction> getFunctions() const;
 
 private:
     QSharedPointer<IHarmonicsModel> m_model;
-    Trigonometric::CalculateFunction m_function;
+    QVector<Trigonometric::CalculateFunction> m_functions;
 
 private slots:
-    void onCurrentItemChanged();
+    void onItemsChanged();
 
 signals:
-    void functionUpdated();
+    void dataUpdated();
 };
 
 #endif // HARMONICFUNCTIONVIEWMODEL_H

@@ -10,7 +10,7 @@ CHarmonicPlotView::CHarmonicPlotView(QSharedPointer<CHarmonicFunctionViewModel> 
     Q_ASSERT(m_plot);
 
     initializePlot();
-    m_model->connect(m_model.get(), SIGNAL(functionUpdated()), this, SLOT(onFunctionUpdated()));
+    m_model->connect(m_model.get(), SIGNAL(dataUpdated()), this, SLOT(onDataUpdated()));
 }
 
 void CHarmonicPlotView::initializePlot()
@@ -28,12 +28,12 @@ void CHarmonicPlotView::clearPlot()
      m_plot->replot();
 }
 
-void CHarmonicPlotView::drawHarmonic(Trigonometric::CalculateFunction const& function)
+void CHarmonicPlotView::drawHarmonic(QVector<Trigonometric::CalculateFunction> const& functions)
 {
     m_plot->addGraph();
     m_plot->graph(0)->setAntialiasedFill(true);
 
-    const auto data = getHarmonicData(function);
+    const auto data = getHarmonicData(functions);
     m_plot->graph(0)->setData(data.first, data.second);
 
     updateYAxisRange(data.second);
@@ -47,29 +47,42 @@ void CHarmonicPlotView::updateYAxisRange(QVector<double> yCoordinates)
     m_plot->yAxis->setRange((*minMaxPair.first), (*minMaxPair.second));
 }
 
-QPair<QVector<double>, QVector<double>> CHarmonicPlotView::getHarmonicData(Trigonometric::CalculateFunction const& function)
+QPair<QVector<double>, QVector<double>> CHarmonicPlotView::getHarmonicData(QVector<Trigonometric::CalculateFunction> const& functions)
+{
+    QVector<double> xCoordinates = getXCoordinateRange();
+    QVector<double> yCoordinates(xCoordinates.size(), 0.0);
+
+    int size = xCoordinates.size();
+    for (int index = 0; index < size; ++index)
+    {
+        std::for_each(functions.begin(), functions.end(), [&](Trigonometric::CalculateFunction const& function){
+            yCoordinates[index] += function(xCoordinates[index]);
+        });
+    }
+
+    return {xCoordinates, yCoordinates};
+}
+
+QVector<double> CHarmonicPlotView::getXCoordinateRange()
 {
     QVector<double> xCoordinates;
-    QVector<double> yCoordinates;
-
     const double step = (X_AXIS_RANGE.second - X_AXIS_RANGE.first) / PLOT_POINTS_COUNT;
     double x = X_AXIS_RANGE.first;
     while (x < X_AXIS_RANGE.second)
     {
         xCoordinates.push_back(x);
-        yCoordinates.push_back(function(x));
         x += step;
     }
-    return {xCoordinates, yCoordinates};
+    return xCoordinates;
 }
 
-void CHarmonicPlotView::onFunctionUpdated()
+void CHarmonicPlotView::onDataUpdated()
 {
     clearPlot();
 
-    Trigonometric::CalculateFunction function = m_model->getFunction();
-    if (function)
+    auto functions = m_model->getFunctions();
+    if (!functions.empty())
     {
-        drawHarmonic(function);
+        drawHarmonic(functions);
     }
 }

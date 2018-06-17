@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     initHarmonicPlotView();
 
     m_model->addHarmonicItem(Trigonometric::Function::SIN, 4.38, 2.25, 1.5);
-    m_model->addHarmonicItem(Trigonometric::Function::COS, 3, -3, 0.3);
+    m_model->addHarmonicItem(Trigonometric::Function::SIN, 3, -3, 0.3);
     m_model->addHarmonicItem(Trigonometric::Function::COS, 1, 1, 5);
 }
 
