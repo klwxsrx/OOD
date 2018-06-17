@@ -1,23 +1,25 @@
 #ifndef EDITHARMONICVIEW_H
 #define EDITHARMONICVIEW_H
 
+#include <QSharedPointer>
 #include <QLineEdit>
 #include <QRadioButton>
 #include <QLabel>
-#include <QModelIndex> // TODO: delete
+#include "model/iharmonicviewmodel.h"
 
-class CEditHarmonicView : public QObject
+class CEditHarmonicView final : public QObject
 {
     Q_OBJECT
 public:
-    CEditHarmonicView(QWidget* editWidget);
+    CEditHarmonicView(QSharedPointer<IHarmonicViewModel> const& model, QWidget* editWidget);
 
 public slots:
-    void onItemChanged(QModelIndex const& index);
+    void onItemChanged();
 
 private:
     void updateEnabledState(bool enable);
 
+    QSharedPointer<IHarmonicViewModel> m_model;
     QWidget* m_groupBox;
     QLineEdit* m_amplitudeField;
     QRadioButton* m_sinRadio;
@@ -25,6 +27,13 @@ private:
     QLineEdit* m_frequencyField;
     QLineEdit* m_phaseField;
     QLabel* m_resultLabel;
+
+signals:
+    void onAmplitudeChanged(QString);
+    void onSinRadioSelected();
+    void onCosRadioSelected();
+    void onFrequencyChanged(QString);
+    void onPhaseChanged(QString);
 };
 
 #endif // EDITHARMONICVIEW_H

@@ -6,7 +6,7 @@
 #include <QPushButton>
 #include <QAbstractListModel>
 
-class CListView : public QObject
+class CListView final : public QObject
 {
     Q_OBJECT
 public:
@@ -25,7 +25,7 @@ private:
     QPushButton* m_deleteButton;
 
 signals:
-    void itemChanged(QModelIndex const& index);
+    void itemPressed(QModelIndex const& index);
     void addButtonCLicked();
     void deleteButtonClicked();
 };

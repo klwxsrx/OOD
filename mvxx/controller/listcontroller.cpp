@@ -6,7 +6,7 @@ CListController::CListController(QSharedPointer<CListView> const& listView, QSha
 {
     m_view->connect(m_view.get(), SIGNAL(addButtonCLicked()), this, SLOT(addButtonClicked()));
     m_view->connect(m_view.get(), SIGNAL(deleteButtonClicked()), this, SLOT(deleteButtonClicked()));
-    m_view->connect(m_view.get(), SIGNAL(itemChanged(QModelIndex)), this, SLOT(onItemChange(QModelIndex)));
+    m_view->connect(m_view.get(), SIGNAL(itemPressed(QModelIndex)), this, SLOT(onItemChange(QModelIndex)));
 }
 
 void CListController::addButtonClicked()
@@ -17,7 +17,7 @@ void CListController::addButtonClicked()
 void CListController::deleteButtonClicked()
 {
     auto currentItemIndex = m_model->getCurrentItemIndex();
-    if (currentItemIndex.isValid() && !currentItemIndex.isNull())
+    if (currentItemIndex.isValid())
     {
         m_model->removeHarmonicItem(currentItemIndex.toInt());
     }
@@ -25,6 +25,6 @@ void CListController::deleteButtonClicked()
 
 void CListController::onItemChange(QModelIndex const& index)
 {
-    QVariant listIndex(index.isValid() ? index.row() : NULL);
+    QVariant listIndex = index.isValid() ? QVariant(index.row()) : QVariant();
     m_model->setCurrentItemIndex(listIndex);
 }

@@ -36,6 +36,6 @@ QVariant CHarmonicListViewModel::data(QModelIndex const& index, int role) const
 
 void CHarmonicListViewModel::onModelDataChanged()
 {
-    // emit layoutAboutToBeChanged(); // TODO: delete if not needed
+    emit layoutAboutToBeChanged(); // TODO: delete if not needed
     emit layoutChanged();
 }

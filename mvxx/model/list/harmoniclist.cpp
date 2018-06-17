@@ -6,6 +6,12 @@ void CHarmonicList::addHarmonicItem(Trigonometric::Function func, double ampl, d
     emit listChanged();
 }
 
+void CHarmonicList::replaceItem(int index, Trigonometric::Function func, double ampl, double freq, double phase)
+{
+    m_list.replace(index, CHarmonicItemBuilder::build(func, ampl, freq, phase));
+    emit listChanged();
+}
+
 void CHarmonicList::removeHarmonicItem(int index)
 {
     m_list.removeAt(index);

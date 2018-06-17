@@ -14,7 +14,7 @@
    <string>Chart Drawer</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGroupBox" name="viewGroupBox">
+   <widget class="QGroupBox" name="editWidget">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -153,7 +153,7 @@
       <rect>
        <x>20</x>
        <y>140</y>
-       <width>47</width>
+       <width>200</width>
        <height>13</height>
       </rect>
      </property>

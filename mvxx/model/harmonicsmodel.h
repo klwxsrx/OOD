@@ -15,6 +15,7 @@ public:
 
     void setCurrentItemIndex(QVariant index) override;
     void addHarmonicItem(Trigonometric::Function func, double ampl, double freq, double phase) override;
+    void replaceHarmonicItem(int index, Trigonometric::Function func, double ampl, double freq, double phase) override;
     void removeHarmonicItem(int index) override;
 
     QVariant getCurrentItemIndex() const;
@@ -28,7 +29,7 @@ private:
 
 signals:
     void dataUpdated();
-    void currentItemIndexChanged();
+    void currentItemChanged();
 };
 
 #endif // HARMONICSMODEL_H

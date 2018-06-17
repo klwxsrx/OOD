@@ -12,6 +12,7 @@ class IHarmonicsModel : public QObject // TODO: delete
 public:
     virtual void setCurrentItemIndex(QVariant index) = 0;
     virtual void addHarmonicItem(Trigonometric::Function func, double ampl, double freq, double phase) = 0;
+    virtual void replaceHarmonicItem(int index, Trigonometric::Function func, double ampl, double freq, double phase) = 0;
     virtual void removeHarmonicItem(int index) = 0;
 
     virtual QVariant getCurrentItemIndex() const = 0;
@@ -23,7 +24,7 @@ public:
 
 signals:
     void dataUpdated();
-    void currentItemIndexChanged();
+    void currentItemChanged();
 };
 
 Q_DECLARE_INTERFACE(IHarmonicsModel, "IHarmonicsModel")

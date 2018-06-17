@@ -4,15 +4,14 @@ CHarmonicsModel::CHarmonicsModel(QSharedPointer<CHarmonicList> const& list)
     : m_list(list)
 {
     m_list->connect(m_list.get(), SIGNAL(listChanged()), this, SIGNAL(dataUpdated()));
-    m_currentSelectedItemIndex.setValue(NULL);
 }
 
 void CHarmonicsModel::setCurrentItemIndex(QVariant index)
 {
-    if (index.isValid() && (m_currentSelectedItemIndex != index) && index.canConvert(QVariant::Int))
+    if (m_currentSelectedItemIndex != index)
     {
         m_currentSelectedItemIndex = index;
-        emit currentItemIndexChanged();
+        emit currentItemChanged();
     }
 }
 
@@ -21,9 +20,26 @@ void CHarmonicsModel::addHarmonicItem(Trigonometric::Function func, double ampl,
     m_list->addHarmonicItem(func, ampl, freq, phase);
 }
 
+void CHarmonicsModel::replaceHarmonicItem(int index, Trigonometric::Function func, double ampl, double freq, double phase)
+{
+    m_list->replaceItem(index, func, ampl, freq, phase);
+    if (m_currentSelectedItemIndex.isValid() && m_currentSelectedItemIndex.toInt() == index)
+    {
+        emit currentItemChanged();
+    }
+}
+
 void CHarmonicsModel::removeHarmonicItem(int index)
 {
     m_list->removeHarmonicItem(index);
+    if (m_currentSelectedItemIndex.isValid() && m_currentSelectedItemIndex.toInt() == index)
+    {
+        if (m_currentSelectedItemIndex.toInt() >= m_list->getSize())
+        {
+            m_currentSelectedItemIndex = QVariant();
+        }
+        emit currentItemChanged();
+    }
 }
 
 QVariant CHarmonicsModel::getCurrentItemIndex() const
