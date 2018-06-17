@@ -22,11 +22,11 @@ QString Trigonometric::harmonicToString(Function func, double ampl, double freq,
 
 Trigonometric::CalculateFunction Trigonometric::getCalculateFunction(Function func, double ampl, double freq, double phase)
 {
-    const CalculateFunction trigonometricFunction = (func == Trigonometric::Function::SIN)
-            ? qAsin
-            : qAcos;
+    Trigonometric::CalculateFunction function = (func == Trigonometric::Function::SIN)
+            ? qSin
+            : qCos;
 
-    return [&](double x) {
-        return (ampl * trigonometricFunction(freq * x + phase));
+    return [ampl, freq, phase, function](double x) {
+        return (ampl * function(freq * x + phase));
     };
 }
