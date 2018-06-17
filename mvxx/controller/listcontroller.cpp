@@ -11,7 +11,9 @@ CListController::CListController(QSharedPointer<CListView> const& listView, QSha
 
 void CListController::onAddButtonClicked()
 {
-    // TODO:
+    QSharedPointer<CInsertHarmonicDialog> dialog = QSharedPointer<CInsertHarmonicDialog>::create();
+    dialog->connect(dialog.get(), SIGNAL(dialogAccepted(Trigonometric::Function,double,double,double)), m_model.get(), SLOT(addHarmonicItem(Trigonometric::Function,double,double,double)));
+    dialog->exec();
 }
 
 void CListController::onDeleteButtonClicked()

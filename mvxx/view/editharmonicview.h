@@ -13,9 +13,6 @@ class CEditHarmonicView final : public QObject
 public:
     CEditHarmonicView(QSharedPointer<IHarmonicViewModel> const& model, QWidget* editWidget);
 
-public slots:
-    void onItemChanged();
-
 private:
     void updateEnabledState(bool enable);
 
@@ -29,6 +26,7 @@ private:
     QLabel* m_resultLabel;
 
 private slots:
+    void onItemChanged();
     void onAmplitudeChanged();
     void onFrequencyChanged();
     void onPhaseChanged();

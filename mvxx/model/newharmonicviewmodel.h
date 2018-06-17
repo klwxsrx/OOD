@@ -10,6 +10,8 @@ class CNewHarmonicViewModel final : public IHarmonicViewModel
     Q_OBJECT
     Q_INTERFACES(IHarmonicViewModel)
 public:
+    CNewHarmonicViewModel();
+
     void setFunction(Trigonometric::Function func) override;
     void setAmplitude(double ampl) override;
     void setFrequency(double freq) override;

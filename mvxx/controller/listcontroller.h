@@ -4,8 +4,9 @@
 #include <QSharedPointer>
 #include "view/listview.h"
 #include "model/harmoniclistviewmodel.h"
+#include "insertdialog.h"
 
-class CListController : public QObject
+class CListController final : public QObject
 {
     Q_OBJECT
 public:

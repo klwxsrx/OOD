@@ -4,7 +4,7 @@
 #include "view/editharmonicview.h"
 #include "model/iharmonicviewmodel.h"
 
-class CEditHarmonicController : public QObject
+class CEditHarmonicController final : public QObject
 {
     Q_OBJECT
 public:

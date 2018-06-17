@@ -5,7 +5,7 @@
 #include <QVector>
 #include "iharmonicsmodel.h"
 
-class CHarmonicFunctionViewModel : public QObject
+class CHarmonicFunctionViewModel final : public QObject
 {
     Q_OBJECT
 public:

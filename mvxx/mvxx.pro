@@ -40,7 +40,8 @@ SOURCES += \
     controller/editharmoniccontroller.cpp \
     view/harmonicplotview.cpp \
     model/harmonicfunctionviewmodel.cpp \
-    model/newharmonicviewmodel.cpp
+    model/newharmonicviewmodel.cpp \
+    insertdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -60,7 +61,8 @@ HEADERS += \
     controller/editharmoniccontroller.h \
     view/harmonicplotview.h \
     model/harmonicfunctionviewmodel.h \
-    model/newharmonicviewmodel.h
+    model/newharmonicviewmodel.h \
+    insertdialog.h
 
 FORMS += \
         mainwindow.ui \

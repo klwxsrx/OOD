@@ -19,6 +19,7 @@ void CListView::initialize()
 {
     m_list->setModel(m_model.get());
     QAbstractListModel::connect(m_model.get(), SIGNAL(layoutChanged(QList<QPersistentModelIndex>,QAbstractItemModel::LayoutChangeHint)), this, SLOT(onDataChanged()));
+    // TODO: fix bug with new inserted item selection
 
     QListView::connect(m_list, SIGNAL(pressed(QModelIndex)), this, SLOT(onItemPressed(QModelIndex)));
     QListView::connect(m_list, SIGNAL(activated(QModelIndex)), this, SLOT(onItemPressed(QModelIndex)));

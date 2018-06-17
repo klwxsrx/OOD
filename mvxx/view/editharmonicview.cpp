@@ -28,6 +28,8 @@ CEditHarmonicView::CEditHarmonicView(QSharedPointer<IHarmonicViewModel> const& m
 
     m_resultLabel = m_groupBox->findChild<QLabel*>("resultLabel");
     Q_ASSERT(m_resultLabel);
+
+    onItemChanged();
 }
 
 void CEditHarmonicView::onItemChanged()

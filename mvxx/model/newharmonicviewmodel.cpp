@@ -1,23 +1,32 @@
 #include "newharmonicviewmodel.h"
 
+CNewHarmonicViewModel::CNewHarmonicViewModel()
+    : m_item(QSharedPointer<CHarmonicItem>::create(Trigonometric::Function::SIN, 0, 0, 0))
+{
+}
+
 void CNewHarmonicViewModel::setFunction(Trigonometric::Function func)
 {
     m_item->setFunction(func);
+    emit harmonicUpdated();
 }
 
 void CNewHarmonicViewModel::setAmplitude(double ampl)
 {
     m_item->setAmplitude(ampl);
+    emit harmonicUpdated();
 }
 
 void CNewHarmonicViewModel::setFrequency(double freq)
 {
     m_item->setFrequency(freq);
+    emit harmonicUpdated();
 }
 
 void CNewHarmonicViewModel::setPhase(double phase)
 {
     m_item->setPhase(phase);
+    emit harmonicUpdated();
 }
 
 Trigonometric::Function CNewHarmonicViewModel::getFunction() const

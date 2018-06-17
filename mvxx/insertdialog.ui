@@ -11,7 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Add Harmonic</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -29,7 +32,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QGroupBox" name="viewGroupBox">
+  <widget class="QGroupBox" name="editWidget">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -147,7 +150,7 @@
      <string>Phase:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="frequencyField_2">
+   <widget class="QLineEdit" name="phaseField">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -168,7 +171,7 @@
      <rect>
       <x>20</x>
       <y>140</y>
-      <width>47</width>
+      <width>200</width>
       <height>13</height>
      </rect>
     </property>
