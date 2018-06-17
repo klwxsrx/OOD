@@ -47,7 +47,7 @@ QVariant CHarmonicsModel::getCurrentItemIndex() const
     return m_currentSelectedItemIndex;
 }
 
-QSharedPointer<CHarmonicItem> CHarmonicsModel::getHarmonicItem(int index) const
+QSharedPointer<const CHarmonicItem> CHarmonicsModel::getHarmonicItem(int index) const
 {
     return m_list->getHarmonicItem(index);
 }

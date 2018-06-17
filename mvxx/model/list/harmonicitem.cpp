@@ -5,6 +5,26 @@ CHarmonicItem::CHarmonicItem(Trigonometric::Function func, double ampl, double f
 {
 }
 
+void CHarmonicItem::setFunction(Trigonometric::Function value)
+{
+    m_function = value;
+}
+
+void CHarmonicItem::setAmplitude(double value)
+{
+    m_amplitude = value;
+}
+
+void CHarmonicItem::setFrequency(double value)
+{
+    m_frequency = value;
+}
+
+void CHarmonicItem::setPhase(double value)
+{
+    m_phase = value;
+}
+
 Trigonometric::Function CHarmonicItem::getFunction() const
 {
     return m_function;

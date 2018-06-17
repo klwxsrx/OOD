@@ -39,7 +39,8 @@ SOURCES += \
     model/editharmonicviewmodel.cpp \
     controller/editharmoniccontroller.cpp \
     view/harmonicplotview.cpp \
-    model/harmonicfunctionviewmodel.cpp
+    model/harmonicfunctionviewmodel.cpp \
+    model/newharmonicviewmodel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -58,8 +59,9 @@ HEADERS += \
     model/iharmonicviewmodel.h \
     controller/editharmoniccontroller.h \
     view/harmonicplotview.h \
-    model/harmonicfunctionviewmodel.h
+    model/harmonicfunctionviewmodel.h \
+    model/newharmonicviewmodel.h
 
 FORMS += \
         mainwindow.ui \
-    insertDialog/insertdialog.ui
+    insertdialog.ui

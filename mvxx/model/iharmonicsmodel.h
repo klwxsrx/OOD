@@ -16,7 +16,7 @@ public:
     virtual void removeHarmonicItem(int index) = 0;
 
     virtual QVariant getCurrentItemIndex() const = 0;
-    virtual QSharedPointer<CHarmonicItem> getHarmonicItem(int index) const = 0;
+    virtual QSharedPointer<const CHarmonicItem> getHarmonicItem(int index) const = 0;
     virtual int getSize() const = 0;
     virtual bool isEmpty() const = 0;
 

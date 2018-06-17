@@ -6,7 +6,7 @@ CEditHarmonicViewModel::CEditHarmonicViewModel(QSharedPointer<IHarmonicsModel> c
     m_model->connect(m_model.get(), SIGNAL(currentItemChanged()), this, SIGNAL(harmonicUpdated()));
 }
 
-void CEditHarmonicViewModel::SetFunction(Trigonometric::Function func)
+void CEditHarmonicViewModel::setFunction(Trigonometric::Function func)
 {
     auto itemIndex = m_model->getCurrentItemIndex();
     if (itemIndex.isValid())
@@ -22,7 +22,7 @@ void CEditHarmonicViewModel::SetFunction(Trigonometric::Function func)
     }
 }
 
-void CEditHarmonicViewModel::SetAmplitude(double ampl)
+void CEditHarmonicViewModel::setAmplitude(double ampl)
 {
     auto itemIndex = m_model->getCurrentItemIndex();
     if (itemIndex.isValid())
@@ -38,7 +38,7 @@ void CEditHarmonicViewModel::SetAmplitude(double ampl)
     }
 }
 
-void CEditHarmonicViewModel::SetFrequency(double freq)
+void CEditHarmonicViewModel::setFrequency(double freq)
 {
     auto itemIndex = m_model->getCurrentItemIndex();
     if (itemIndex.isValid())
@@ -54,7 +54,7 @@ void CEditHarmonicViewModel::SetFrequency(double freq)
     }
 }
 
-void CEditHarmonicViewModel::SetPhase(double phase)
+void CEditHarmonicViewModel::setPhase(double phase)
 {
     auto itemIndex = m_model->getCurrentItemIndex();
     if (itemIndex.isValid())

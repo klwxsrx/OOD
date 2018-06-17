@@ -18,7 +18,7 @@ void CHarmonicList::removeHarmonicItem(int index)
     emit listChanged();
 }
 
-QSharedPointer<CHarmonicItem> CHarmonicList::getHarmonicItem(int index) const
+QSharedPointer<const CHarmonicItem> CHarmonicList::getHarmonicItem(int index) const
 {
     return m_list.at(index);
 }

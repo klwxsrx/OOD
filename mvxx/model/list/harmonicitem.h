@@ -8,6 +8,11 @@ class CHarmonicItem final
 public:
     CHarmonicItem(Trigonometric::Function func, double ampl, double freq, double phase);
 
+    void setFunction(Trigonometric::Function value);
+    void setAmplitude(double value);
+    void setFrequency(double value);
+    void setPhase(double value);
+
     Trigonometric::Function getFunction() const;
     double getAmplitude() const;
     double getFrequency() const;

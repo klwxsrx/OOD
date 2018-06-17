@@ -12,12 +12,12 @@ public:
     void replaceItem(int index, Trigonometric::Function func, double ampl, double freq, double phase);
     void removeHarmonicItem(int index);
 
-    QSharedPointer<CHarmonicItem> getHarmonicItem(int index) const;
+    QSharedPointer<const CHarmonicItem> getHarmonicItem(int index) const;
     int getSize() const;
     bool isEmpty() const;
 
 private:
-    QList<QSharedPointer<CHarmonicItem>> m_list;
+    QList<QSharedPointer<const CHarmonicItem>> m_list;
 
 signals:
     void listChanged();

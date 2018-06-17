@@ -13,25 +13,25 @@ CEditHarmonicController::CEditHarmonicController(QSharedPointer<CEditHarmonicVie
 
 void CEditHarmonicController::onAmplitudeChanged(double value)
 {
-    m_model->SetAmplitude(value);
+    m_model->setAmplitude(value);
 }
 
 void CEditHarmonicController::onSinRadioSelected()
 {
-    m_model->SetFunction(Trigonometric::Function::SIN);
+    m_model->setFunction(Trigonometric::Function::SIN);
 }
 
 void CEditHarmonicController::onCosRadioSelected()
 {
-    m_model->SetFunction(Trigonometric::Function::COS);
+    m_model->setFunction(Trigonometric::Function::COS);
 }
 
 void CEditHarmonicController::onFrequencyChanged(double value)
 {
-    m_model->SetFrequency(value);
+    m_model->setFrequency(value);
 }
 
 void CEditHarmonicController::onPhaseChanged(double value)
 {
-m_model->SetPhase(value);
+    m_model->setPhase(value);
 }

@@ -16,7 +16,7 @@ void CHarmonicFunctionViewModel::onCurrentItemChanged()
     QVariant index = m_model->getCurrentItemIndex();
     if (index.isValid())
     {
-        QSharedPointer<CHarmonicItem> item = m_model->getHarmonicItem(index.toInt());
+        QSharedPointer<const CHarmonicItem> item = m_model->getHarmonicItem(index.toInt());
         m_function = Trigonometric::getCalculateFunction(
             item->getFunction(),
             item->getAmplitude(),

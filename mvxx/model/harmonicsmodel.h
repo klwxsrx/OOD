@@ -19,7 +19,7 @@ public:
     void removeHarmonicItem(int index) override;
 
     QVariant getCurrentItemIndex() const;
-    QSharedPointer<CHarmonicItem> getHarmonicItem(int index) const override;
+    QSharedPointer<const CHarmonicItem> getHarmonicItem(int index) const override;
     int getSize() const override;
     bool isEmpty() const override;
 

@@ -1,15 +1,15 @@
-#ifndef EDITHARMONICVIEWMODEL_H
-#define EDITHARMONICVIEWMODEL_H
+#ifndef NEWHARMONICVIEWMODEL_H
+#define NEWHARMONICVIEWMODEL_H
 
-#include "iharmonicsmodel.h"
+#include <QSharedPointer>
 #include "iharmonicviewmodel.h"
+#include "list/harmonicitem.h"
 
-class CEditHarmonicViewModel final : public IHarmonicViewModel
+class CNewHarmonicViewModel final : public IHarmonicViewModel
 {
     Q_OBJECT
     Q_INTERFACES(IHarmonicViewModel)
 public:
-    CEditHarmonicViewModel(QSharedPointer<IHarmonicsModel> const& model);
     void setFunction(Trigonometric::Function func) override;
     void setAmplitude(double ampl) override;
     void setFrequency(double freq) override;
@@ -23,10 +23,10 @@ public:
     bool isEnabled() const override;
 
 private:
-    QSharedPointer<IHarmonicsModel> m_model;
+    QSharedPointer<CHarmonicItem> m_item;
 
 signals:
     void harmonicUpdated();
 };
 
-#endif // EDITHARMONICVIEWMODEL_H
+#endif // NEWHARMONICVIEWMODEL_H

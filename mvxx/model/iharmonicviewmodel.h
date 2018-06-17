@@ -9,10 +9,10 @@ class IHarmonicViewModel : public QObject // TODO: delete
 {
     Q_OBJECT
 public:
-    virtual void SetFunction(Trigonometric::Function func) = 0;
-    virtual void SetAmplitude(double ampl) = 0;
-    virtual void SetFrequency(double freq) = 0;
-    virtual void SetPhase(double phase) = 0;
+    virtual void setFunction(Trigonometric::Function func) = 0;
+    virtual void setAmplitude(double ampl) = 0;
+    virtual void setFrequency(double freq) = 0;
+    virtual void setPhase(double phase) = 0;
 
     virtual Trigonometric::Function getFunction() const = 0;
     virtual double getAmplitude() const = 0;

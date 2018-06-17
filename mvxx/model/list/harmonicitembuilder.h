@@ -7,7 +7,7 @@
 class CHarmonicItemBuilder final
 {
 public:
-    static QSharedPointer<CHarmonicItem> build(Trigonometric::Function func, double ampl, double freq, double phase);
+    static QSharedPointer<const CHarmonicItem> build(Trigonometric::Function func, double ampl, double freq, double phase);
 };
 
 #endif // HARMONICITEMBUILDER_H
