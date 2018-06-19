@@ -3,7 +3,7 @@
 CEditHarmonicView::CEditHarmonicView(QSharedPointer<IHarmonicViewModel> const& model, QWidget* editWidget)
     : m_model(model)
 {
-    m_model->connect(m_model.get(), SIGNAL(harmonicUpdated()), this, SLOT(onItemChanged()));
+    connect(dynamic_cast<QObject*>(m_model.get()), SIGNAL(harmonicUpdated()), this, SLOT(onItemChanged()));
     m_groupBox = editWidget;
 
     m_amplitudeField = m_groupBox->findChild<QLineEdit*>("amplitudeField");

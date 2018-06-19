@@ -3,8 +3,8 @@
 CHarmonicListViewModel::CHarmonicListViewModel(QSharedPointer<IHarmonicsModel> const& model)
     : m_model(model)
 {
-    m_model->connect(m_model.get(), SIGNAL(dataUpdated()), this, SLOT(onModelDataChanged()));
-    m_model->connect(m_model.get(), SIGNAL(currentItemChanged()), this, SLOT(onItemChanged()));
+    connect(dynamic_cast<QObject*>(m_model.get()), SIGNAL(dataUpdated()), this, SLOT(onModelDataChanged()));
+    connect(dynamic_cast<QObject*>(m_model.get()), SIGNAL(currentItemChanged()), this, SLOT(onItemChanged()));
 }
 
 void CHarmonicListViewModel::setCurrentItemIndex(QVariant index)

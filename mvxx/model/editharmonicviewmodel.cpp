@@ -3,7 +3,7 @@
 CEditHarmonicViewModel::CEditHarmonicViewModel(QSharedPointer<IHarmonicsModel> const& model)
     : m_model(model)
 {
-    m_model->connect(m_model.get(), SIGNAL(currentItemChanged()), this, SIGNAL(harmonicUpdated()));
+    connect(dynamic_cast<QObject*>(m_model.get()), SIGNAL(currentItemChanged()), this, SIGNAL(harmonicUpdated()));
 }
 
 void CEditHarmonicViewModel::setFunction(Trigonometric::Function func)

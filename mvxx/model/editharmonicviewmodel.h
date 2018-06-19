@@ -4,7 +4,7 @@
 #include "iharmonicsmodel.h"
 #include "iharmonicviewmodel.h"
 
-class CEditHarmonicViewModel final : public IHarmonicViewModel
+class CEditHarmonicViewModel final : public QObject, public IHarmonicViewModel
 {
     Q_OBJECT
     Q_INTERFACES(IHarmonicViewModel)
@@ -26,7 +26,7 @@ private:
     QSharedPointer<IHarmonicsModel> m_model;
 
 signals:
-    void harmonicUpdated();
+    void harmonicUpdated() override;
 };
 
 #endif // EDITHARMONICVIEWMODEL_H

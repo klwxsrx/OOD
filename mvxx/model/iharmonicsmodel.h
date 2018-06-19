@@ -6,9 +6,8 @@
 #include "utils/trigonometric.h"
 #include "list/harmonicitem.h"
 
-class IHarmonicsModel : public QObject // TODO: delete
+class IHarmonicsModel
 {
-    Q_OBJECT
 public:
     virtual void setCurrentItemIndex(QVariant index) = 0;
     virtual void addHarmonicItem(Trigonometric::Function func, double ampl, double freq, double phase) = 0;
@@ -23,8 +22,8 @@ public:
     virtual ~IHarmonicsModel() = default;
 
 signals:
-    void dataUpdated();
-    void currentItemChanged();
+    virtual void dataUpdated() = 0;
+    virtual void currentItemChanged() = 0;
 };
 
 Q_DECLARE_INTERFACE(IHarmonicsModel, "IHarmonicsModel")

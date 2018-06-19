@@ -3,7 +3,7 @@
 CHarmonicFunctionViewModel::CHarmonicFunctionViewModel(QSharedPointer<IHarmonicsModel> const& model)
     : m_model(model)
 {
-    m_model->connect(m_model.get(), SIGNAL(dataUpdated()), this, SLOT(onItemsChanged()));
+    connect(dynamic_cast<QObject*>(m_model.get()), SIGNAL(dataUpdated()), this, SLOT(onItemsChanged()));
 }
 
 QVector<Trigonometric::CalculateFunction> CHarmonicFunctionViewModel::getFunctions() const

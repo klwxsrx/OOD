@@ -2,12 +2,10 @@
 #define IHARMONICVIEWMODEL_H
 
 #include <QString>
-#include <QObject>
 #include "utils/trigonometric.h"
 
-class IHarmonicViewModel : public QObject // TODO: delete
+class IHarmonicViewModel
 {
-    Q_OBJECT
 public:
     virtual void setFunction(Trigonometric::Function func) = 0;
     virtual void setAmplitude(double ampl) = 0;
@@ -24,7 +22,7 @@ public:
     virtual ~IHarmonicViewModel() = default;
 
 signals:
-    void harmonicUpdated();
+    virtual void harmonicUpdated() = 0;
 };
 
 Q_DECLARE_INTERFACE(IHarmonicViewModel, "IHarmonicViewModel")

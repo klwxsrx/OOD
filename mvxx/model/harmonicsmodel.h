@@ -6,7 +6,7 @@
 #include "iharmonicsmodel.h"
 #include "list/harmoniclist.h"
 
-class CHarmonicsModel final : public IHarmonicsModel
+class CHarmonicsModel final : public QObject, public IHarmonicsModel
 {
     Q_OBJECT
     Q_INTERFACES(IHarmonicsModel)
@@ -28,8 +28,8 @@ private:
     QVariant m_currentSelectedItemIndex;
 
 signals:
-    void dataUpdated();
-    void currentItemChanged();
+    void dataUpdated() override;
+    void currentItemChanged() override;
 };
 
 #endif // HARMONICSMODEL_H
