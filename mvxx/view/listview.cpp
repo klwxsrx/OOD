@@ -1,6 +1,6 @@
 #include "listview.h"
 
-CListView::CListView(QSharedPointer<QAbstractListModel> const& model, QWidget* parent)
+CListView::CListView(QSharedPointer<CHarmonicListViewModel> const& model, QWidget* parent)
     : m_model(model)
 {
     m_list = parent->findChild<QListView*>("itemList");
@@ -18,8 +18,8 @@ CListView::CListView(QSharedPointer<QAbstractListModel> const& model, QWidget* p
 void CListView::initialize()
 {
     m_list->setModel(m_model.get());
-    QAbstractListModel::connect(m_model.get(), SIGNAL(layoutChanged(QList<QPersistentModelIndex>,QAbstractItemModel::LayoutChangeHint)), this, SLOT(onDataChanged()));
-    // TODO: fix bug with new inserted item selection
+    CHarmonicListViewModel::connect(m_model.get(), SIGNAL(layoutChanged(QList<QPersistentModelIndex>,QAbstractItemModel::LayoutChangeHint)), this, SLOT(onDataChanged()));
+    CHarmonicListViewModel::connect(m_model.get(), SIGNAL(indexChanged(QModelIndex)), this, SLOT(onIndexChanged(QModelIndex)));
 
     QListView::connect(m_list, SIGNAL(pressed(QModelIndex)), this, SLOT(onItemPressed(QModelIndex)));
     QListView::connect(m_list, SIGNAL(activated(QModelIndex)), this, SLOT(onItemPressed(QModelIndex)));
@@ -39,4 +39,9 @@ void CListView::onDataChanged()
     {
         m_deleteButton->setEnabled(false);
     }
+}
+
+void CListView::onIndexChanged(QModelIndex const& index)
+{
+    m_list->setCurrentIndex(index);
 }

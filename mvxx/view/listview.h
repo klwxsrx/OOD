@@ -4,18 +4,18 @@
 #include <QSharedPointer>
 #include <QListView>
 #include <QPushButton>
-#include <QAbstractListModel>
+#include "model/harmoniclistviewmodel.h"
 
 class CListView final : public QObject
 {
     Q_OBJECT
 public:
-    CListView(QSharedPointer<QAbstractListModel> const& model, QWidget* listWidget);
+    CListView(QSharedPointer<CHarmonicListViewModel> const& model, QWidget* listWidget);
 
 private:
     void initialize();
 
-    QSharedPointer<QAbstractListModel> m_model;
+    QSharedPointer<CHarmonicListViewModel> m_model;
     QListView* m_list;
     QPushButton* m_addButton;
     QPushButton* m_deleteButton;
@@ -23,6 +23,7 @@ private:
 private slots:
     void onItemPressed(QModelIndex const& index);
     void onDataChanged();
+    void onIndexChanged(QModelIndex const& index);
 
 signals:
     void itemPressed(QModelIndex const& index);

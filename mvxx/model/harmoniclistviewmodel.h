@@ -26,6 +26,10 @@ private:
 
 private slots:
     void onModelDataChanged();
+    void onItemChanged();
+
+signals:
+    void indexChanged(QModelIndex const&);
 };
 
 #endif // HARMONICLISTVIEWMODEL_H
