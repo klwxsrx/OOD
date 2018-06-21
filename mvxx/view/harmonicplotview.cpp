@@ -44,7 +44,14 @@ void CHarmonicPlotView::drawHarmonic(QVector<Trigonometric::CalculateFunction> c
 void CHarmonicPlotView::updateYAxisRange(QVector<double> yCoordinates)
 {
     const auto minMaxPair = std::minmax_element(yCoordinates.begin(), yCoordinates.end());
-    m_plot->yAxis->setRange((*minMaxPair.first), (*minMaxPair.second));
+    double bottom = (*minMaxPair.first);
+    double top = (*minMaxPair.second);
+    if (top == bottom)
+    {
+        top += 1;
+        bottom -= 1;
+    }
+    m_plot->yAxis->setRange(top, bottom);
 }
 
 QPair<QVector<double>, QVector<double>> CHarmonicPlotView::getHarmonicData(QVector<Trigonometric::CalculateFunction> const& functions)
